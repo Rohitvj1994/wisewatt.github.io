@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WiseWatt – India’s Energy Transition</title>
+  <title>WiseWatt – Mapping India’s Green Transition — Built on Reliability, Not Just Ambition</title>
   <style>
     body {
       margin: 0;
@@ -100,16 +100,86 @@
 
   <header>
     <h1>WiseWatt: Mapping India's Energy Transition</h1>
-    <p>From coal belts to clean hubs — region by region, data-driven.</p>
+    <p>Where clean energy meets ground reality — decoding the technologies, decisions, and global experiences shaping India's reliable energy future.</p>
   </header>
 
-  <section>
-    <h2>Key Themes in the Transition</h2>
-    <div class="themes">
-      <div class="card">
-        <h3>🌞 Renewables</h3>
-        <p>Where solar and wind are booming, and where policy is enabling the shift.</p>
-      </div>
-      <div class="card">
-        <h3
+ <section>
+  <h2>Explore Key Pillars of India's Electricity Transition</h2>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 2rem;">
+    <button onclick="showTab('vre')">Solar & Wind (VRE)</button>
+    <button onclick="showTab('otherRE')">Other Renewables</button>
+    <button onclick="showTab('coal')">Coal & Thermal</button>
+    <button onclick="showTab('storage')">Storage & Flexibility</button>
+    <button onclick="showTab('nuclear')">Nuclear</button>
+    <button onclick="showTab('other')">Other Generation</button>
+  </div>
+
+  <div id="vre" class="tabContent">
+    <h3>Solar & Wind (VRE)</h3>
+    <p>Explore the rise of variable renewable energy, its regional hotspots, and the challenge of grid integration and forecasting.</p>
+  </div>
+
+  <div id="otherRE" class="tabContent" style="display:none">
+    <h3>Other Renewables</h3>
+    <p>Biomass, small hydro, and waste-to-energy — often overlooked but important in rural and industrial areas.</p>
+  </div>
+
+  <div id="coal" class="tabContent" style="display:none">
+    <h3>Coal & Thermal</h3>
+    <p>Understand coal's role in baseload supply, new retrofits, phase-down strategies, and air pollution links.</p>
+  </div>
+
+  <div id="storage" class="tabContent" style="display:none">
+    <h3>Storage & Flexibility</h3>
+    <p>Storage is the bridge between VRE and reliability — covering batteries, pumped hydro, demand-side flexibility, and more.</p>
+  </div>
+
+  <div id="nuclear" class="tabContent" style="display:none">
+    <h3>Nuclear Power</h3>
+    <p>India's modest but steady investment in nuclear — a firm, low-carbon option with geopolitical considerations.</p>
+  </div>
+
+  <div id="other" class="tabContent" style="display:none">
+    <h3>Other Generation Sources</h3>
+    <p>Gas, diesel, hydro, and cross-border imports — the niche and backup sources keeping lights on in key regions.</p>
+  </div>
+</section>
+
+<script>
+  function showTab(id) {
+    const allTabs = document.querySelectorAll('.tabContent');
+    allTabs.forEach(tab => tab.style.display = 'none');
+    document.getElementById(id).style.display = 'block';
+  }
+</script>
+
+<style>
+  button {
+    background: #007acc;
+    color: white;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.3s ease;
+  }
+
+  button:hover {
+    background: #005fa3;
+  }
+
+  .tabContent {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.05);
+  }
+
+  .tabContent h3 {
+    color: #007acc;
+    margin-top: 0;
+  }
+</style>
 
