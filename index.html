@@ -1,14 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>WiseWatt</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WiseWatt – India’s Energy Transition</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/2/2d/India_Map_blank_without_boundaries.png');
+      background-size: cover;
+      background-position: center;
+      height: 60vh;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    header h1 {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 1rem 2rem;
+      border-radius: 12px;
+    }
+    section {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .themes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.05);
+      padding: 1rem;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to WiseWatt</h1>
-  <p>This is the future of clean energy.</p>
+
+  <header>
+    <h1>WiseWatt: Mapping India's Energy Transition</h1>
+    <p>Visualizing the shift from coal to clean, region by region.</p>
+  </header>
+
+  <section>
+    <h2>Key Themes in India’s Transition</h2>
+    <div class="themes">
+      <div class="card">
+        <h3>Renewables</h3>
+        <p>Solar and wind growth hotspots and policy zones.</p>
+      </div>
+      <div class="card">
+        <h3>Coal Exit</h3>
+        <p>Identifying phasedown regions and employment impacts.</p>
+      </div>
+      <div class="card">
+        <h3>Storage</h3>
+        <p>Battery deployment and pumped hydro geography.</p>
+      </div>
+      <div class="card">
+        <h3>Transmission</h3>
+        <p>Overlaying transmission corridors and RE-rich zones.</p>
+      </div>
+    </div>
+  </section>
+
 </body>
 </html>
+
 
 
