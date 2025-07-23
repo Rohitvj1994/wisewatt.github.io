@@ -107,10 +107,10 @@
   <h2>Start Exploring: From Policy Moves to Global Learnings</h2>
 
   <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 2rem;">
-  <button onclick="showTab('policy')">Policy Watch</button>
-  <button onclick="showTab('tech')">Making Tech Simple</button>
-  <button onclick="showTab('trends')">Fresh Ideas & New Energy</button>
-  <button onclick="showTab('global')">Lessons from the World</button>
+  <a href="policy.html" class="button">Policy Watch: India's Clean Energy Agenda</a>
+  <a href="tech.html" class="button">Making Tech Simple</a>
+  <a href="trends.html" class="button">Fresh Ideas & New Energy</a>
+  <a href="global.html" class="button">Lessons from the World</a>
 </div>
 
   <div id="policy" class="tabContent">
@@ -143,21 +143,22 @@
 </script>
 
 <style>
-  button {
-    background: #007acc;
-    color: white;
-    border: none;
-    padding: 0.6rem 1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.95rem;
-    transition: background 0.3s ease;
-  }
+a.button {
+  background: #007acc;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.3s ease;
+}
 
-  button:hover {
-    background: #005fa3;
-  }
-
+a.button:hover {
+  background: #005fa3;
+}
   .tabContent {
     background: white;
     padding: 1.5rem;
