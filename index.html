@@ -3,295 +3,117 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WiseWatt - Mapping India Energy Transition</title>
+  <title>WiseWatt – Mapping India’s Green Transition — Built on Reliability, Not Just Ambition</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
   <style>
-    :root {
-      --primary-green: #00c851;
-      --secondary-green: #00ff88;
-      --dark-green: #00a142;
-      --energy-blue: #007acc;
-      --electric-yellow: #ffeb3b;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f7f9fc;
       color: #333;
-      overflow-x: hidden;
-    }
-
-    /* Animated background particles */
-    .particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .particle {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      background: var(--primary-green);
-      border-radius: 50%;
-      animation: float 6s ease-in-out infinite;
-      opacity: 0.6;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(180deg); }
-    }
-
-    /* Energy pulse animation */
-    @keyframes energyPulse {
-      0% { box-shadow: 0 0 0 0 rgba(0, 200, 81, 0.7); }
-      70% { box-shadow: 0 0 0 10px rgba(0, 200, 81, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(0, 200, 81, 0); }
     }
 
     header {
-      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), 
-                  radial-gradient(circle at 30% 50%, rgba(0, 200, 81, 0.3) 0%, transparent 50%),
-                  radial-gradient(circle at 70% 30%, rgba(0, 122, 204, 0.3) 0%, transparent 50%),
-                  linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      background-image: url('Head.jpg');
       background-size: cover;
       background-position: center;
-      height: 100vh;
+      height: 70vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       color: white;
-      position: relative;
-    }
-
-    /* Animated energy waves */
-    header::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 100px;
-      background: linear-gradient(45deg, transparent, rgba(0, 200, 81, 0.3), transparent);
-      animation: wave 3s ease-in-out infinite;
-    }
-
-    @keyframes wave {
-      0%, 100% { transform: translateX(-100%); }
-      50% { transform: translateX(100%); }
     }
 
     header h1 {
-      background: linear-gradient(135deg, rgba(0, 200, 81, 0.9), rgba(0, 122, 204, 0.9));
-      padding: 2rem 3rem;
-      border-radius: 20px;
-      font-size: 3rem;
-      font-weight: 700;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      font-size: 2.5rem;
       margin: 0;
-      backdrop-filter: blur(10px);
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      animation: glow 2s ease-in-out infinite alternate;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    }
-
-    @keyframes glow {
-      from { box-shadow: 0 0 20px rgba(0, 200, 81, 0.5); }
-      to { box-shadow: 0 0 30px rgba(0, 200, 81, 0.8), 0 0 40px rgba(0, 122, 204, 0.3); }
     }
 
     header p {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 1rem 2rem;
-      border-radius: 15px;
-      margin-top: 2rem;
-      font-size: 1.3rem;
-      font-weight: 400;
-      backdrop-filter: blur(5px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      max-width: 800px;
-    }
-
-    /* Scroll indicator */
-    .scroll-indicator {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: white;
-      animation: bounce 2s infinite;
-      font-size: 2rem;
-      cursor: pointer;
-    }
-
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-      40% { transform: translateX(-50%) translateY(-10px); }
-      60% { transform: translateX(-50%) translateY(-5px); }
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 0.5rem 1.5rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      font-size: 1.2rem;
     }
 
     section {
-      padding: 4rem 2rem;
-      max-width: 1200px;
+      padding: 3rem 1.5rem;
+      max-width: 1000px;
       margin: auto;
-      position: relative;
     }
 
     h2 {
       text-align: center;
-      margin-bottom: 3rem;
-      font-size: 2.5rem;
-      font-weight: 600;
-      background: linear-gradient(45deg, #00c851, #007acc, #ffeb3b);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      position: relative;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      color: #222;
     }
 
-    h2::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 4px;
-      background: linear-gradient(45deg, #00c851, #007acc, #ffeb3b);
-      border-radius: 2px;
-    }
-
-    .button-container {
+    .themes {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 2rem;
-      margin-bottom: 3rem;
     }
 
-    a.button {
-      background: linear-gradient(135deg, var(--primary-green), var(--energy-blue));
-      color: white;
-      border: none;
-      padding: 1.5rem 2rem;
-      border-radius: 15px;
-      cursor: pointer;
-      font-size: 1.1rem;
-      font-weight: 500;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 8px 25px rgba(0, 200, 81, 0.3);
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
+      padding: 1.5rem;
+      transition: transform 0.3s ease;
     }
 
-    a.button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.5s;
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     }
 
-    a.button:hover::before {
-      left: 100%;
-    }
-
-    a.button:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 15px 35px rgba(0, 200, 81, 0.4);
-      animation: energyPulse 1.5s infinite;
-    }
-
-    a.button i {
-      font-size: 1.3rem;
-    }
-
-    /* Floating energy orbs */
-    .energy-orb {
-      position: absolute;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: radial-gradient(circle, var(--secondary-green), var(--primary-green));
-      opacity: 0.1;
-      animation: floatOrb 8s ease-in-out infinite;
-    }
-
-    .energy-orb:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
-    .energy-orb:nth-child(2) { top: 20%; right: 15%; animation-delay: 2s; }
-    .energy-orb:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 4s; }
-    .energy-orb:nth-child(4) { bottom: 10%; right: 10%; animation-delay: 6s; }
-
-    @keyframes floatOrb {
-      0%, 100% { transform: translateY(0px) scale(1); }
-      50% { transform: translateY(-30px) scale(1.1); }
+    .card h3 {
+      margin-top: 0;
+      color: #007acc;
     }
 
     footer {
-      background: linear-gradient(135deg, #2c3e50, #34495e);
-      color: #ecf0f1;
+      background: #222;
+      color: #ccc;
       text-align: center;
-      padding: 2rem;
-      font-size: 1rem;
-      position: relative;
-      overflow: hidden;
+      padding: 1rem;
+      font-size: 0.9rem;
     }
 
-    footer::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(45deg, #00c851, #007acc, #ffeb3b);
-    }
-
-    /* Responsive design */
-    @media (max-width: 768px) {
+    @media (max-width: 600px) {
       header h1 {
-        font-size: 2.2rem;
-        padding: 1.5rem 2rem;
+        font-size: 1.8rem;
       }
-      
       header p {
-        font-size: 1.1rem;
-        padding: 0.8rem 1.5rem;
-      }
-
-      .button-container {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-
-      a.button {
-        padding: 1.2rem 1.5rem;
         font-size: 1rem;
       }
+    }
+
+    a.button {
+      background: #007acc;
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.3s ease;
+    }
+
+    a.button:hover {
+      background: #005fa3;
     }
 
     .tabContent {
@@ -299,212 +121,49 @@
       padding: 1.5rem;
       border-radius: 10px;
       box-shadow: 0 0 12px rgba(0,0,0,0.05);
-      margin-top: 2rem;
-      animation: fadeIn 0.5s ease-in;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     .tabContent h3 {
       color: #007acc;
       margin-top: 0;
-      margin-bottom: 1rem;
-    }
-
-    .tabContent ul {
-      margin-left: 1.5rem;
-    }
-
-    .tabContent li {
-      margin-bottom: 0.5rem;
     }
   </style>
 </head>
 
 <body>
-  <!-- Animated background particles -->
-  <div class="particles" id="particles"></div>
 
-  <header>
-    <div class="energy-orb"></div>
-    <div class="energy-orb"></div>
-    <div class="energy-orb"></div>
-    <div class="energy-orb"></div>
-    
-    <h1>WiseWatt</h1>
-    <p>Mapping India's Energy Transition - Built on Reliability, Not Just Ambition</p>
-    
-    <div class="scroll-indicator">
-      <i class="fas fa-chevron-down"></i>
-    </div>
+  <header data-aos="fade-down">
+    <h1>WiseWatt: Mapping India's Energy Transition</h1>
+    <p>Where clean energy meets ground reality — decoding the technologies, decisions, and global experiences shaping India's reliable energy future.</p>
   </header>
 
   <section>
-    <h2>Explore Energy Solutions</h2>
-    <div class="button-container">
-      <a href="#" class="button" onclick="showTab('solar')">
-        <i class="fas fa-solar-panel"></i>
-        Solar Energy
-      </a>
-      
-      <a href="#" class="button" onclick="showTab('wind')">
-        <i class="fas fa-wind"></i>
-        Wind Power
-      </a>
-      
-      <a href="#" class="button" onclick="showTab('hydro')">
-        <i class="fas fa-water"></i>
-        Hydro Power
-      </a>
-      
-      <a href="#" class="button" onclick="showTab
-        # Continue with the rest of the HTML content\
-html_content += \"\"\"('storage')\">\
-        <i class=\"fas fa-battery-full\"></i>\
-        Energy Storage\
-      </a>\
-      \
-      <a href=\"#\" class=\"button\" onclick=\"showTab('grid')\">\
-        <i class=\"fas fa-network-wired\"></i>\
-        Smart Grid\
-      </a>\
-      \
-      <a href=\"#\" class=\"button\" onclick=\"showTab('efficiency')\">\
-        <i class=\"fas fa-leaf\"></i>\
-        Energy Efficiency\
-      </a>\
-    </div>\
-\
-    <!-- Tab Content -->\
-    <div id=\"solar\" class=\"tabContent\" style=\"display: none;\">\
-      <h3>Solar Energy Solutions</h3>\
-      <p>India's solar capacity has grown exponentially, reaching over 60 GW. Our platform tracks real-time solar generation, weather impacts, and grid integration challenges across major solar parks.</p>\
-      <ul>\
-        <li>Real-time solar irradiance monitoring</li>\
-        <li>Performance analytics for solar farms</li>\
-        <li>Weather impact assessment</li>\
-        <li>Grid integration optimization</li>\
-      </ul>\
-    </div>\
-\
-    <div id=\"wind\" class=\"tabContent\" style=\"display: none;\">\
-      <h3>Wind Power Analytics</h3>\
-      <p>Track wind patterns, turbine performance, and seasonal variations across India's wind corridors. Our data helps optimize wind farm operations and predict generation patterns.</p>\
-      <ul>\
-        <li>Wind speed and direction analysis</li>\
-        <li>Turbine efficiency monitoring</li>\
-        <li>Seasonal generation forecasting</li>\
-        <li>Maintenance scheduling optimization</li>\
-      </ul>\
-    </div>\
-\
-    <div id=\"hydro\" class=\"tabContent\" style=\"display: none;\">\
-      <h3>Hydro Power Management</h3>\
-      <p>Monitor reservoir levels, rainfall patterns, and hydroelectric generation across India's river systems. Essential for managing water resources and power generation.</p>\
-      <ul>\
-        <li>Reservoir level monitoring</li>\
-        <li>Rainfall and inflow tracking</li>\
-        <li>Generation capacity planning</li>\
-        <li>Environmental impact assessment</li>\
-      </ul>\
-    </div>\
-\
-    <div id=\"storage\" class=\"tabContent\" style=\"display: none;\">\
-      <h3>Energy Storage Systems</h3>\
-      <p>Battery storage is crucial for renewable integration. Track battery performance, charging cycles, and grid stabilization services across India's growing storage network.</p>\
-      <ul>\
-        <li>Battery state of charge monitoring</li>\
-        <li>Cycle life and degradation analysis</li>\
-        <li>Grid services optimization</li>\
-        <li>Economic performance tracking</li>\
-      </ul>\
-    </div>\
-\
-    <div id=\"grid\" class=\"tabContent\" style=\"display: none;\">\
-      <h3>Smart Grid Infrastructure</h3>\
-      <p>Modern grids need intelligent management. Monitor transmission losses, load balancing, and renewable integration across India's evolving power infrastructure.</p>\
-      <ul>\
-        <li>Real-time load balancing</li>\
-        <li>Transmission loss monitoring</li>\
-        <li>Renewable integration tracking</li>\
-        <li>Grid stability analysis</li>\
-      </ul>\
-    </div>\
-\
-    <div id=\"efficiency\" class=\"tabContent\" style=\"display: none;\">\
-      <h3>Energy Efficiency Programs</h3>\
-      <p>Track energy consumption patterns, efficiency improvements, and conservation programs across industrial, commercial, and residential sectors.</p>\
-      <ul>\
-        <li>Consumption pattern analysis</li>\
-        <li>Efficiency program tracking</li>\
-        <li>Demand response management</li>\
-        <li>Conservation impact measurement</li>\
-      </ul>\
-    </div>\
-  </section>\
-\
-  <footer>\
-    <p>&copy; 2024 WiseWatt. Powering India's sustainable energy future with data-driven insights.</p>\
-  </footer>\
-\
-  <script>\
-    // Create animated particles\
-    function createParticles() {\
-      const particlesContainer = document.getElementById('particles');\
-      const particleCount = 50;\
-      \
-      for (let i = 0; i < particleCount; i++) {\
-        const particle = document.createElement('div');\
-        particle.className = 'particle';\
-        particle.style.left = Math.random() * 100 + '%';\
-        particle.style.top = Math.random() * 100 + '%';\
-        particle.style.animationDelay = Math.random() * 6 + 's';\
-        particle.style.animationDuration = (Math.random() * 3 + 3) + 's';\
-        particlesContainer.appendChild(particle);\
-      }\
-    }\
-\
-    // Show tab content\
-    function showTab(tabName) {\
-      // Hide all tab contents\
-      const tabContents = document.querySelectorAll('.tabContent');\
-      tabContents.forEach(tab => {\
-        tab.style.display = 'none';\
-      });\
-      \
-      // Show selected tab\
-      const selectedTab = document.getElementById(tabName);\
-      if (selectedTab) {\
-        selectedTab.style.display = 'block';\
-        selectedTab.scrollIntoView({ behavior: 'smooth', block: 'nearest' });\
-      }\
-    }\
-\
-    // Smooth scrolling for scroll indicator\
-    document.querySelector('.scroll-indicator').addEventListener('click', function() {\
-      document.querySelector('section').scrollIntoView({ behavior: 'smooth' });\
-    });\
-\
-    // Initialize particles when page loads\
-    window.addEventListener('load', function() {\
-      createParticles();\
-    });\
-\
-    // Add some interactive hover effects\
-    document.querySelectorAll('.button').forEach(button => {\
-      button.addEventListener('mouseenter', function() {\
-        this.style.transform = 'translateY(-5px) scale(1.02)';\
-      });\
-      \
-      button.addEventListener('mouseleave', function() {\
-        this.style.transform = 'translateY(0) scale(1)';\
-      });\
-    });\
-  </script>\
-</body>\
-</html>\"\"\"\
-\
-print(\"HTML content prepared successfully!\")"}
+    <h2 data-aos="fade-up">Start Exploring: From Policy Moves to Global Learnings</h2>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 2rem;" data-aos="fade-up" data-aos-delay="100">
+      <a href="policy.html" class="button" data-aos="fade-right" data-aos-delay="200">Policy Watch: India's Clean Energy Agenda</a>
+      <a href="tech.html" class="button" data-aos="fade-right" data-aos-delay="300">Making Tech Simple</a>
+      <a href="trends.html" class="button" data-aos="fade-left" data-aos-delay="400">Fresh Ideas & New Energy</a>
+      <a href="global.html" class="button" data-aos="fade-left" data-aos-delay="500">Lessons from the World</a>
+    </div>
+  </section>
+
+  <script>
+    function showTab(id) {
+      const allTabs = document.querySelectorAll('.tabContent');
+      allTabs.forEach(tab => tab.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+  </script>
+
+  <!-- AOS JS and Init -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      once: true, // animation happens only once on scroll
+      duration: 800, // animation duration
+    });
+  </script>
+
+</body>
+</html>
