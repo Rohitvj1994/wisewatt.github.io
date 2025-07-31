@@ -9,24 +9,32 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
+  <!-- Font Awesome for theme toggle icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-BxkS..." crossorigin="anonymous" />
 
   <style>
     :root {
       --text-color: #ffffff;
+      --bg-color: linear-gradient(to top right, #0d1a26, #012f24, #2c3e50);
       --button-bg: #00e5ff;
       --button-hover: #ffab00;
+    }
+
+    body.light-theme {
+      --text-color: #000000;
+      --bg-color: linear-gradient(to top right, #ffffff, #e8f5e9, #e3f2fd);
     }
 
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to top right, #0d1a26, #012f24, #2c3e50);
+      background: var(--bg-color);
       color: var(--text-color);
       position: relative;
       overflow-x: hidden;
+      transition: background 0.5s, color 0.5s;
     }
 
-    /* Background Icons */
     body::before {
       content: "";
       position: fixed;
@@ -36,8 +44,8 @@
         url('https://cdn-icons-png.flaticon.com/512/2910/2910764.png'),
         url('https://cdn-icons-png.flaticon.com/512/6147/6147367.png');
       background-repeat: repeat;
-      background-size: 100px;
-      opacity: 0.05;
+      background-size: 80px;
+      opacity: 0.07;
       z-index: 0;
       animation: iconsFloat 120s linear infinite;
     }
@@ -45,6 +53,18 @@
     @keyframes iconsFloat {
       0% { background-position: 0 0; }
       100% { background-position: 1000px 1000px; }
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      z-index: 10;
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text-color);
+      cursor: pointer;
     }
 
     header {
@@ -59,18 +79,6 @@
       padding: 1rem;
     }
 
-    .sun-icon {
-      font-size: 2.2rem;
-      margin-right: 10px;
-      vertical-align: middle;
-      animation: glowSun 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes glowSun {
-      0% { color: #ffd54f; text-shadow: 0 0 5px #ffeb3b; }
-      100% { color: #ffb300; text-shadow: 0 0 15px #ffcc80; }
-    }
-
     header h1 {
       font-family: 'Orbitron', sans-serif;
       font-size: 3.4rem;
@@ -80,6 +88,16 @@
       -webkit-text-fill-color: transparent;
       animation: gradientMove 6s linear infinite;
       text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    header h1 svg {
+      width: 36px;
+      height: 36px;
+      fill: #ffcc00;
+      flex-shrink: 0;
     }
 
     @keyframes gradientMove {
@@ -108,7 +126,7 @@
       text-align: center;
       font-size: 2.2rem;
       margin-bottom: 2rem;
-      color: #ffffff;
+      color: var(--text-color);
     }
 
     .button-container {
@@ -161,8 +179,15 @@
 </head>
 
 <body>
+  <button class="theme-toggle" onclick="toggleTheme()">
+    <i class="fas fa-circle-half-stroke"></i>
+  </button>
+
   <header data-aos="fade-down">
-    <h1><span class="sun-icon">☀️</span>WiseWatt: Mapping India's Energy Transition</h1>
+    <h1>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4a1 1 0 011 1v1.05a7.002 7.002 0 015.95 5.95H20a1 1 0 110 2h-1.05a7.002 7.002 0 01-5.95 5.95V20a1 1 0 11-2 0v-1.05a7.002 7.002 0 01-5.95-5.95H4a1 1 0 110-2h1.05a7.002 7.002 0 015.95-5.95V5a1 1 0 011-1zm0 4a5 5 0 100 10 5 5 0 000-10z"/></svg>
+      WiseWatt: Mapping India's Energy Transition
+    </h1>
     <p>Where clean energy meets ground reality — decoding the technologies, decisions, and global experiences shaping India's reliable energy future.</p>
   </header>
 
@@ -187,7 +212,12 @@
       once: true,
       duration: 800,
     });
+
+    function toggleTheme() {
+      document.body.classList.toggle('light-theme');
+    }
   </script>
 </body>
 </html>
+
 
