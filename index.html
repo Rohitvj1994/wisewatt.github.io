@@ -7,11 +7,13 @@
 
   <!-- AOS CSS -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Poppins', sans-serif;
       background: #f7f9fc;
       color: #333;
     }
@@ -55,7 +57,7 @@
       text-align: center;
       margin-bottom: 2rem;
       font-size: 2rem;
-      color: #222;
+      color: #2b3a42;
     }
 
     .themes {
@@ -69,7 +71,8 @@
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
       padding: 1.5rem;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-left: 6px solid #00a86b; /* Energy green accent */
     }
 
     .card:hover {
@@ -79,7 +82,7 @@
 
     .card h3 {
       margin-top: 0;
-      color: #007acc;
+      color: #ff6b00; /* Solar orange */
     }
 
     footer {
@@ -100,20 +103,30 @@
     }
 
     a.button {
-      background: #007acc;
+      background: linear-gradient(45deg, #00aaff, #00c853); /* Wind blue to solar green */
       color: white;
       border: none;
-      padding: 0.6rem 1rem;
-      border-radius: 6px;
+      padding: 0.75rem 1.2rem;
+      border-radius: 8px;
       cursor: pointer;
-      font-size: 0.95rem;
+      font-size: 1rem;
       text-decoration: none;
       display: inline-block;
-      transition: background 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      font-weight: 600;
+      box-shadow: 0 0 10px rgba(0, 200, 83, 0.3);
+      animation: pulse 3s infinite;
     }
 
     a.button:hover {
-      background: #005fa3;
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 193, 7, 0.5);
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 rgba(0, 200, 83, 0.3); }
+      50% { box-shadow: 0 0 15px rgba(255, 193, 7, 0.5); }
+      100% { box-shadow: 0 0 0 rgba(0, 200, 83, 0.3); }
     }
 
     .tabContent {
@@ -124,7 +137,7 @@
     }
 
     .tabContent h3 {
-      color: #007acc;
+      color: #00aaff;
       margin-top: 0;
     }
   </style>
@@ -160,8 +173,8 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({
-      once: true, // animation happens only once on scroll
-      duration: 800, // animation duration
+      once: true,
+      duration: 800,
     });
   </script>
 
