@@ -48,6 +48,7 @@
       justify-content: center; align-items: center;
       text-align: center; position: relative;
       z-index: 1; padding: 1rem;
+      margin-bottom: -1.5rem; /* Reduced space below header */
     }
     header h1 {
       font-family: 'Orbitron', sans-serif; font-size: 3.4rem;
@@ -73,7 +74,8 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     }
     section {
-      padding: 3rem 1.5rem; max-width: 1000px; margin: auto;
+      padding: 2rem 1.5rem 3rem; /* reduced top padding */
+      max-width: 1000px; margin: auto;
     }
     h2 {
       text-align: center; font-size: 2.2rem;
@@ -113,7 +115,8 @@
     }
     @media (max-width: 600px) {
       header h1 { font-size: 2rem; }
-      header p { font-size: 1rem; }
+      header p { font-size: 1rem; margin-top: 1rem; }
+      section { padding-top: 1.2rem; }
     }
   </style>
 </head>
@@ -159,4 +162,3 @@
   </script>
 </body>
 </html>
-
