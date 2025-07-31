@@ -3,84 +3,71 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WiseWatt – Mapping India’s Green Transition — Built on Reliability, Not Just Ambition</title>
+  <title>WiseWatt – Mapping India’s Green Transition</title>
 
   <!-- AOS CSS -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Google Font for Energy Feel -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
 
   <style>
     :root {
       --primaryTitle: #ffffff;
-    }
-
-    body.dark {
-      --primaryTitle: #ffffff;
-    }
-
-    body:not(.dark) {
-      --primaryTitle: #000000;
+      --gradientBG: linear-gradient(to right top, #013220, #03644d, #1d8a79, #3ba9a1, #8ad4c4);
     }
 
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: #f7f9fc;
-      color: #333;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--gradientBG);
+      color: #fff;
+      position: relative;
+      overflow-x: hidden;
     }
 
     header {
-      background-image: linear-gradient(
-          rgba(0, 0, 0, 0.4),
-          rgba(0, 0, 0, 0.6)
-        ),
-        url('Head.jpg');
-      background-size: cover;
-      background-position: center;
-      height: 70vh;
+      height: 90vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       position: relative;
-      overflow: hidden;
+      z-index: 1;
     }
 
     header::before {
-      content: '';
+      content: "";
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at center, rgba(255,255,255,0.05), rgba(0, 200, 83, 0.15));
-      animation: bgGlow 8s infinite alternate;
+      inset: 0;
+      background-image: url('https://cdn-icons-png.flaticon.com/512/1046/1046890.png'),
+                        url('https://cdn-icons-png.flaticon.com/512/2972/2972210.png'),
+                        url('https://cdn-icons-png.flaticon.com/512/3218/3218671.png'),
+                        url('https://cdn-icons-png.flaticon.com/512/1530/1530625.png');
+      background-repeat: repeat;
+      background-size: 60px;
+      opacity: 0.06;
       z-index: 0;
+      animation: bgMove 50s linear infinite;
     }
 
-    @keyframes bgGlow {
-      from {
-        background: radial-gradient(circle at center, rgba(255,255,255,0.05), rgba(255, 193, 7, 0.2));
-      }
-      to {
-        background: radial-gradient(circle at center, rgba(255,255,255,0.05), rgba(0, 200, 83, 0.2));
-      }
+    @keyframes bgMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 1000px 1000px; }
     }
 
     header h1 {
-      position: relative;
-      font-size: 3rem;
-      font-weight: 800;
-      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.2rem;
+      font-weight: 700;
       background-image: linear-gradient(90deg, #00e676, #00b0ff, #ff9100);
-      background-size: 200% auto;
+      background-size: 300% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: gradientMove 6s ease infinite;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-      z-index: 1;
+      animation: gradientMove 5s linear infinite;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+      z-index: 2;
     }
 
     @keyframes gradientMove {
@@ -90,54 +77,13 @@
     }
 
     header p {
-      position: relative;
       font-size: 1.2rem;
-      color: #f1f1f1;
-      background-color: rgba(0,0,0,0.35);
-      padding: 0.5rem 1.2rem;
-      border-radius: 10px;
-      margin-top: 1rem;
-      animation: fadeSlideUp 2.5s ease forwards;
-      z-index: 1;
-    }
-
-    @keyframes fadeSlideUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .icon {
-      width: 50px;
-      height: 50px;
-      margin-right: 0.8rem;
-      fill: #ffcc00;
-      animation: pulseIcon 2s infinite;
-    }
-
-    @keyframes pulseIcon {
-      0% { transform: scale(1); opacity: 0.8; }
-      50% { transform: scale(1.1); opacity: 1; }
-      100% { transform: scale(1); opacity: 0.8; }
-    }
-
-    .scroll-indicator {
-      position: absolute;
-      bottom: 20px;
-      font-size: 2rem;
-      color: white;
-      animation: bounce 2s infinite;
-      z-index: 1;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(10px); }
+      max-width: 700px;
+      margin-top: 1.5rem;
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      z-index: 2;
     }
 
     section {
@@ -148,38 +94,32 @@
 
     h2 {
       text-align: center;
-      margin-bottom: 2rem;
       font-size: 2rem;
-      color: #2b3a42;
+      margin-bottom: 2rem;
+      color: #ffffff;
     }
 
-    .themes {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
+    .button {
+      background: #00bcd4;
+      color: white;
+      padding: 0.8rem 1.2rem;
+      margin: 0.5rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: 'Orbitron', sans-serif;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      display: inline-block;
     }
 
-    .card {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
-      padding: 1.5rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      border-left: 6px solid #00a86b;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    }
-
-    .card h3 {
-      margin-top: 0;
-      color: #ff6b00;
+    .button:hover {
+      background: #00acc1;
+      transform: scale(1.05);
     }
 
     footer {
-      background: #222;
+      background: #111;
       color: #ccc;
       text-align: center;
       padding: 1rem;
@@ -194,127 +134,33 @@
         font-size: 1rem;
       }
     }
-
-    a.button {
-      background: linear-gradient(45deg, #00aaff, #00c853);
-      color: white;
-      border: none;
-      padding: 0.75rem 1.2rem;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1rem;
-      text-decoration: none;
-      display: inline-block;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      font-weight: 600;
-      box-shadow: 0 0 10px rgba(0, 200, 83, 0.3);
-      animation: pulse 3s infinite;
-    }
-
-    a.button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(255, 193, 7, 0.5);
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 rgba(0, 200, 83, 0.3); }
-      50% { box-shadow: 0 0 15px rgba(255, 193, 7, 0.5); }
-      100% { box-shadow: 0 0 0 rgba(0, 200, 83, 0.3); }
-    }
-
-    .tabContent {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 0 12px rgba(0,0,0,0.05);
-    }
-
-    .tabContent h3 {
-      color: #00aaff;
-      margin-top: 0;
-    }
-
-    #darkToggle {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      background: #333;
-      color: #fff;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      z-index: 999;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      transition: all 0.3s ease;
-    }
-
-    #darkToggle:hover {
-      background: #00c853;
-    }
-
-    body.dark {
-      background: #121212;
-      color: #eee;
-    }
-
-    body.dark header {
-      background-blend-mode: overlay;
-    }
-
-    body.dark .card,
-    body.dark .tabContent {
-      background: #1e1e1e;
-      color: #eee;
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
-    }
-
-    body.dark footer {
-      background: #111;
-      color: #999;
-    }
   </style>
 </head>
 
 <body>
-
-  <button id="darkToggle">Toggle Dark Mode</button>
-
   <header data-aos="fade-down">
-    <div style="display: flex; align-items: center; justify-content: center; z-index: 1;">
-      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M6.76 4.84l-1.8-1.79-1.42 1.42 1.79 1.79 1.43-1.42zm10.48 0l1.79-1.79-1.42-1.42-1.79 1.79 1.42 1.42zM12 4V1h-1v3h1zm0 19v-3h-1v3h1zm8.66-10H21v1h3v-1h-3zm-19 0H0v1h3v-1zM17.24 19.16l1.8 1.79 1.42-1.42-1.79-1.79-1.43 1.42zM6.76 19.16l-1.79 1.79 1.42 1.42 1.79-1.79-1.42-1.42zM12 8a4 4 0 100 8 4 4 0 000-8z"/>
-      </svg>
-      <h1>WiseWatt: Mapping India's Energy Transition</h1>
-    </div>
+    <h1>WiseWatt: Mapping India's Energy Transition</h1>
     <p>Where clean energy meets ground reality — decoding the technologies, decisions, and global experiences shaping India's reliable energy future.</p>
-    <div class="scroll-indicator">⬇</div>
   </header>
 
   <section>
     <h2 data-aos="fade-up">Start Exploring: From Policy Moves to Global Learnings</h2>
-
-    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 2rem;" data-aos="fade-up" data-aos-delay="100">
-      <a href="policy.html" class="button" data-aos="fade-right" data-aos-delay="200">Policy Watch: India's Clean Energy Agenda</a>
+    <div style="text-align: center;" data-aos="fade-up" data-aos-delay="100">
+      <a href="policy.html" class="button" data-aos="fade-right" data-aos-delay="200">Policy Watch</a>
       <a href="tech.html" class="button" data-aos="fade-right" data-aos-delay="300">Making Tech Simple</a>
-      <a href="trends.html" class="button" data-aos="fade-left" data-aos-delay="400">Fresh Ideas & New Energy</a>
-      <a href="global.html" class="button" data-aos="fade-left" data-aos-delay="500">Lessons from the World</a>
+      <a href="trends.html" class="button" data-aos="fade-left" data-aos-delay="400">Fresh Ideas</a>
+      <a href="global.html" class="button" data-aos="fade-left" data-aos-delay="500">Global Lessons</a>
     </div>
   </section>
 
-  <!-- AOS JS and Init -->
+  <!-- AOS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init({ once: true, duration: 800 });
-
-    // Dark Mode Toggle
-    const toggleBtn = document.getElementById('darkToggle');
-    toggleBtn.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
+    AOS.init({
+      once: true,
+      duration: 800,
     });
   </script>
-
 </body>
 </html>
 
