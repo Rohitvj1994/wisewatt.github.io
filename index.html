@@ -19,7 +19,11 @@
     }
 
     header {
-      background-image: url('Head.jpg');
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.4), 
+          rgba(0, 0, 0, 0.6)
+        ),
+        url('Head.jpg');
       background-size: cover;
       background-position: center;
       height: 70vh;
@@ -28,23 +32,91 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.05), rgba(0, 200, 83, 0.15));
+      animation: bgGlow 8s infinite alternate;
+      z-index: 0;
+    }
+
+    @keyframes bgGlow {
+      from {
+        background: radial-gradient(circle at center, rgba(255,255,255,0.05), rgba(255, 193, 7, 0.2));
+      }
+      to {
+        background: radial-gradient(circle at center, rgba(255,255,255,0.05), rgba(0, 200, 83, 0.2));
+      }
     }
 
     header h1 {
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 1rem 2rem;
-      border-radius: 12px;
-      font-size: 2.5rem;
+      position: relative;
+      background: linear-gradient(to right, #00c853, #ff6f00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 3rem;
+      font-weight: 700;
       margin: 0;
+      animation: fadeSlideUp 2s ease forwards;
+      z-index: 1;
     }
 
     header p {
-      background-color: rgba(0, 0, 0, 0.4);
-      padding: 0.5rem 1.5rem;
-      border-radius: 8px;
-      margin-top: 1rem;
+      position: relative;
       font-size: 1.2rem;
+      color: #f1f1f1;
+      background-color: rgba(0,0,0,0.35);
+      padding: 0.5rem 1.2rem;
+      border-radius: 10px;
+      margin-top: 1rem;
+      animation: fadeSlideUp 2.5s ease forwards;
+      z-index: 1;
+    }
+
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .icon {
+      width: 50px;
+      height: 50px;
+      margin-right: 0.8rem;
+      fill: #ffcc00;
+      animation: pulseIcon 2s infinite;
+    }
+
+    @keyframes pulseIcon {
+      0% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.8; }
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 20px;
+      font-size: 2rem;
+      color: white;
+      animation: bounce 2s infinite;
+      z-index: 1;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(10px); }
     }
 
     section {
@@ -72,7 +144,7 @@
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
       padding: 1.5rem;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      border-left: 6px solid #00a86b; /* Energy green accent */
+      border-left: 6px solid #00a86b;
     }
 
     .card:hover {
@@ -82,7 +154,7 @@
 
     .card h3 {
       margin-top: 0;
-      color: #ff6b00; /* Solar orange */
+      color: #ff6b00;
     }
 
     footer {
@@ -95,7 +167,7 @@
 
     @media (max-width: 600px) {
       header h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
       }
       header p {
         font-size: 1rem;
@@ -103,7 +175,7 @@
     }
 
     a.button {
-      background: linear-gradient(45deg, #00aaff, #00c853); /* Wind blue to solar green */
+      background: linear-gradient(45deg, #00aaff, #00c853);
       color: white;
       border: none;
       padding: 0.75rem 1.2rem;
@@ -140,14 +212,66 @@
       color: #00aaff;
       margin-top: 0;
     }
+
+    /* 🌗 Dark Mode Toggle */
+    #darkToggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: #333;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      z-index: 999;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+
+    #darkToggle:hover {
+      background: #00c853;
+    }
+
+    body.dark {
+      background: #121212;
+      color: #eee;
+    }
+
+    body.dark header {
+      background-blend-mode: overlay;
+    }
+
+    body.dark .card,
+    body.dark .tabContent {
+      background: #1e1e1e;
+      color: #eee;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+    }
+
+    body.dark footer {
+      background: #111;
+      color: #999;
+    }
   </style>
 </head>
 
 <body>
 
+  <!-- 🌗 Dark Mode Toggle Button -->
+  <button id="darkToggle">Toggle Dark Mode</button>
+
   <header data-aos="fade-down">
-    <h1>WiseWatt: Mapping India's Energy Transition</h1>
+    <div style="display: flex; align-items: center; justify-content: center; z-index: 1;">
+      <!-- SVG Energy Icon -->
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M6.76 4.84l-1.8-1.79-1.42 1.42 1.79 1.79 1.43-1.42zm10.48 0l1.79-1.79-1.42-1.42-1.79 1.79 1.42 1.42zM12 4V1h-1v3h1zm0 19v-3h-1v3h1zm8.66-10H21v1h3v-1h-3zm-19 0H0v1h3v-1zM17.24 19.16l1.8 1.79 1.42-1.42-1.79-1.79-1.43 1.42zM6.76 19.16l-1.79 1.79 1.42 1.42 1.79-1.79-1.42-1.42zM12 8a4 4 0 100 8 4 4 0 000-8z"/>
+      </svg>
+      <h1>WiseWatt: Mapping India's Energy Transition</h1>
+    </div>
     <p>Where clean energy meets ground reality — decoding the technologies, decisions, and global experiences shaping India's reliable energy future.</p>
+    <div class="scroll-indicator">⬇</div>
   </header>
 
   <section>
@@ -161,22 +285,18 @@
     </div>
   </section>
 
-  <script>
-    function showTab(id) {
-      const allTabs = document.querySelectorAll('.tabContent');
-      allTabs.forEach(tab => tab.style.display = 'none');
-      document.getElementById(id).style.display = 'block';
-    }
-  </script>
-
   <!-- AOS JS and Init -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init({
-      once: true,
-      duration: 800,
+    AOS.init({ once: true, duration: 800 });
+
+    // Dark Mode Toggle
+    const toggleBtn = document.getElementById('darkToggle');
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
     });
   </script>
 
 </body>
 </html>
+
