@@ -3,87 +3,100 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WiseWatt – Mapping India’s Green Transition — Built on Reliability, Not Just Ambition</title>
+  <title>WiseWatt – Mapping India’s Green Transition</title>
 
   <!-- AOS CSS -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet" />
+
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f7f9fc;
-      color: #333;
+      font-family: 'Inter', sans-serif;
+      background: #f4f8fb;
+      color: #2b2b2b;
     }
 
     header {
       background-image: url('Head.jpg');
       background-size: cover;
       background-position: center;
-      height: 70vh;
+      height: 75vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 1;
+    }
+
+    header h1, header p {
+      position: relative;
+      z-index: 2;
     }
 
     header h1 {
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 1rem 2rem;
-      border-radius: 12px;
-      font-size: 2.5rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.8rem;
       margin: 0;
+      padding: 0.5rem 1.5rem;
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
     }
 
     header p {
-      background-color: rgba(0, 0, 0, 0.4);
-      padding: 0.5rem 1.5rem;
-      border-radius: 8px;
       margin-top: 1rem;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
+      max-width: 700px;
+      padding: 0.5rem 1.2rem;
+      background-color: rgba(0, 0, 0, 0.25);
+      border-radius: 8px;
     }
 
     section {
       padding: 3rem 1.5rem;
-      max-width: 1000px;
+      max-width: 1100px;
       margin: auto;
     }
 
     h2 {
       text-align: center;
-      margin-bottom: 2rem;
-      font-size: 2rem;
-      color: #222;
+      margin-bottom: 2.5rem;
+      font-size: 2.2rem;
+      color: #174963;
+      font-weight: 600;
     }
 
-    .themes {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
+    .button {
+      background: #2ba885;
+      color: white;
+      padding: 0.8rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.3s ease, background 0.3s ease;
+      display: inline-block;
     }
 
-    .card {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
-      padding: 1.5rem;
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    }
-
-    .card h3 {
-      margin-top: 0;
-      color: #007acc;
+    .button:hover {
+      background: #208b6c;
+      transform: translateY(-3px);
     }
 
     footer {
-      background: #222;
+      background: #1f1f1f;
       color: #ccc;
       text-align: center;
       padding: 1rem;
@@ -92,35 +105,18 @@
 
     @media (max-width: 600px) {
       header h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
       }
       header p {
         font-size: 1rem;
       }
     }
 
-    a.button {
-      background: #007acc;
-      color: white;
-      border: none;
-      padding: 0.6rem 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.95rem;
-      text-decoration: none;
-      display: inline-block;
-      transition: background 0.3s ease;
-    }
-
-    a.button:hover {
-      background: #005fa3;
-    }
-
     .tabContent {
       background: white;
       padding: 1.5rem;
       border-radius: 10px;
-      box-shadow: 0 0 12px rgba(0,0,0,0.05);
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
     }
 
     .tabContent h3 {
@@ -132,7 +128,7 @@
 
 <body>
 
-  <header data-aos="fade-down">
+  <header data-aos="zoom-in">
     <h1>WiseWatt: Mapping India's Energy Transition</h1>
     <p>Where clean energy meets ground reality — decoding the technologies, decisions, and global experiences shaping India's reliable energy future.</p>
   </header>
@@ -140,30 +136,7 @@
   <section>
     <h2 data-aos="fade-up">Start Exploring: From Policy Moves to Global Learnings</h2>
 
-    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 2rem;" data-aos="fade-up" data-aos-delay="100">
-      <a href="policy.html" class="button" data-aos="fade-right" data-aos-delay="200">Policy Watch: India's Clean Energy Agenda</a>
-      <a href="tech.html" class="button" data-aos="fade-right" data-aos-delay="300">Making Tech Simple</a>
-      <a href="trends.html" class="button" data-aos="fade-left" data-aos-delay="400">Fresh Ideas & New Energy</a>
-      <a href="global.html" class="button" data-aos="fade-left" data-aos-delay="500">Lessons from the World</a>
-    </div>
-  </section>
-
-  <script>
-    function showTab(id) {
-      const allTabs = document.querySelectorAll('.tabContent');
-      allTabs.forEach(tab => tab.style.display = 'none');
-      document.getElementById(id).style.display = 'block';
-    }
-  </script>
-
-  <!-- AOS JS and Init -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      once: true, // animation happens only once on scroll
-      duration: 800, // animation duration
-    });
-  </script>
-
-</body>
-</html>
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 2rem;">
+      <a href="policy.html" class="button" data-aos="fade-right" data-aos-delay="100">Policy Watch: India's Clean Energy Agenda</a>
+      <a href="tech.html" class="button" data-aos="fade-right" data-aos-delay="200">Making Tech Simple</a>
+      <a href="trends.html" class="button" data-aos="fade-left" data-aos-delay="300">Fresh Ideas & New
