@@ -59,6 +59,18 @@
       padding: 1rem;
     }
 
+    .sun-icon {
+      font-size: 2.2rem;
+      margin-right: 10px;
+      vertical-align: middle;
+      animation: glowSun 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowSun {
+      0% { color: #ffd54f; text-shadow: 0 0 5px #ffeb3b; }
+      100% { color: #ffb300; text-shadow: 0 0 15px #ffcc80; }
+    }
+
     header h1 {
       font-family: 'Orbitron', sans-serif;
       font-size: 3.4rem;
@@ -150,7 +162,7 @@
 
 <body>
   <header data-aos="fade-down">
-    <h1>WiseWatt: Mapping India's Energy Transition</h1>
+    <h1><span class="sun-icon">☀️</span>WiseWatt: Mapping India's Energy Transition</h1>
     <p>Where clean energy meets ground reality — decoding the technologies, decisions, and global experiences shaping India's reliable energy future.</p>
   </header>
 
@@ -178,3 +190,4 @@
   </script>
 </body>
 </html>
+
