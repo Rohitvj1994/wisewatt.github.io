@@ -3,167 +3,347 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WiseWatt – Mapping India’s Green Transition — Built on Reliability, Not Just Ambition</title>
+  <title>WiseWatt – Mapping India's Green Transition — Built on Reliability, Not Just Ambition</title>
 
   <!-- AOS CSS -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
   <style>
-    body {
+    :root {
+      --primary-green: #00c851;
+      --secondary-green: #00ff88;
+      --dark-green: #00a142;
+      --energy-blue: #007acc;
+      --electric-yellow: #ffeb3b;
+      --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --energy-gradient: linear-gradient(45deg, #00c851, #007acc, #ffeb3b);
+    }
+
+    * {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f7f9fc;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
       color: #333;
+      overflow-x: hidden;
+    }
+
+    /* Animated background particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--primary-green);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    /* Energy pulse animation */
+    @keyframes energyPulse {
+      0% { box-shadow: 0 0 0 0 rgba(0, 200, 81, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(0, 200, 81, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 200, 81, 0); }
     }
 
     header {
-      background-image: url('Head.jpg');
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('Head.jpg');
       background-size: cover;
       background-position: center;
-      height: 70vh;
+      background-attachment: fixed;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       color: white;
+      position: relative;
+    }
+
+    /* Animated energy waves */
+    header::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(45deg, transparent, rgba(0, 200, 81, 0.3), transparent);
+      animation: wave 3s ease-in-out infinite;
+    }
+
+    @keyframes wave {
+      0%, 100% { transform: translateX(-100%); }
+      50% { transform: translateX(100%); }
     }
 
     header h1 {
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 1rem 2rem;
-      border-radius: 12px;
-      font-size: 2.5rem;
+      background: linear-gradient(135deg, rgba(0, 200, 81, 0.9), rgba(0, 122, 204, 0.9));
+      padding: 2rem 3rem;
+      border-radius: 20px;
+      font-size: 3rem;
+      font-weight: 700;
       margin: 0;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      animation: glow 2s ease-in-out infinite alternate;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 20px rgba(0, 200, 81, 0.5); }
+      to { box-shadow: 0 0 30px rgba(0, 200, 81, 0.8), 0 0 40px rgba(0, 122, 204, 0.3); }
     }
 
     header p {
-      background-color: rgba(0, 0, 0, 0.4);
-      padding: 0.5rem 1.5rem;
-      border-radius: 8px;
-      margin-top: 1rem;
-      font-size: 1.2rem;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 1rem 2rem;
+      border-radius: 15px;
+      margin-top: 2rem;
+      font-size: 1.3rem;
+      font-weight: 400;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      max-width: 800px;
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+      40% { transform: translateX(-50%) translateY(-10px); }
+      60% { transform: translateX(-50%) translateY(-5px); }
     }
 
     section {
-      padding: 3rem 1.5rem;
-      max-width: 1000px;
+      padding: 4rem 2rem;
+      max-width: 1200px;
       margin: auto;
+      position: relative;
     }
 
     h2 {
       text-align: center;
-      margin-bottom: 2rem;
-      font-size: 2rem;
-      color: #222;
+      margin-bottom: 3rem;
+      font-size: 2.5rem;
+      font-weight: 600;
+      background: var(--energy-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
     }
 
-    .themes {
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: var(--energy-gradient);
+      border-radius: 2px;
+    }
+
+    .button-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
+      margin-bottom: 3rem;
     }
 
-    .card {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
-      padding: 1.5rem;
-      transition: transform 0.3s ease;
+    a.button {
+      background: linear-gradient(135deg, var(--primary-green), var(--energy-blue));
+      color: white;
+      border: none;
+      padding: 1.5rem 2rem;
+      border-radius: 15px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: 500;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0, 200, 81, 0.3);
     }
 
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    a.button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
     }
 
-    .card h3 {
-      margin-top: 0;
-      color: #007acc;
+    a.button:hover::before {
+      left: 100%;
+    }
+
+    a.button:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 15px 35px rgba(0, 200, 81, 0.4);
+      animation: energyPulse 1.5s infinite;
+    }
+
+    a.button i {
+      font-size: 1.3rem;
+    }
+
+    /* Energy-themed icons for buttons */
+    .btn-policy::before { content: '\0e7'; font-family: 'Font Awesome 6 Free'; font-weight: 900; margin-right: 10px; }
+    .btn-tech::before { content: '\085'; font-family: 'Font Awesome 6 Free'; font-weight: 900; margin-right: 10px; }
+    .btn-trends::before { content: '\201'; font-family: 'Font Awesome 6 Free'; font-weight: 900; margin-right: 10px; }
+    .btn-global::before { content: '\0ac'; font-family: 'Font Awesome 6 Free'; font-weight: 900; margin-right: 10px; }
+
+    /* Floating energy orbs */
+    .energy-orb {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--secondary-green), var(--primary-green));
+      opacity: 0.1;
+      animation: floatOrb 8s ease-in-out infinite;
+    }
+
+    .energy-orb:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+    .energy-orb:nth-child(2) { top: 20%; right: 15%; animation-delay: 2s; }
+    .energy-orb:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 4s; }
+    .energy-orb:nth-child(4) { bottom: 10%; right: 10%; animation-delay: 6s; }
+
+    @keyframes floatOrb {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-30px) scale(1.1); }
     }
 
     footer {
-      background: #222;
-      color: #ccc;
+      background: linear-gradient(135deg, #2c3e50, #34495e);
+      color: #ecf0f1;
       text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
+      padding: 2rem;
+      font-size: 1rem;
+      position: relative;
+      overflow: hidden;
     }
 
-    @media (max-width: 600px) {
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--energy-gradient);
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
       header h1 {
-        font-size: 1.8rem;
+        font-size: 2.2rem;
+        padding: 1.5rem 2rem;
       }
+      
       header p {
+        font-size: 1.1rem;
+        padding: 0.8rem 1.5rem;
+      }
+
+      .button-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      a.button {
+        padding: 1.2rem 1.5rem;
         font-size: 1rem;
       }
     }
 
-    a.button {
-      background: #007acc;
-      color: white;
-      border: none;
-      padding: 0.6rem 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.95rem;
-      text-decoration: none;
-      display: inline-block;
-      transition: background 0.3s ease;
+    /* Loading animation */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary-green), var(--energy-blue));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
     }
 
-    a.button:hover {
-      background: #005fa3;
+    .loading-spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(255,255,255,0.3);
+      border-top: 4px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
     }
 
-    .tabContent {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 0 12px rgba(0,0,0,0.05);
-    }
-
-    .tabContent h3 {
-      color: #007acc;
-      margin-top: 0;
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
   </style>
 </head>
 
 <body>
+  <!-- Loading overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <!-- Animated background particles -->
+  <div class="particles" id="particles"></div>
 
   <header data-aos="fade-down">
-    <h1>WiseWatt: Mapping India's Energy Transition</h1>
-    <p>Where clean energy meets ground reality — decoding the technologies, decisions, and global experiences shaping India's reliable energy future.</p>
-  </header>
-
-  <section>
-    <h2 data-aos="fade-up">Start Exploring: From Policy Moves to Global Learnings</h2>
-
-    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 2rem;" data-aos="fade-up" data-aos-delay="100">
-      <a href="policy.html" class="button" data-aos="fade-right" data-aos-delay="200">Policy Watch: India's Clean Energy Agenda</a>
-      <a href="tech.html" class="button" data-aos="fade-right" data-aos-delay="300">Making Tech Simple</a>
-      <a href="trends.html" class="button" data-aos="fade-left" data-aos-delay="400">Fresh Ideas & New Energy</a>
-      <a href="global.html" class="button" data-aos="fade-left" data-aos-delay="500">Lessons from the World</a>
-    </div>
-  </section>
-
-  <script>
-    function showTab(id) {
-      const allTabs = document.querySelectorAll('.tabContent');
-      allTabs.forEach(tab => tab.style.display = 'none');
-      document.getElementById(id).style.display = 'block';
-    }
-  </script>
-
-  <!-- AOS JS and Init -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      once: true, // animation happens only once on scroll
-      duration: 800, // animation duration
-    });
-  </script>
-
-</body>
-</html>
+    <div class="energy-orb"></div>
+    <div class="energy-orb"></div>
+    <div class="energy-orb"></div>
+    <div class="energy-orb"></div>
+    
+    
