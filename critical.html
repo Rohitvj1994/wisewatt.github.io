@@ -8,52 +8,157 @@
     body {
       font-family: 'Segoe UI', sans-serif;
       padding: 2rem;
-      background-color: #f7f9fc;
-      color: #333;
+      min-height: 100vh;
+      margin: 0;
+      color: #232323;
+      background: linear-gradient(120deg, #212121 0%, #444444 50%, #bfa14b 100%, #8ed6ff 120%);
+      background-size: 300% 300%;
+      animation: mineralsGradient 18s ease-in-out infinite;
+      position: relative;
+      overflow-x: hidden;
     }
-
+    @keyframes mineralsGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .mineral-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.13;
+      overflow: hidden;
+    }
+    .crystal1, .crystal2, .crystal3 {
+      position: absolute;
+      filter: drop-shadow(0 4px 18px #0007);
+      animation-timing-function: ease-in-out;
+    }
+    .crystal1 {
+      left: 12vw; top: 7vh;
+      width: 170px;
+      animation: crystal1move 17s infinite alternate;
+    }
+    .crystal2 {
+      right: 15vw; bottom: 10vh;
+      width: 130px;
+      animation: crystal2move 21s infinite alternate;
+    }
+    .crystal3 {
+      left: 65vw; top: 60vh;
+      width: 110px;
+      animation: crystal3move 20s infinite alternate-reverse;
+    }
+    @keyframes crystal1move {
+      0% { transform: translateY(0) scale(1) rotate(0deg); }
+      100% { transform: translateY(35px) scale(1.13) rotate(11deg); }
+    }
+    @keyframes crystal2move {
+      0% { transform: translateY(0) scale(1) rotate(0deg); }
+      100% { transform: translateY(-29px) scale(1.09) rotate(-8deg); }
+    }
+    @keyframes crystal3move {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(50px) scale(0.97) rotate(8deg); }
+    }
     header {
       text-align: center;
       margin-bottom: 2rem;
+      z-index: 1;
+      position: relative;
     }
-
     header h1 {
-      color: #007acc;
-      font-size: 2rem;
+      font-size: 2.2rem;
+      font-weight: 800;
       margin-bottom: 0.5rem;
+      letter-spacing: 1.2px;
+      background: linear-gradient(92deg,#bfa14b 30%,#8ed6ff 70%,#f3f3f3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-
     header p {
-      font-size: 1.1rem;
-      color: #555;
+      font-size: 1.13rem;
+      color: #e7e6e1;
+      background: rgba(34,34,34,0.5);
+      display: inline-block;
+      padding: 0.5em 1.2em;
+      border-radius: 30px;
+      box-shadow: 0 2px 11px rgba(186,161,75,0.09);
     }
-
     .blog-post {
-      background: white;
-      padding: 1.5rem;
-      margin: 1rem auto;
-      border-radius: 10px;
+      background: rgba(34,32,32,0.97);
+      padding: 2rem 2.2rem 1.7rem 2.2rem;
+      margin: 2rem auto 1.5rem auto;
+      border-radius: 18px;
       max-width: 800px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      box-shadow: 0 12px 32px 0 rgba(191,161,75,0.14), 0 2px 4px 0 rgba(0,0,0,0.06);
+      z-index: 1;
+      position: relative;
+      border: 2px solid #6e5c24;
+      animation: popCard 1.4s cubic-bezier(0.32,1.56,0.64,1) 0.5s backwards;
     }
-
+    @keyframes popCard {
+      0% { transform: scale(0.93) translateY(40px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
     .blog-post h2 {
-      color: #222;
+      color: #bfa14b;
       margin-top: 0;
+      letter-spacing: 0.5px;
     }
-
     .blog-post p.date {
-      font-size: 0.9rem;
-      color: #888;
+      font-size: 0.98rem;
+      color: #8ed6ff;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .blog-post p {
+      color: #e7e7e7;
+    }
+    @media (max-width: 700px) {
+      .blog-post { padding: 1.2rem 0.7rem; }
+      header h1 { font-size: 1.2rem; }
     }
   </style>
 </head>
 <body>
+  <!-- Mineral-themed floating SVGs (background) -->
+  <div class="mineral-bg">
+    <svg class="crystal1" viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="60,10 110,130 10,130" fill="url(#gold1)" />
+      <defs>
+        <linearGradient id="gold1" x1="0" y1="0" x2="120" y2="140" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#bfa14b" />
+          <stop offset="1" stop-color="#f3e9c7" />
+        </linearGradient>
+      </defs>
+    </svg>
+    <svg class="crystal2" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="25" y="10" width="70" height="100" rx="20" fill="url(#cobalt1)" />
+      <defs>
+        <linearGradient id="cobalt1" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#8ed6ff" />
+          <stop offset="1" stop-color="#232323" />
+        </linearGradient>
+      </defs>
+    </svg>
+    <svg class="crystal3" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="50" cy="50" rx="46" ry="37" fill="url(#graphite1)" />
+      <defs>
+        <linearGradient id="graphite1" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#444444" />
+          <stop offset="1" stop-color="#bfa14b" />
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
   <header>
     <h1>Critical Minerals: How Critical Are Critical Minerals?</h1>
     <p>Warning: May Cause Extreme Energy Dependence. (We're Talking Critical Minerals Here.)</p>
   </header>
-
   <div class="blog-post">
     <h2>Sample Blog Post Title</h2>
     <p class="date">July 15, 2025</p>
