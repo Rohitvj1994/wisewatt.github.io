@@ -8,52 +8,160 @@
     body {
       font-family: 'Segoe UI', sans-serif;
       padding: 2rem;
-      background-color: #f7f9fc;
-      color: #333;
+      min-height: 100vh;
+      margin: 0;
+      color: #232323;
+      background: linear-gradient(120deg, #232526 0%, #3a7bd5 40%, #00d2ff 80%, #e0eafc 100%);
+      background-size: 350% 350%;
+      animation: roboGradient 16s ease-in-out infinite;
+      position: relative;
+      overflow-x: hidden;
     }
-
+    @keyframes roboGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .robotics-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.14;
+      overflow: hidden;
+    }
+    .gear1, .gear2, .circuit {
+      position: absolute;
+      filter: drop-shadow(0 6px 18px #0005);
+      animation-timing-function: ease-in-out;
+    }
+    .gear1 {
+      left: 7vw; top: 8vh;
+      width: 130px;
+      animation: gear1spin 20s linear infinite;
+    }
+    .gear2 {
+      right: 9vw; bottom: 11vh;
+      width: 90px;
+      animation: gear2spin 24s linear infinite reverse;
+    }
+    .circuit {
+      left: 60vw; top: 60vh;
+      width: 170px;
+      animation: circuitmove 15s ease-in-out infinite alternate;
+    }
+    @keyframes gear1spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes gear2spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(-360deg); }
+    }
+    @keyframes circuitmove {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(30px); }
+    }
     header {
       text-align: center;
       margin-bottom: 2rem;
+      z-index: 1;
+      position: relative;
     }
-
     header h1 {
-      color: #007acc;
-      font-size: 2rem;
+      font-size: 2.3rem;
+      font-weight: 700;
       margin-bottom: 0.5rem;
+      letter-spacing: 1.2px;
+      background: linear-gradient(92deg,#00d2ff 40%,#e0eafc 70%,#232526 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-
     header p {
-      font-size: 1.1rem;
-      color: #555;
+      font-size: 1.15rem;
+      color: #232323;
+      background: rgba(255,255,255,0.82);
+      display: inline-block;
+      padding: 0.5em 1.2em;
+      border-radius: 30px;
+      box-shadow: 0 2px 13px rgba(31,162,255,0.09);
     }
-
     .blog-post {
-      background: white;
-      padding: 1.5rem;
-      margin: 1rem auto;
-      border-radius: 10px;
+      background: rgba(250,251,253,0.95);
+      padding: 2rem 2.2rem 1.7rem 2.2rem;
+      margin: 2rem auto 1.5rem auto;
+      border-radius: 18px;
       max-width: 800px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      box-shadow: 0 12px 32px 0 rgba(58,123,213,0.07), 0 2px 4px 0 rgba(0,0,0,0.02);
+      z-index: 1;
+      position: relative;
+      border: 2px solid #bde5fa;
+      animation: popCard 1.4s cubic-bezier(0.32,1.56,0.64,1) 0.5s backwards;
     }
-
+    @keyframes popCard {
+      0% { transform: scale(0.93) translateY(40px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
     .blog-post h2 {
-      color: #222;
+      color: #3a7bd5;
       margin-top: 0;
+      letter-spacing: 0.5px;
     }
-
     .blog-post p.date {
-      font-size: 0.9rem;
-      color: #888;
+      font-size: 0.98rem;
+      color: #232526;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .blog-post p {
+      color: #232323;
+    }
+    @media (max-width: 700px) {
+      .blog-post { padding: 1.2rem 0.7rem; }
+      header h1 { font-size: 1.2rem; }
     }
   </style>
 </head>
 <body>
+  <!-- Robotics-themed floating SVGs (background) -->
+  <div class="robotics-bg">
+    <svg class="gear1" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="36" stroke="#3a7bd5" stroke-width="10" fill="#e0eafc" />
+      <g stroke="#00d2ff" stroke-width="4">
+        <line x1="50" y1="10" x2="50" y2="30" />
+        <line x1="50" y1="90" x2="50" y2="70" />
+        <line x1="10" y1="50" x2="30" y2="50" />
+        <line x1="90" y1="50" x2="70" y2="50" />
+        <line x1="25" y1="25" x2="36" y2="36" />
+        <line x1="75" y1="25" x2="64" y2="36" />
+        <line x1="25" y1="75" x2="36" y2="64" />
+        <line x1="75" y1="75" x2="64" y2="64" />
+      </g>
+    </svg>
+    <svg class="gear2" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="35" cy="35" r="25" stroke="#00d2ff" stroke-width="8" fill="#bde5fa" />
+      <g stroke="#3a7bd5" stroke-width="3">
+        <line x1="35" y1="7" x2="35" y2="20" />
+        <line x1="35" y1="63" x2="35" y2="50" />
+        <line x1="7" y1="35" x2="20" y2="35" />
+        <line x1="63" y1="35" x2="50" y2="35" />
+      </g>
+    </svg>
+    <svg class="circuit" viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="20" width="120" height="50" rx="18" fill="#e0eafc" stroke="#3a7bd5" stroke-width="6" />
+      <circle cx="40" cy="45" r="7" fill="#00d2ff" />
+      <circle cx="120" cy="45" r="7" fill="#00d2ff" />
+      <rect x="70" y="34" width="20" height="22" rx="7" fill="#3a7bd5" stroke="#00d2ff" stroke-width="2" />
+      <line x1="47" y1="45" x2="70" y2="45" stroke="#00d2ff" stroke-width="3" />
+      <line x1="90" y1="45" x2="113" y2="45" stroke="#00d2ff" stroke-width="3" />
+    </svg>
+  </div>
   <header>
     <h1>Making Tech Simple</h1>
     <p>We break down the complex tech behind clean energy so you don’t have to — from storage to smart grids.</p>
   </header>
-
   <div class="blog-post">
     <h2>Sample Blog Post Title</h2>
     <p class="date">July 15, 2025</p>
@@ -61,4 +169,3 @@
   </div>
 </body>
 </html>
-
