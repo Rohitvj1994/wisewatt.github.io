@@ -44,11 +44,12 @@
       font-size: 1.5rem; color: var(--text-color); cursor: pointer;
     }
     header {
-      height: 90vh; display: flex; flex-direction: column;
+      min-height: 60vh; /* Reduced height for less vertical space */
+      display: flex; flex-direction: column;
       justify-content: center; align-items: center;
       text-align: center; position: relative;
-      z-index: 1; padding: 1rem;
-      margin-bottom: -1.5rem; /* Reduced space below header */
+      z-index: 1; padding: 2rem 1rem 1.2rem 1rem;
+      margin-bottom: 0; /* Remove negative margin */
     }
     header h1 {
       font-family: 'Orbitron', sans-serif; font-size: 3.4rem;
@@ -58,6 +59,7 @@
       animation: gradientMove 6s linear infinite;
       text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
       display: flex; align-items: center; gap: 0.5rem;
+      margin-bottom: 1rem;
     }
     header h1 svg {
       width: 36px; height: 36px; fill: #ffcc00; flex-shrink: 0;
@@ -68,30 +70,31 @@
       100% { background-position: 0% center; }
     }
     header p {
-      font-size: 1.3rem; max-width: 700px; margin-top: 1.5rem;
-      background-color: rgba(0,0,0,0.4);
-      padding: 1rem 1.5rem; border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      font-size: 1.15rem; max-width: 700px; margin: 0.6rem auto 0.8rem;
+      background-color: rgba(0,0,0,0.33);
+      padding: 0.7rem 1.1rem; border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.28);
     }
     section {
-      padding: 2rem 1.5rem 3rem; /* reduced top padding */
+      padding: 1.5rem 1.5rem 2.5rem; /* less top padding */
       max-width: 1000px; margin: auto;
     }
     h2 {
-      text-align: center; font-size: 2.2rem;
-      margin-bottom: 2rem; color: var(--text-color);
+      text-align: center; font-size: 2.05rem;
+      margin-bottom: 1.5rem; color: var(--text-color);
+      margin-top: 0.15rem;
     }
     .button-container {
       display: flex; flex-wrap: wrap;
-      justify-content: center; gap: 1.5rem;
+      justify-content: center; gap: 1.2rem;
     }
     .button {
       background: var(--button-bg); color: #000;
-      padding: 0.9rem 1.4rem; border-radius: 10px;
+      padding: 0.85rem 1.2rem; border-radius: 10px;
       font-size: 1.1rem; font-family: 'Orbitron', sans-serif;
       text-decoration: none; transition: all 0.3s ease;
       box-shadow: 0 5px 15px rgba(0,229,255,0.5);
-      min-width: 180px; text-align: center;
+      min-width: 150px; text-align: center;
       position: relative; z-index: 2;
     }
     .button:hover {
@@ -114,9 +117,13 @@
       font-size: 0.9rem;
     }
     @media (max-width: 600px) {
-      header h1 { font-size: 2rem; }
-      header p { font-size: 1rem; margin-top: 1rem; }
-      section { padding-top: 1.2rem; }
+      header { min-height: unset; padding: 1.2rem 0.5rem 0.7rem 0.5rem; }
+      header h1 { font-size: 1.45rem; }
+      header p { font-size: 0.92rem; margin: 0.4rem auto 0.7rem; padding: 0.55rem 0.7rem;}
+      section { padding-top: 0.7rem; padding-bottom: 1.2rem; }
+      h2 { font-size: 1.25rem; margin-bottom: 1.1rem; }
+      .button-container { gap: 0.7rem; }
+      .button { min-width: 120px; font-size: 0.97rem; padding: 0.65rem 0.7rem;}
     }
   </style>
 </head>
@@ -130,7 +137,7 @@
   <header data-aos="fade-down">
     <h1>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M12 4a1 1 0 011 1v1.05a7.002 7.002 0 015.95 5.95H20a1 1 0 110 2h-1.05a7.002 7.002 0 01-5.95 5.95V20a1 1 0 11-2 0v-1.05a7.002 7.002 0 01-5.95-5.95H4a1 1 0 110-2h1.05a7.002 7.002 0 015.95-5.95V5a1 1 0 011-1zm0 4a5 5 0 100 10 5 5 0 000-10z"/>
+        <path d="M12 4a1 1 0 011 1v1.05a7.002 7.002 0 015.95 5.95H20a1 1 0 110 2h-1.05a7.002 7.002 0 01-5.95 5.95V20a1 1 0 11-2 0v-1.05a7.002 7.002 0 01-5.95-5.95H4a1 1 0 110-2h1.05a7.002 7.002 0 015.95-5.95V5a1 1 0 011-1z"/>
       </svg>
       WiseWatt: Mapping India's Energy Transition
     </h1>
