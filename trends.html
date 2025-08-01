@@ -11,9 +11,9 @@
       margin: 0;
       min-height: 100vh;
       color: #232323;
-      background: linear-gradient(125deg, #fff6e0 0%, #e0c3fc 40%, #8ec5fc 80%, #e0f7fa 100%);
+      background: linear-gradient(120deg, #e0f7fa 0%, #c6efce 40%, #ffe082 80%, #c1c8e4 100%);
       background-size: 300% 300%;
-      animation: trendBGmove 20s ease-in-out infinite;
+      animation: trendBGmove 23s ease-in-out infinite;
       overflow-x: hidden;
       position: relative;
     }
@@ -27,46 +27,62 @@
       top: 0; left: 0; width: 100vw; height: 100vh;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.17;
+      opacity: 0.18;
       overflow: hidden;
     }
-    .icon-rocket, .icon-bulb, .icon-policy, .icon-ai {
+    .icon-sun, .icon-wind, .icon-leaf, .icon-water, .icon-solar, .icon-earth {
       position: absolute;
       will-change: transform;
-      filter: blur(0.5px) drop-shadow(0 4px 18px #0002);
+      filter: blur(0.5px) drop-shadow(0 4px 16px #0002);
     }
-    .icon-rocket {
-      left: 10vw; top: 14vh; width: 90px;
-      animation: floatRocket 13s linear infinite;
+    .icon-sun {
+      left: 7vw; top: 12vh; width: 75px;
+      animation: floatSun 17s linear infinite;
     }
-    .icon-bulb {
-      right: 8vw; top: 10vh; width: 60px;
-      animation: floatBulb 16s ease-in-out infinite alternate;
+    .icon-wind {
+      right: 10vw; top: 18vh; width: 70px;
+      animation: floatWind 19s ease-in-out infinite alternate;
     }
-    .icon-policy {
-      left: 75vw; bottom: 8vh; width: 75px;
-      animation: floatPolicy 19s linear infinite reverse;
+    .icon-leaf {
+      left: 78vw; bottom: 8vh; width: 60px;
+      animation: floatLeaf 16s linear infinite reverse;
     }
-    .icon-ai {
-      left: 30vw; top: 65vh; width: 90px;
-      animation: floatAI 15s ease-in-out infinite alternate;
+    .icon-water {
+      left: 28vw; top: 60vh; width: 90px;
+      animation: floatWater 14s ease-in-out infinite alternate;
     }
-    @keyframes floatRocket {
-      0% { transform: translateY(0) rotate(-7deg); }
-      50% { transform: translateY(24px) rotate(7deg); }
-      100% { transform: translateY(0) rotate(-7deg); }
+    .icon-solar {
+      left: 55vw; top: 40vh; width: 85px;
+      animation: floatSolar 18s ease-in-out infinite alternate;
     }
-    @keyframes floatBulb {
+    .icon-earth {
+      left: 37vw; top: 12vh; width: 65px;
+      animation: floatEarth 20s linear infinite reverse;
+    }
+    @keyframes floatSun {
+      0% { transform: translateY(0) rotate(0deg) scale(1); }
+      50% { transform: translateY(18px) rotate(8deg) scale(1.08); }
+      100% { transform: translateY(0) rotate(0deg) scale(1); }
+    }
+    @keyframes floatWind {
       0% { transform: translateY(0) scale(1); }
       100% { transform: translateY(22px) scale(1.05); }
     }
-    @keyframes floatPolicy {
+    @keyframes floatLeaf {
       0% { transform: translateY(0) scale(1); }
       100% { transform: translateY(-18px) scale(1.04); }
     }
-    @keyframes floatAI {
+    @keyframes floatWater {
       0% { transform: translateY(0) scale(1); }
-      100% { transform: translateY(-32px) scale(1.1); }
+      100% { transform: translateY(-28px) scale(1.08); }
+    }
+    @keyframes floatSolar {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(23px) scale(1.09); }
+    }
+    @keyframes floatEarth {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-32px) scale(1.12); }
     }
     header {
       text-align: center;
@@ -75,12 +91,12 @@
       z-index: 1;
     }
     header h1 {
-      color: #7c30ff;
+      color: #388e3c;
       font-size: 2.4rem;
       font-weight: 700;
       margin-bottom: 0.5rem;
       letter-spacing: 1.2px;
-      background: linear-gradient(90deg,#ffa17f 10%, #7f53ac 60%, #55d6be 100%);
+      background: linear-gradient(90deg,#ffeb3b 10%, #388e3c 60%, #008cff 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -92,10 +108,10 @@
       display: inline-block;
       padding: 0.5em 1.2em;
       border-radius: 30px;
-      box-shadow: 0 2px 13px rgba(127,83,172,0.08);
+      box-shadow: 0 2px 13px rgba(56,142,60,0.09);
     }
     h2 {
-      color: #5f27cd;
+      color: #008cff;
       margin-top: 2rem;
       margin-bottom: 1.2rem;
       letter-spacing: 0.7px;
@@ -108,51 +124,55 @@
       position: relative;
     }
     li {
-      background: rgba(255,255,255,0.88);
+      background: rgba(255,255,255,0.9);
       margin-bottom: 0.9em;
       border-radius: 13px;
-      box-shadow: 0 4px 21px 0 rgba(140, 105, 255, 0.07), 0 2px 4px 0 rgba(0,0,0,0.02);
+      box-shadow: 0 4px 21px 0 rgba(56, 142, 60, 0.06), 0 2px 4px 0 rgba(0,0,0,0.02);
       font-size: 1.12em;
       transition: transform 0.22s cubic-bezier(.2,.81,.44,1.11);
       list-style: none;
       padding: 1em 1.3em;
-      border-left: 5px solid #7c30ff;
+      border-left: 5px solid #388e3c;
       cursor: pointer;
     }
     li:hover {
       transform: translateX(7px) scale(1.028);
-      box-shadow: 0 8px 26px 0 rgba(140, 105, 255, 0.15);
-      border-left: 8px solid #ffa17f;
+      box-shadow: 0 8px 26px 0 rgba(56, 142, 60, 0.16);
+      border-left: 8px solid #ffeb3b;
     }
     a {
-      color: #7c30ff;
+      color: #388e3c;
       text-decoration: none;
       font-weight: 600;
       letter-spacing: 0.3px;
     }
     a:hover {
-      color: #ff6200;
+      color: #008cff;
       text-decoration: underline;
     }
     @media (max-width: 700px) {
       header h1 { font-size: 1.3rem; }
       li { font-size: 1em; }
       h2 { font-size: 1.1rem; }
-      .icon-rocket, .icon-bulb, .icon-policy, .icon-ai { width: 40px !important; }
+      .icon-sun, .icon-wind, .icon-leaf, .icon-water, .icon-solar, .icon-earth { width: 35px !important; }
     }
   </style>
 </head>
 <body>
-  <!-- Animated SVGs for trends background -->
+  <!-- Animated SVGs for climate/energy background -->
   <div class="trends-animated-bg">
-    <!-- Rocket Icon -->
-    <svg class="icon-rocket" viewBox="0 0 80 80" fill="none"><ellipse cx="40" cy="60" rx="10" ry="8" fill="#ffa17f" opacity="0.3"/><path d="M40 10 L50 50 Q40 60 30 50 Z" fill="#7f53ac"/><circle cx="40" cy="38" r="7" fill="#fff" stroke="#7c30ff" stroke-width="3"/><rect x="36" y="53" width="8" height="13" rx="4" fill="#ffbd59"/></svg>
-    <!-- Bulb Icon -->
-    <svg class="icon-bulb" viewBox="0 0 60 60" fill="none"><ellipse cx="30" cy="55" rx="9" ry="5" fill="#55d6be" opacity="0.22"/><circle cx="30" cy="27" r="14" fill="#fff" stroke="#ffa17f" stroke-width="3"/><rect x="25" y="41" width="10" height="10" rx="3" fill="#7f53ac"/></svg>
-    <!-- Policy Icon (document) -->
-    <svg class="icon-policy" viewBox="0 0 75 75" fill="none"><rect x="10" y="10" width="55" height="55" rx="11" fill="#e0c3fc" stroke="#7c30ff" stroke-width="3"/><rect x="23" y="23" width="29" height="5" rx="2.5" fill="#7f53ac"/><rect x="23" y="33" width="29" height="5" rx="2.5" fill="#7f53ac"/></svg>
-    <!-- AI Chip Icon -->
-    <svg class="icon-ai" viewBox="0 0 90 90" fill="none"><rect x="20" y="20" width="50" height="50" rx="13" fill="#fff" stroke="#55d6be" stroke-width="4"/><rect x="37" y="37" width="16" height="16" rx="5" fill="#7f53ac"/><rect x="0" y="44" width="15" height="3" rx="1.5" fill="#ffa17f"/><rect x="75" y="44" width="15" height="3" rx="1.5" fill="#ffa17f"/><rect y="44" width="90" height="3" rx="1.5" fill="#ffa17f" opacity="0.1"/></svg>
+    <!-- Sun Icon -->
+    <svg class="icon-sun" viewBox="0 0 75 75" fill="none"><circle cx="37.5" cy="37.5" r="18" fill="#ffeb3b" stroke="#fff59d" stroke-width="6"/><g stroke="#ffeb3b" stroke-width="3"> <line x1="37.5" y1="4" x2="37.5" y2="19"/><line x1="37.5" y1="56" x2="37.5" y2="71"/><line x1="4" y1="37.5" x2="19" y2="37.5"/><line x1="56" y1="37.5" x2="71" y2="37.5"/><line x1="13" y1="13" x2="23" y2="23"/><line x1="62" y1="13" x2="52" y2="23"/><line x1="13" y1="62" x2="23" y2="52"/><line x1="62" y1="62" x2="52" y2="52"/></g></svg>
+    <!-- Wind Turbine Icon -->
+    <svg class="icon-wind" viewBox="0 0 70 70" fill="none"><circle cx="35" cy="35" r="33" stroke="#c1c8e4" stroke-width="3"/><g><rect x="32" y="35" width="6" height="28" rx="3" fill="#8fd3f4"/><polygon points="35,8 38,37 32,37" fill="#60b2e5"/></g><g><rect x="34" y="10" width="2" height="29" rx="1" fill="#fff"/></g></svg>
+    <!-- Leaf Icon -->
+    <svg class="icon-leaf" viewBox="0 0 60 60" fill="none"><path d="M10 50 Q35 -5 50 45 Q45 55 10 50" fill="#a5d6a7" stroke="#388e3c" stroke-width="3"/></svg>
+    <!-- Water Droplet Icon -->
+    <svg class="icon-water" viewBox="0 0 90 90" fill="none"><path d="M45 10 Q70 45 45 80 Q20 45 45 10" fill="#4fc3f7" stroke="#0288d1" stroke-width="4"/><ellipse cx="45" cy="65" rx="12" ry="18" fill="#b2ebf2" opacity=".5"/></svg>
+    <!-- Solar Panel Icon -->
+    <svg class="icon-solar" viewBox="0 0 85 85" fill="none"><rect x="13" y="45" width="59" height="22" rx="6" fill="#ffe082" stroke="#ffb300" stroke-width="3"/><rect x="17" y="49" width="11" height="14" rx="2" fill="#fffde7"/><rect x="31" y="49" width="11" height="14" rx="2" fill="#fffde7"/><rect x="45" y="49" width="11" height="14" rx="2" fill="#fffde7"/><rect x="59" y="49" width="11" height="14" rx="2" fill="#fffde7"/></svg>
+    <!-- Earth Icon -->
+    <svg class="icon-earth" viewBox="0 0 65 65" fill="none"><circle cx="32.5" cy="32.5" r="28" fill="#90caf9" stroke="#388e3c" stroke-width="5"/><ellipse cx="32.5" cy="32.5" rx="17" ry="8.5" fill="#c6efce"/><ellipse cx="32.5" cy="42" rx="8" ry="2.5" fill="#388e3c"/></svg>
   </div>
   <header>
     <h1>Fresh Ideas & New Energy</h1>
