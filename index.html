@@ -42,24 +42,26 @@
       position: absolute; top: 1.2rem; right: 1.5rem;
       z-index: 10; background: transparent; border: none;
       font-size: 1.5rem; color: var(--text-color); cursor: pointer;
+      transition: top 0.2s, right 0.2s;
     }
     header {
-      min-height: 60vh; /* Reduced height for less vertical space */
+      min-height: 58vh;
       display: flex; flex-direction: column;
       justify-content: center; align-items: center;
       text-align: center; position: relative;
-      z-index: 1; padding: 2rem 1rem 1.2rem 1rem;
-      margin-bottom: 0; /* Remove negative margin */
+      z-index: 1; padding: 2rem 0.5rem 1rem 0.5rem;
+      margin-bottom: 0;
     }
     header h1 {
-      font-family: 'Orbitron', sans-serif; font-size: 3.4rem;
+      font-family: 'Orbitron', sans-serif; font-size: 3.1rem;
       background-image: linear-gradient(90deg, #00e676, #00b0ff, #ff9100);
       background-size: 300% auto;
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       animation: gradientMove 6s linear infinite;
       text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
       display: flex; align-items: center; gap: 0.5rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.6rem;
+      flex-wrap: wrap;
     }
     header h1 svg {
       width: 36px; height: 36px; fill: #ffcc00; flex-shrink: 0;
@@ -70,74 +72,111 @@
       100% { background-position: 0% center; }
     }
     header p {
-      font-size: 1.15rem; max-width: 700px; margin: 0.6rem auto 0.8rem;
-      background-color: rgba(0,0,0,0.33);
-      padding: 0.7rem 1.1rem; border-radius: 10px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.28);
+      font-size: 1.11rem; max-width: 700px; margin: 0.4rem auto 0.9rem;
+      background-color: rgba(0,0,0,0.22);
+      padding: 0.6rem 1.1rem; border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.19);
     }
     section {
-      padding: 1.5rem 1.5rem 2.5rem; /* less top padding */
+      padding: 1.2rem 0.5rem 1.5rem;
       max-width: 1000px; margin: auto;
     }
     h2 {
-      text-align: center; font-size: 2.05rem;
-      margin-bottom: 1.5rem; color: var(--text-color);
+      text-align: center; font-size: 1.55rem;
+      margin-bottom: 1.2rem; color: var(--text-color);
       margin-top: 0.15rem;
+      letter-spacing: 0.01em;
     }
     .button-container {
       display: flex; flex-wrap: wrap;
-      justify-content: center; gap: 1.2rem;
+      justify-content: center; gap: 0.9rem;
+      margin: 0 auto;
     }
     .button {
       background: var(--button-bg); color: #000;
-      padding: 0.85rem 1.2rem; border-radius: 10px;
-      font-size: 1.1rem; font-family: 'Orbitron', sans-serif;
+      padding: 0.8rem 1rem; border-radius: 11px;
+      font-size: 1.08rem; font-family: 'Orbitron', sans-serif;
       text-decoration: none; transition: all 0.3s ease;
-      box-shadow: 0 5px 15px rgba(0,229,255,0.5);
-      min-width: 150px; text-align: center;
+      box-shadow: 0 3px 10px rgba(0,229,255,0.23);
+      min-width: 145px; text-align: center;
       position: relative; z-index: 2;
+      margin-bottom: 0;
+      margin-top: 0;
+      margin-left: 0;
+      margin-right: 0;
     }
     .button:hover {
       background: var(--button-hover); color: #fff;
-      box-shadow: 0 6px 20px rgba(255,171,0,0.6);
-      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 4px 16px rgba(255,171,0,0.32);
+      transform: translateY(-2px) scale(1.03);
     }
     .back-to-top {
-      position: fixed; bottom: 30px; right: 30px;
+      position: fixed; bottom: 22px; right: 20px;
       background: var(--button-bg); color: #000;
       padding: 10px 14px; border-radius: 50%;
-      font-size: 1.4rem; cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      font-size: 1.3rem; cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
       display: none; z-index: 1000;
     }
     .back-to-top.show { display: block; }
     footer {
-      background: #000000aa; color: #ccc;
-      text-align: center; padding: 1.2rem;
-      font-size: 0.9rem;
+      background: #000000cc; color: #ccc;
+      text-align: center; padding: 1.1rem 0.4rem;
+      font-size: 1.01rem;
+      letter-spacing: 0.01em;
     }
-    @media (max-width: 600px) {
-      header { min-height: unset; padding: 1.2rem 0.5rem 0.7rem 0.5rem; }
-      header h1 { font-size: 1.45rem; }
-      header p { font-size: 0.92rem; margin: 0.4rem auto 0.7rem; padding: 0.55rem 0.7rem;}
-      section { padding-top: 0.7rem; padding-bottom: 1.2rem; }
-      h2 { font-size: 1.25rem; margin-bottom: 1.1rem; }
-      .button-container { gap: 0.7rem; }
-      .button { min-width: 120px; font-size: 0.97rem; padding: 0.65rem 0.7rem;}
+    /* Mobile Styling */
+    @media (max-width: 800px) {
+      .theme-toggle {
+        top: 0.5rem;
+        right: 0.5rem;
+        font-size: 1.15rem;
+      }
+      header { min-height: unset; padding: 0.8rem 0.3rem 0.5rem 0.3rem;}
+      header h1 { font-size: 1.45rem; margin-bottom: 0.45rem;}
+      header p { font-size: 0.97rem; margin: 0.3rem auto 0.65rem; padding: 0.45rem 0.7rem;}
+      section { padding: 0.6rem 0.1rem 0.7rem 0.1rem; }
+      h2 { font-size: 1.01rem; margin-bottom: 0.7rem; }
+      .button-container {
+        flex-direction: column;
+        gap: 0.4rem;
+        align-items: center;
+      }
+      .button {
+        min-width: unset;
+        font-size: 0.99rem;
+        padding: 0.62rem 0.6rem;
+        width: 100%;
+        max-width: 310px;
+        margin: 0 auto;
+        margin-bottom: 0;
+      }
+      footer { padding: 0.7rem 0.2rem; font-size: 0.91rem;}
+    }
+    @media (max-width: 430px) {
+      .theme-toggle {
+        top: 0.15rem;
+        right: 0.18rem;
+        font-size: 1.03rem;
+      }
+      header h1 { font-size: 1.05rem; }
+      h2 { font-size: 0.98rem; }
+      .button { font-size: 0.93rem; }
+      section { padding-bottom: 0.6rem; }
     }
   </style>
 </head>
 <body>
-  <button class="theme-toggle" onclick="toggleTheme()">
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
     <i class="fas fa-circle-half-stroke"></i>
   </button>
-  <button id="backToTop" class="back-to-top" onclick="scrollToTop()">
+  <button id="backToTop" class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">
     <i class="fas fa-arrow-up"></i>
   </button>
   <header data-aos="fade-down">
     <h1>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M12 4a1 1 0 011 1v1.05a7.002 7.002 0 015.95 5.95H20a1 1 0 110 2h-1.05a7.002 7.002 0 01-5.95 5.95V20a1 1 0 11-2 0v-1.05a7.002 7.002 0 01-5.95-5.95H4a1 1 0 110-2h1.05a7.002 7.002 0 015.95-5.95V5a1 1 0 011-1z"/>
+        <path d="M12 4a1 1 0 011 1v1.05a7.002 7.002 0 015.95 5.95H20a1 1 0 110 2h-1.05a7.002 7.002 0 01-5.95 5.95V20a1 1 0 11-2 0v-1.05a7.002 7.002 0 01-5.95-5.95H4a1 1 0 110-2h1.05a7.002 7.002 0 015.95-5.95V5a1 1 0 011-1z"></path>
       </svg>
       WiseWatt: Mapping India's Energy Transition
     </h1>
