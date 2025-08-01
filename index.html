@@ -1,22 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wise Watt</title>
-    <style>
-        body {
-            background-image: url('icons/solar.png'), url('icons/wind.png'), url('icons/thermal.png'), url('icons/storage.png'), url('icons/nuclear.png'), url('icons/hydro.png');
-            background-repeat: repeat;
-            background-size: 100px 100px; /* Adjust size as necessary */
-            background-color: #f0f0f0; /* Fallback color */
-        }
-        /* Additional styling here */
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WiseWatt – Mapping India’s Green Transition</title>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <style>
+    :root {
+      --text-color: #fff;
+      --bg-color: linear-gradient(to top right, #0d1a26, #012f24, #2c3e50);
+      --button-bg: #00e5ff;
+      --button-hover: #ffab00;
+    }
+    body.light-theme {
+      --text-color: #000;
+      --bg-color: linear-gradient(to top right, #fff, #e8f5e9, #e3f2fd);
+    }
+    body {
+      margin: 0; font-family: 'Segoe UI', sans-serif;
+      background: var(--bg-color); color: var(--text-color);
+      position: relative; overflow-x: hidden;
+      transition: background 0.5s, color 0.5s;
+    }
+    body::before {
+      content: "";
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url('https://cdn-icons-png.flaticon.com/512/1046/1046890.png'),
+                        url('https://cdn-icons-png.flaticon.com/512/2910/2910764.png'),
+                        url('https://cdn-icons-png.flaticon.com/512/6147/6147367.png');
+      background-repeat: repeat; background-size: 80px;
+      opacity: 0.07; z-index: 0;
+      animation: iconsFloat 120s linear infinite;
+    }
+    @keyframes iconsFloat {
+      0% { background-position: 0 0; }
+      100% { background-position: 1000px 1000px; }
+    }
+    .theme-toggle {
+      position: absolute; top: 1.2rem; right: 1.5rem;
+      z-index: 10; background: transparent; border: none;
+      font-size: 1.5rem; color: var(--text-color); cursor: pointer;
+    }
+    header {
+      min-height: 60vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center; position: relative;
+      z-index: 1; padding: 2rem 1rem 1.2rem 1rem;
+      margin-bottom: 0;
+    }
+    header h1 {
+      font-family: 'Orbitron', sans-serif; font-size: 3.4rem;
+      background-image: linear-gradient(90deg, #00e676, #00b0ff, #ff9100);
+      background-size: 300% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      animation: gradientMove 6s linear infinite;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-bottom: 1rem;
+      word-break: break-word;
+    }
+    header h1 svg {
+      width: 36px; height: 36px; fill: #ffcc00; flex-shrink: 0;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% center; }
+      50% { background-position: 100% center; }
+      100% { background-position: 0% center; }
+    }
+    header p {
+      font-size: 1.15rem; max-width: 700px; margin: 0.6rem auto 0.8rem;
+      background-color: rgba(0,0,0,0.33);
+      padding: 0.7rem 1.1rem; border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.28);
+      word-break: break-word;
+    }
+    section {
+      padding: 1.5rem 1.5rem 2.5rem; max-width: 1000px; margin: auto;
+    }
+    h2 {
+      text-align: center; font-size: 2.05rem;
+      margin-bottom: 1.5rem; color: var(--text-color);
+      margin-top: 0.15rem;
+    }
+    .button-container {
+      display: flex; flex-wrap: wrap;
+      justify-content: center; gap: 1.2rem;
+    }
+    .button {
+      background: var(--button-bg); color: #000;
+      padding: 0.85rem 1.2rem; border-radius: 10px;
+      font-size: 1.1rem; font-family: 'Orbitron', sans-serif;
+      text-decoration: none; transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,229,255,0.5);
+      min-width: 150px; text-align: center;
+      position: relative; z-index: 2;
+      word-break: break-word;
+    }
+    .button:hover {
+      background: var(--button-hover); color: #fff;
+      box-shadow: 0 6px 20px rgba(255,171,0,0.6);
+      transform: translateY(-3px) scale(1.05);
+    }
+    .back-to-top {
+      position: fixed; bottom: 30px; right: 30px;
+      background: var(--button-bg); color: #000;
+      padding: 10px 14px; border-radius: 50%;
+      font-size: 1.4rem; cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      display: none; z-index: 1000;
+    }
+    .back-to-top.show { display: block; }
+    footer {
+      background: #000000aa; color: #ccc;
+      text-align: center; padding: 1.2rem;
+      font-size: 0.9rem;
+    }
+    /* Improved mobile styles: full-width, full-height, stretch content */
+    @media (max-width: 600px) {
+      html, body {
+        width: 100vw;
+        min-height: 100vh;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        width: 100vw;
+        overflow-x: hidden;
+      }
+      header {
+        min-height: unset;
+        flex: 1;
+        padding: 4vw 2vw 2vw 2vw;
+        margin-bottom: 0;
+        width: 100vw;
+        box-sizing: border-box;
+        justify-content: flex-start;
+        align-items: stretch;
+      }
+      header h1 {
+        font-size: 4.5vw;
+        flex-direction: column;
+        gap: 0.18rem;
+        margin-bottom: 0.2rem;
+        text-align: left;
+        text-align: center;
+        width: 100%;
+        word-break: break-word;
+      }
+@@ -159,89 +159,89 @@
+        border-radius: 7px;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: left;
+        text-align: center;
+      }
+      section {
+        padding: 2vw 2vw 4vw 2vw;
+        width: 100vw;
+        box-sizing: border-box;
+      }
+      h2 {
+        font-size: 4vw;
+        margin-bottom: 0.55rem;
+        margin-top: 0.01rem;
+      }
+      .button-container {
+        gap: 0.32rem;
+        flex-wrap: wrap;
+        width: 100%;
+      }
+      .button {
+        min-width: 80px;
+        font-size: 3.3vw;
+        padding: 0.4rem 0.4rem;
+        margin: 0.1rem 0;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .theme-toggle {
+        top: 0.4rem;
+        right: 0.4rem;
+        font-size: 0.93rem;
+      }
+      .back-to-top {
+        bottom: 10px;
+        right: 10px;
+        font-size: 0.93rem;
+        padding: 6px 8px;
+      }
+      footer {
+        width: 100vw;
+        box-sizing: border-box;
+        padding: 4vw 2vw;
+        font-size: 3vw;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>Welcome to Wise Watt</h1>
-    <p>Your source for clean energy information.</p>
-    <!-- More content here -->
+  <button class="theme-toggle" onclick="toggleTheme()">
+    <i class="fas fa-circle-half-stroke"></i>
+  </button>
+  <button id="backToTop" class="back-to-top" onclick="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  <header data-aos="fade-down">
+    <h1>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 4a1 1 0 011 1v1.05a7.002 7.002 0 015.95 5.95H20a1 1 0 110 2h-1.05a7.002 7.002 0 01-5.95 5.95V20a1 1 0 11-2 0v-1.05a7.002 7.002 0 01-5.95-5.95H4a1 1 0 110-2h1.05a7.002 7.002 0 015.95-5.95V5a1 1 0 011-1z"/>
+      </svg>
+      WiseWatt: Mapping India's Energy Transition
+    </h1>
+    <p>Where clean energy meets ground reality — decoding the technologies, decisions, and global experiences shaping India's reliable energy future.</p>
+  </header>
+  <section>
+    <h2 data-aos="fade-up">Start Exploring: From Policy Moves to Global Learnings</h2>
+    <div class="button-container" data-aos="fade-up" data-aos-delay="100">
+      <a href="policy.html" class="button">Policy Watch</a>
+      <a href="tech.html" class="button">Making Tech Simple</a>
+      <a href="trends.html" class="button">Fresh Ideas</a>
+      <a href="global.html" class="button">Global Lessons</a>
+      <a href="critical.html" class="button">Critical Minerals</a>
+    </div>
+  </section>
+  <footer>© 2025 WiseWatt. All rights reserved.</footer>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ once: true, duration: 800 });
+    function toggleTheme() {
+      document.body.classList.toggle('light-theme');
+    }
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    window.addEventListener('scroll', () => {
+      document.getElementById('backToTop').classList.toggle('show', window.scrollY > 300);
+    });
+  </script>
 </body>
-</html>
