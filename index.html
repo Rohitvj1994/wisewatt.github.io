@@ -52,6 +52,15 @@
       z-index: 1; padding: 2rem 0.5rem 1rem 0.5rem;
       margin-bottom: 0;
     }
+    .sun-logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 0.7rem;
+    }
+    .sun-logo svg {
+      width: 46px; height: 46px; fill: #ffcc00; display: block;
+    }
     header h1 {
       font-family: 'Orbitron', sans-serif; font-size: 3.1rem;
       background-image: linear-gradient(90deg, #00e676, #00b0ff, #ff9100);
@@ -59,12 +68,9 @@
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       animation: gradientMove 6s linear infinite;
       text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-      display: flex; align-items: center; gap: 0.5rem;
       margin-bottom: 0.6rem;
       flex-wrap: wrap;
-    }
-    header h1 svg {
-      width: 36px; height: 36px; fill: #ffcc00; flex-shrink: 0;
+      display: block;
     }
     @keyframes gradientMove {
       0% { background-position: 0% center; }
@@ -76,6 +82,9 @@
       background-color: rgba(0,0,0,0.22);
       padding: 0.6rem 1.1rem; border-radius: 10px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.19);
+    }
+    .explore-gap {
+      height: 1.5rem;
     }
     section {
       padding: 1.2rem 0.5rem 1.5rem;
@@ -133,8 +142,14 @@
         font-size: 1.15rem;
       }
       header { min-height: unset; padding: 0.8rem 0.3rem 0.5rem 0.3rem;}
+      .sun-logo svg { width: 34px; height: 34px; }
       header h1 { font-size: 1.45rem; margin-bottom: 0.45rem;}
       header p { font-size: 0.97rem; margin: 0.3rem auto 0.65rem; padding: 0.45rem 0.7rem;}
+      .explore-gap {
+        height: 13vh;
+        min-height: 1.5rem;
+        max-height: 18vw;
+      }
       section { padding: 0.6rem 0.1rem 0.7rem 0.1rem; }
       h2 { font-size: 1.01rem; margin-bottom: 0.7rem; }
       .button-container {
@@ -159,10 +174,12 @@
         right: 0.18rem;
         font-size: 1.03rem;
       }
+      .sun-logo svg { width: 28px; height: 28px; }
       header h1 { font-size: 1.05rem; }
       h2 { font-size: 0.98rem; }
       .button { font-size: 0.93rem; }
       section { padding-bottom: 0.6rem; }
+      .explore-gap { height: 8vh; }
     }
   </style>
 </head>
@@ -174,13 +191,16 @@
     <i class="fas fa-arrow-up"></i>
   </button>
   <header data-aos="fade-down">
-    <h1>
+    <div class="sun-logo">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path d="M12 4a1 1 0 011 1v1.05a7.002 7.002 0 015.95 5.95H20a1 1 0 110 2h-1.05a7.002 7.002 0 01-5.95 5.95V20a1 1 0 11-2 0v-1.05a7.002 7.002 0 01-5.95-5.95H4a1 1 0 110-2h1.05a7.002 7.002 0 015.95-5.95V5a1 1 0 011-1z"></path>
       </svg>
+    </div>
+    <h1>
       WiseWatt: Mapping India's Energy Transition
     </h1>
     <p>Where clean energy meets ground reality — decoding the technologies, decisions, and global experiences shaping India's reliable energy future.</p>
+    <div class="explore-gap"></div>
   </header>
   <section>
     <h2 data-aos="fade-up">Start Exploring: From Policy Moves to Global Learnings</h2>
