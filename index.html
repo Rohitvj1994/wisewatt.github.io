@@ -116,14 +116,26 @@
       text-align: center; padding: 1.2rem;
       font-size: 0.9rem;
     }
-    @media (max-width: 600px) {
-      header { min-height: unset; padding: 1.2rem 0.5rem 0.7rem 0.5rem; }
-      header h1 { font-size: 1.45rem; }
-      header p { font-size: 0.92rem; margin: 0.4rem auto 0.7rem; padding: 0.55rem 0.7rem;}
-      section { padding-top: 0.7rem; padding-bottom: 1.2rem; }
-      h2 { font-size: 1.25rem; margin-bottom: 1.1rem; }
-      .button-container { gap: 0.7rem; }
-      .button { min-width: 120px; font-size: 0.97rem; padding: 0.65rem 0.7rem;}
+    @media (max-width: 800px) {
+      header { min-height: unset; padding: 2rem 1rem 1.5rem 1rem; }
+      header h1 { font-size: 2.2rem; }
+      header p { font-size: 1.1rem; margin: 0.8rem auto 1.2rem; padding: 0.9rem 1.2rem;}
+      section { padding: 2rem 1.5rem 3rem; }
+      h2 { font-size: 1.6rem; margin-bottom: 2rem; }
+      .button-container { 
+        gap: 1rem; 
+        flex-direction: column;
+        align-items: center;
+      }
+      .button { 
+        min-width: 280px; 
+        font-size: 1.1rem; 
+        padding: 1rem 1.5rem;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
   </style>
 </head>
