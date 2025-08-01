@@ -8,52 +8,158 @@
     body {
       font-family: 'Segoe UI', sans-serif;
       padding: 2rem;
-      background-color: #f7f9fc;
-      color: #333;
+      min-height: 100vh;
+      margin: 0;
+      color: #222;
+      /* Animated gradient background */
+      background: linear-gradient(-45deg, #a8e063, #f5f7fa, #56ccf2, #f7971e 80%);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      position: relative;
+      overflow-x: hidden;
     }
-
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    /* Energy-themed floating SVGs */
+    .energy-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.11;
+      overflow: hidden;
+    }
+    /* Animate floating SVGs */
+    .float1, .float2, .float3 {
+      position: absolute;
+      filter: drop-shadow(0 4px 14px rgba(0,0,0,0.15));
+      animation-timing-function: ease-in-out;
+    }
+    .float1 {
+      left: 10vw; top: 10vh;
+      width: 220px;
+      animation: float1move 14s infinite alternate;
+    }
+    .float2 {
+      right: 12vw; bottom: 14vh;
+      width: 180px;
+      animation: float2move 18s infinite alternate;
+    }
+    .float3 {
+      left: 60vw; top: 60vh;
+      width: 180px;
+      animation: float3move 20s infinite alternate-reverse;
+    }
+    @keyframes float1move {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(60px) scale(1.08) rotate(8deg); }
+    }
+    @keyframes float2move {
+      0% { transform: translateY(0) scale(1) rotate(0deg); }
+      100% { transform: translateY(-40px) scale(1.11) rotate(6deg); }
+    }
+    @keyframes float3move {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(35px) scale(0.95); }
+    }
     header {
       text-align: center;
       margin-bottom: 2rem;
+      z-index: 1;
+      position: relative;
     }
-
     header h1 {
       color: #007acc;
-      font-size: 2rem;
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: 1px;
       margin-bottom: 0.5rem;
+      background: linear-gradient(90deg,#007acc 30%,#a8e063 60%,#f7971e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-
     header p {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: #555;
+      background: rgba(255,255,255,0.5);
+      display: inline-block;
+      padding: 0.5em 1.2em;
+      border-radius: 30px;
+      box-shadow: 0 2px 12px rgba(56,183,255,0.07);
     }
-
     .blog-post {
-      background: white;
-      padding: 1.5rem;
-      margin: 1rem auto;
-      border-radius: 10px;
+      background: rgba(255,255,255,0.97);
+      padding: 2rem 2.2rem 1.7rem 2.2rem;
+      margin: 2rem auto 1.5rem auto;
+      border-radius: 18px;
       max-width: 800px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      box-shadow: 0 12px 32px 0 rgba(44,140,255,0.09), 0 2px 4px 0 rgba(0,0,0,0.03);
+      z-index: 1;
+      position: relative;
+      border: 2px solid #eaeaea;
+      animation: popCard 1.4s cubic-bezier(0.32,1.56,0.64,1) 0.5s backwards;
     }
-
+    @keyframes popCard {
+      0% { transform: scale(0.93) translateY(40px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
     .blog-post h2 {
-      color: #222;
+      color: #4caf50;
       margin-top: 0;
+      letter-spacing: 0.5px;
     }
-
     .blog-post p.date {
-      font-size: 0.9rem;
-      color: #888;
+      font-size: 0.98rem;
+      color: #007acc;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 700px) {
+      .blog-post { padding: 1.2rem 0.7rem; }
+      header h1 { font-size: 1.5rem; }
     }
   </style>
 </head>
 <body>
+  <!-- Energy-themed floating SVGs (background) -->
+  <div class="energy-bg">
+    <svg class="float1" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="70" cy="70" r="64" fill="url(#grad1)" />
+      <defs>
+        <linearGradient id="grad1" x1="0" y1="0" x2="140" y2="140" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#ffe259" />
+          <stop offset="1" stop-color="#ffa751" />
+        </linearGradient>
+      </defs>
+    </svg>
+    <svg class="float2" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="55" cy="55" rx="50" ry="50" fill="url(#grad2)" />
+      <defs>
+        <linearGradient id="grad2" x1="0" y1="0" x2="110" y2="110" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#43cea2" />
+          <stop offset="1" stop-color="#185a9d" />
+        </linearGradient>
+      </defs>
+    </svg>
+    <svg class="float3" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="60,10 90,110 30,110" fill="url(#grad3)" />
+      <defs>
+        <linearGradient id="grad3" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#56ccf2" />
+          <stop offset="1" stop-color="#2f80ed" />
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
   <header>
     <h1>Policy Watch: India's Clean Energy Agenda</h1>
     <p>Stay up to date with India's evolving energy policies and announcements.</p>
   </header>
-
   <div class="blog-post">
     <h2>Sample Blog Post Title</h2>
     <p class="date">July 15, 2025</p>
