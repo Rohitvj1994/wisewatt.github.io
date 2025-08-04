@@ -7,7 +7,6 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap
 " rel="stylesheet" />
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
   <style>
     :root {
@@ -78,7 +77,6 @@
     header h1:hover {
       transform: scale(1.025);
       filter: drop-shadow(0 0 18px #00e5ff66);
-
     }
     @keyframes gradientMove {
       0% { background-position: 0% center; }
@@ -158,7 +156,10 @@
       color: #ff1744;
       animation: iconShake 0.5s;
     }
-
+    .button:hover .btn-icon-ai {
+      color: #7c4dff;
+      animation: iconSpin 0.6s;
+    }
     @keyframes iconSpin {
       0% { transform: rotate(0deg);}
       100% {transform: rotate(360deg);}
@@ -183,7 +184,6 @@
       20%, 80% { transform: translateX(2px);}
       30%, 50%, 70% { transform: translateX(-4px);}
       40%, 60% { transform: translateX(4px);}
-
     }
     .back-to-top {
       position: fixed; bottom: 22px; right: 20px;
@@ -259,7 +259,7 @@
   <header data-aos="fade-down">
     <div class="sun-logo">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M12 4a1 1 0 011 1v1.05a7.002 7.002 0 015.95 5.95H20a1 1 0 110 2h-1.05a7.002 7.002 0 01-5.95 5.95V20a1 1 0 11-2 0v-1.05a7.002 7.002 0 01-5.95-5.95H4a1 1 0 110-2h1.05a7.002 7.002 0 015.95-5.95V5a1 1 0 011-1z"></path>
+        <path d="M12 4a1 1 0 011 1v1.05a7.002 7.002 0 015.95 5.95H20a1 1 0 110 2h-1.05a7.002 7.002 0 01-5.95 5.95V20a1 1 0 11-2 0v-1.05a7.002 7.002 0 01-5.95-5.95H4a1 1 0 110-2h1.05a7.002 7.002 0 015.95-5.95V5a1 1 0 011-1z"/>
       </svg>
     </div>
     <h1>
@@ -276,6 +276,7 @@
       <a href="trends.html" class="button"><span class="btn-icon btn-icon-fresh"><i class="fas fa-lightbulb"></i></span>Fresh Ideas</a>
       <a href="global.html" class="button"><span class="btn-icon btn-icon-global"><i class="fas fa-globe-asia"></i></span>Global Lessons</a>
       <a href="critical.html" class="button"><span class="btn-icon btn-icon-minerals"><i class="fas fa-gem"></i></span>Critical Minerals</a>
+      <a href="AI.html" class="button"><span class="btn-icon btn-icon-ai"><i class="fas fa-robot"></i></span>AI Meets Energy</a>
     </div>
   </section>
   <footer>© 2025 WiseWatt. All rights reserved.</footer>
