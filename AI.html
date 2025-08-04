@@ -9,23 +9,20 @@
       --neon1: #1fa2ff;
       --neon2: #f8ffae;
       --neon3: #2c5364;
-      --neon4: #ffffff;
-      --neon5: #ff57a6;
-      --neon6: #53ffe2;
-      --blog-post-shadow: 0 16px 40px 0 rgba(31,162,255,0.18), 0 2px 4px 0 rgba(0,0,0,0.03);
+      --neon4: #ff57a6;
+      --neon5: #53ffe2;
+      --neon6: #ffffff;
     }
-    body {
-      font-family: 'Segoe UI', 'Montserrat', 'Roboto', Arial, sans-serif;
-      padding: 2rem;
-      min-height: 100vh;
+    html, body {
+      height: 100%;
       margin: 0;
-      color: #232323;
+      padding: 0;
+      font-family: 'Segoe UI', 'Montserrat', 'Roboto', Arial, sans-serif;
       background: radial-gradient(ellipse at 60% 0%, #1fa2ff 0%, #2c5364 50%, #1fa2ff 100%);
       background-size: 500% 500%;
-      animation: bgPulse 16s cubic-bezier(.68,.01,.11,.98) infinite alternate;
-      position: relative;
+      animation: bgPulse 18s cubic-bezier(.68,.01,.11,.98) infinite alternate;
       overflow-x: hidden;
-      overflow-y: auto;
+      min-height: 100vh;
       transition: background 0.6s;
     }
     @keyframes bgPulse {
@@ -40,11 +37,11 @@
       top: 0; left: 0; width: 100vw; height: 100vh;
       z-index: 0;
       pointer-events: none;
-      opacity: 0.16;
+      opacity: 0.18;
       mix-blend-mode: lighten;
     }
 
-    /* Circuit energy lines SVG overlay */
+    /* Circuit/Energy Lines SVG Animation */
     #circuit-bg {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
@@ -54,7 +51,71 @@
       mix-blend-mode: screen;
     }
 
-    /* Floating SVGs - Orbs & Cells */
+    /* AI Core Orb */
+    #ai-core {
+      position: fixed;
+      bottom: 28px;
+      left: 28px;
+      width: 72px;
+      height: 72px;
+      z-index: 20;
+      pointer-events: auto;
+    }
+    #ai-core-orb {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 0 28px #1fa2ff99) blur(1px);
+      animation: aiCorePulse 3.2s infinite alternate, aiCoreSpin 22s linear infinite;
+      transition: filter 0.3s;
+    }
+    @keyframes aiCorePulse {
+      0% { filter: drop-shadow(0 0 18px #1fa2ff55) blur(1px);}
+      100% { filter: drop-shadow(0 0 40px #f8ffae99) blur(2px);}
+    }
+    @keyframes aiCoreSpin {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(360deg);}
+    }
+    #ai-core:hover #ai-core-orb {
+      filter: drop-shadow(0 0 44px #ff57a6cc) blur(2px);
+    }
+    #ai-core-tooltip {
+      position: absolute;
+      left: 80px;
+      bottom: 18px;
+      background: linear-gradient(92deg,#1fa2ff 40%,#f8ffae 70%,#2c5364 100%);
+      color: #fff;
+      font-size: 1rem;
+      padding: 0.7em 1.2em;
+      border-radius: 24px;
+      box-shadow: 0 2px 12px #1fa2ff44;
+      opacity: 0;
+      pointer-events: none;
+      font-family: 'Montserrat', sans-serif;
+      white-space: nowrap;
+      transition: opacity 0.26s;
+      z-index: 21;
+    }
+    #ai-core:hover #ai-core-tooltip {
+      opacity: 1;
+    }
+
+    /* Mouse trail particles */
+    .trail-dot {
+      position: fixed;
+      pointer-events: none;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #f8ffae 0%, #1fa2ff 100%);
+      z-index: 9999;
+      opacity: 0.55;
+      mix-blend-mode: lighten;
+      filter: blur(1px);
+      transition: opacity 0.5s;
+    }
+
+    /* Floating SVGs - Orbits */
     .global-bg {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
@@ -62,42 +123,37 @@
       z-index: 2;
       overflow: hidden;
     }
-    .orbit1, .orbit2, .orbit3, .orbit4, .orbit5 {
+    .orbit1, .orbit2, .orbit3 {
       position: absolute;
-      filter: drop-shadow(0 8px 24px #1fa2ff88);
       will-change: transform;
-      transition: filter 0.4s;
-      /* Will get parallax/3D via JS */
+      filter: drop-shadow(0 12px 32px #1fa2ff66) blur(0.4px);
+      transition: filter 0.4s, transform 0.4s;
     }
     .orbit1 { left: 7vw; top: 8vh; width: 180px; }
     .orbit2 { right: 10vw; bottom: 12vh; width: 130px; }
     .orbit3 { left: 65vw; top: 60vh; width: 110px; }
-    .orbit4 { left: 45vw; top: 15vh; width: 80px; }
-    .orbit5 { right: 24vw; top: 56vh; width: 60px; }
 
-    /* Orb Glow Animation */
     @keyframes orbGlow {
-      0% { filter: drop-shadow(0 8px 24px #1fa2ff88); }
-      50% { filter: drop-shadow(0 14px 40px #f8ffae99); }
-      100% { filter: drop-shadow(0 8px 24px #1fa2ff88); }
+      0%,100% { filter: drop-shadow(0 12px 32px #1fa2ff66) blur(0.4px);}
+      50% { filter: drop-shadow(0 18px 60px #f8ffae99) blur(1px);}
     }
-    /* Orb Rotate Animation */
     @keyframes orbRot {
-      0% { transform: rotateY(0deg) rotate(0deg);}
-      100% { transform: rotateY(360deg) rotate(60deg);}
+      0% { transform: rotate3d(0.8,0.2,0,0deg);}
+      100% { transform: rotate3d(0.8,0.2,0,360deg);}
     }
-    .orbit1, .orbit2, .orbit3, .orbit4, .orbit5 {
-      animation: orbGlow 6s infinite alternate, orbRot 32s linear infinite;
+    .orbit1, .orbit2, .orbit3 {
+      animation: orbGlow 8s infinite alternate, orbRot 38s linear infinite;
     }
 
+    /* Typography Animation */
     header {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 2.2rem;
       z-index: 10;
       position: relative;
       opacity: 0;
       transform: translateY(60px);
-      animation: fadeUp 1.5s cubic-bezier(.77,.00,.18,1.00) 0.2s forwards;
+      animation: fadeUp 1.6s cubic-bezier(.77,.00,.18,1.00) 0.3s forwards;
     }
     @keyframes fadeUp {
       from {opacity: 0; transform: translateY(60px);}
@@ -106,20 +162,26 @@
     header h1 {
       font-size: 2.7rem;
       font-weight: 700;
-      margin-bottom: 0.75rem;
-      letter-spacing: 1.8px;
+      margin-bottom: 0.8rem;
+      letter-spacing: 2px;
       background: linear-gradient(92deg,var(--neon1) 40%,var(--neon2) 70%,var(--neon3) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       filter: drop-shadow(0 0 10px #1fa2ff88);
       opacity: 0;
-      animation: liquidReveal 2.2s cubic-bezier(.75,0,.25,1) 0.7s forwards;
+      animation: typewriterGlow 2.5s steps(6) 0.8s forwards, pulseText 3s infinite alternate 3.3s;
+      overflow: hidden;
+      white-space: pre-line;
     }
-    @keyframes liquidReveal {
-      0% { clip-path: inset(0 100% 0 0); opacity: 0;}
-      40% { opacity: 0.6; }
-      100% { clip-path: inset(0 0 0 0); opacity: 1;}
+    @keyframes typewriterGlow {
+      from {width: 0; opacity:0;}
+      to {width: 100%; opacity:1;}
+    }
+    @keyframes pulseText {
+      0% { filter: drop-shadow(0 0 10px #1fa2ff88);}
+      50% { filter: drop-shadow(0 0 24px #f8ffae88);}
+      100% { filter: drop-shadow(0 0 10px #1fa2ff88);}
     }
     header p {
       font-size: 1.15rem;
@@ -130,33 +192,47 @@
       border-radius: 30px;
       box-shadow: 0 2px 13px rgba(31,162,255,0.09);
       opacity: 0;
-      animation: fadeInSubtitle 1.3s cubic-bezier(.77,.00,.18,1.00) 2.3s forwards;
+      animation: pulseSubtitle 2.2s cubic-bezier(.77,.00,.18,1.00) 2.7s forwards, subtitleGlow 3.5s infinite alternate 5.1s;
+      transition: box-shadow 0.22s;
     }
-    @keyframes fadeInSubtitle {
+    @keyframes pulseSubtitle {
       from {opacity: 0; transform: translateY(16px);}
       to {opacity: 1; transform: translateY(0);}
     }
+    @keyframes subtitleGlow {
+      0% { box-shadow: 0 2px 13px rgba(31,162,255,0.09);}
+      50% { box-shadow: 0 0 35px #f8ffae55;}
+      100% { box-shadow: 0 2px 13px rgba(31,162,255,0.09);}
+    }
+    header p:hover {
+      box-shadow: 0 0 42px #1fa2ff99;
+      background: linear-gradient(92deg,#f8ffae 0%,#1fa2ff 100%);
+      color: #1fa2ff;
+      transition: box-shadow 0.22s, background 0.22s, color 0.22s;
+    }
+
+    /* Blog Post Card Enhancements */
     .blog-post {
-      background: rgba(255,255,255,0.97);
+      background: rgba(255,255,255,0.98);
       padding: 2.2rem 2.7rem 2rem 2.7rem;
       margin: 2.5rem auto 1.5rem auto;
       border-radius: 24px;
       max-width: 820px;
-      box-shadow: var(--blog-post-shadow);
+      box-shadow: 0 16px 40px 0 rgba(31,162,255,0.18), 0 2px 4px 0 rgba(0,0,0,0.03);
       z-index: 10;
       position: relative;
-      border: 2.5px solid transparent;
+      border: 2px solid transparent;
       opacity: 0;
-      transform: translateY(60px) scale(.98);
-      animation: blogPopIn 1.5s cubic-bezier(.77,.00,.18,1.00) 2.3s forwards;
-      transition: box-shadow 0.28s, border 0.28s, filter 0.28s, transform 0.28s;
+      transform: translateY(64px) scale(.97);
+      animation: blogPopIn 1.6s cubic-bezier(.77,.00,.18,1.00) 3.3s forwards;
+      transition: box-shadow 0.25s, border 0.25s, filter 0.25s, transform 0.25s;
       will-change: filter, transform;
       overflow: hidden;
-      backdrop-filter: blur(2px);
+      backdrop-filter: blur(2.5px);
     }
     @keyframes blogPopIn {
-      0% { opacity: 0; transform: translateY(60px) scale(.97);}
-      70% { opacity: .7; transform: translateY(-4px) scale(1.01);}
+      0% { opacity: 0; transform: translateY(64px) scale(.97);}
+      80% { opacity: .8; transform: translateY(-7px) scale(1.03);}
       100% { opacity: 1; transform: translateY(0) scale(1);}
     }
     .blog-post:before {
@@ -167,28 +243,35 @@
       pointer-events: none;
       z-index: 0;
       background: linear-gradient(92deg,#1fa2ff99 30%,#f8ffae88 60%,#ff57a655 95%);
-      opacity: 0.22;
-      filter: blur(8px);
+      opacity: 0.24;
+      filter: blur(10px);
       transition: opacity 0.33s;
     }
     .blog-post:hover:before {
-      opacity: 0.45;
+      opacity: 0.54;
     }
     .blog-post:hover {
       box-shadow: 0 0 44px 0 #1fa2ff45, 0 2px 8px 0 rgba(31,162,255,0.17), 0 16px 40px 0 rgba(31,162,255,0.28);
       border-color: #1fa2ff55;
       filter: drop-shadow(0 0 18px #f8ffae66);
-      transform: scale(1.022) translateY(-5px) rotate3d(.12,.6,0,3deg);
+      transform: scale(1.021) translateY(-7px) rotate3d(.13,.6,0,4deg);
+    }
+    /* Blog post scroll reveal */
+    .blog-post.revealed {
+      opacity: 1 !important;
+      transform: translateY(0) scale(1) !important;
+      transition: opacity 0.8s, transform 0.8s;
+      animation: none !important;
     }
     .blog-post h2, .blog-post p.date, .blog-post p {
       opacity: 0;
       transform: translateY(18px);
-      animation: drawIn 0.7s cubic-bezier(.77,.00,.18,1.00) 2.9s forwards;
+      animation: drawIn 0.8s cubic-bezier(.77,.00,.18,1.00) 4.1s forwards;
       animation-fill-mode: forwards;
     }
-    .blog-post h2 { animation-delay: 2.9s;}
-    .blog-post p.date { animation-delay: 3.1s;}
-    .blog-post p { animation-delay: 3.3s;}
+    .blog-post h2 { animation-delay: 4.1s;}
+    .blog-post p.date { animation-delay: 4.3s;}
+    .blog-post p { animation-delay: 4.5s;}
     @keyframes drawIn {
       from {opacity: 0; transform: translateY(18px);}
       to {opacity: 1; transform: translateY(0);}
@@ -199,7 +282,7 @@
       position: fixed;
       right: 24px;
       bottom: 24px;
-      z-index: 20;
+      z-index: 30;
       background: linear-gradient(92deg,#1fa2ff 40%,#f8ffae 70%,#2c5364 100%);
       color: #fff;
       border: none;
@@ -219,16 +302,28 @@
       background: linear-gradient(120deg,#2c5364 20%,#f8ffae 70%,#1fa2ff 100%);
       box-shadow: 0 0 24px #1fa2ff44;
     }
-    @media (max-width: 700px) {
+
+    /* Responsiveness */
+    @media (max-width: 900px) {
       .blog-post { padding: 1.2rem 0.7rem; }
-      header h1 { font-size: 1.2rem; }
+      header h1 { font-size: 1.4rem; }
+      #ai-core { width: 48px; height: 48px; left: 12px; bottom: 12px;}
+      #ai-core-tooltip { font-size: 0.93rem; left: 58px; bottom: 2px;}
       #sound-toggle { font-size: 1rem; padding: 0.6em 1em;}
+    }
+    @media (max-width: 600px) {
+      .orbit1, .orbit2, .orbit3 { width: 80px !important; }
+      .blog-post { padding: 0.8rem 0.4rem;}
+      header h1 { font-size: 1.01rem;}
+      #ai-core { width: 34px; height: 34px; left: 6px; bottom: 6px;}
+      #ai-core-tooltip { font-size: 0.8rem; left: 38px; bottom: -6px;}
     }
   </style>
 </head>
 <body>
   <!-- Neural Net Background Animation -->
   <canvas id="neural-bg"></canvas>
+
   <!-- Circuit/Energy Lines SVG Animation -->
   <svg id="circuit-bg" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg" width="100vw" height="100vh">
     <g>
@@ -238,7 +333,8 @@
       <path id="path4" d="M800,200 Q900,350 1100,280 Q1200,200 1300,350" stroke="#ff57a677" stroke-width="2.7" fill="none"/>
     </g>
   </svg>
-  <!-- Floating SVG Orbs (AI nodes, power cells) -->
+
+  <!-- Floating SVG Orbits (AI nodes, power cells) -->
   <div class="global-bg">
     <svg class="orbit1" viewBox="0 0 120 120" fill="none">
       <circle cx="60" cy="60" r="50" stroke="url(#globeGrad1)" stroke-width="7" fill="url(#globeGrad2)" />
@@ -271,28 +367,28 @@
         </linearGradient>
       </defs>
     </svg>
-    <!-- Additional AI node orb -->
-    <svg class="orbit4" viewBox="0 0 60 60" fill="none">
-      <circle cx="30" cy="30" r="25" fill="url(#nodeGrad1)" stroke="#1fa2ff" stroke-width="2"/>
+  </div>
+
+  <!-- AI Core Orb (Optional Enhancement) -->
+  <div id="ai-core" title="">
+    <svg id="ai-core-orb" viewBox="0 0 70 70" fill="none">
+      <circle cx="35" cy="35" r="32" fill="url(#coreGrad1)" />
+      <circle cx="35" cy="35" r="19" fill="url(#coreGrad2)" />
       <defs>
-        <radialGradient id="nodeGrad1" cx="50%" cy="50%" r="50%">
+        <radialGradient id="coreGrad1" cx="50%" cy="50%" r="50%">
           <stop offset="0%" stop-color="#f8ffae" />
+          <stop offset="100%" stop-color="#1fa2ff" />
+        </radialGradient>
+        <radialGradient id="coreGrad2" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ff57a6" />
           <stop offset="100%" stop-color="#1fa2ff" />
         </radialGradient>
       </defs>
     </svg>
-    <!-- Power cell orb -->
-    <svg class="orbit5" viewBox="0 0 50 50" fill="none">
-      <ellipse cx="25" cy="25" rx="20" ry="16" fill="url(#cellGrad1)" />
-      <defs>
-        <linearGradient id="cellGrad1" x1="0" y1="0" x2="50" y2="50">
-          <stop stop-color="#1fa2ff" />
-          <stop offset="1" stop-color="#f8ffae" />
-        </linearGradient>
-      </defs>
-    </svg>
+    <span id="ai-core-tooltip">The mind of the grid watches you.</span>
   </div>
-  <!-- Main Content -->
+
+  <!-- Main Content (No structural change) -->
   <header>
     <h1>AI: Powering Brains, Braining Power</h1>
     <p>The strange but electrifying love story of energy systems and artificial intelligence.</p>
@@ -302,13 +398,14 @@
     <p class="date">July 15, 2025</p>
     <p>This is where your blog content goes. Add insights, updates, or commentary for your readers.</p>
   </div>
+
   <!-- Ambient sound toggle button and audio element -->
   <button id="sound-toggle" aria-label="Toggle ambient sound">AI Hum: Off</button>
   <audio id="ambient-audio" loop>
     <source src="https://cdn.pixabay.com/audio/2022/02/23/audio_115b6a6c48.mp3" type="audio/mp3">
   </audio>
   <script>
-    // Neural net background - gently moving parallax nodes + links
+    /* Neural Net Background Animation */
     const canvas = document.getElementById('neural-bg');
     const ctx = canvas.getContext('2d');
     let w = window.innerWidth, h = window.innerHeight;
@@ -321,8 +418,8 @@
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Neural net: node objects
-    const NODES = 36, LINKS = 60;
+    // Neural net nodes + links
+    const NODES = 34, LINKS = 60;
     let nodes = [], links = [];
     for(let i=0;i<NODES;i++){
       nodes.push({
@@ -339,36 +436,41 @@
       let a = Math.floor(Math.random()*NODES), b = Math.floor(Math.random()*NODES);
       if(a!==b) links.push([a,b]);
     }
-    // Parallax (mousemove)
+    // Parallax from mouse
     let parallaxX = 0, parallaxY = 0;
     window.addEventListener('mousemove', e=>{
       parallaxX = (e.clientX/w - 0.5)*38;
       parallaxY = (e.clientY/h - 0.5)*18;
     });
+    // Parallax from scroll
+    let parallaxScrollY = 0;
+    window.addEventListener('scroll', ()=>{
+      parallaxScrollY = window.scrollY * 0.14;
+    });
     function drawNeural(){
       ctx.clearRect(0,0,w,h);
       for(const n of nodes){
         ctx.beginPath();
-        ctx.arc(n.x+n.parallax, n.y+n.parallax, n.r, 0, 2 * Math.PI);
-        ctx.fillStyle = "rgba(31,162,255,0.42)";
+        ctx.arc(n.x+n.parallax, n.y+n.parallax+parallaxScrollY, n.r, 0, 2 * Math.PI);
+        ctx.fillStyle = "rgba(31,162,255,0.36)";
         ctx.shadowColor = "#f8ffae";
-        ctx.shadowBlur = 13;
+        ctx.shadowBlur = 12;
         ctx.fill();
         ctx.shadowBlur = 0;
       }
       for(const link of links){
         let a = nodes[link[0]], b = nodes[link[1]];
         ctx.beginPath();
-        ctx.moveTo(a.x+a.parallax, a.y+a.parallax);
-        ctx.lineTo(b.x+b.parallax, b.y+b.parallax);
-        ctx.strokeStyle = "rgba(250,255,174,0.13)";
+        ctx.moveTo(a.x+a.parallax, a.y+a.parallax+parallaxScrollY);
+        ctx.lineTo(b.x+b.parallax, b.y+b.parallax+parallaxScrollY);
+        ctx.strokeStyle = "rgba(250,255,174,0.10)";
         ctx.lineWidth = 1.1;
         ctx.stroke();
       }
     }
     function animateNeural(){
       for(const n of nodes){
-        n.x += n.vx + Math.sin(Date.now()/1000+n.phase)*0.08;
+        n.x += n.vx + Math.sin(Date.now()/1200+n.phase)*0.09;
         n.y += n.vy + Math.cos(Date.now()/1300+n.phase)*0.07;
         // gently keep in bounds
         if(n.x < 0) n.x = w;
@@ -402,40 +504,74 @@
     }
     animateCircuit();
 
-    // Floating SVGs - glow & parallax tilt
-    const orbClasses = ['orbit1','orbit2','orbit3','orbit4','orbit5'];
+    // Floating SVGs - glow, slow 3D rotation, mouse parallax tilt
+    const orbClasses = ['orbit1','orbit2','orbit3'];
     let orbEls = orbClasses.map(cls=>document.querySelector('.'+cls));
     window.addEventListener('mousemove', e=>{
       let cx = (e.clientX/w - 0.5), cy = (e.clientY/h - 0.5);
       orbEls.forEach((el,i)=>{
-        let tilt = (i%2===0 ? 1 : -1)*cx*18;
+        let tilt = (i%2===0 ? 1 : -1)*cx*22;
         let lift = cy*8;
-        el.style.transform = `rotateY(${tilt}deg) rotate(${lift}deg) scale(1.08)`;
+        el.style.transform = `rotate3d(${cx.toFixed(2)},${cy.toFixed(2)},0,${tilt}deg) scale(1.09)`;
       });
     });
     orbEls.forEach((el,i)=>{
       el.addEventListener('mouseenter',()=>{el.style.filter="drop-shadow(0 0 54px #ff57a6cc)";});
-      el.addEventListener('mouseleave',()=>{el.style.filter="drop-shadow(0 8px 24px #1fa2ff88)";});
+      el.addEventListener('mouseleave',()=>{el.style.filter="drop-shadow(0 12px 32px #1fa2ff66)";});
     });
 
-    // Scroll: Animate elements with easing
-    function animateOnScroll() {
-      const elements = document.querySelectorAll('header, .blog-post');
-      const throttled = [];
-      window.addEventListener('scroll', ()=>{
-        elements.forEach(el=>{
-          if(throttled.includes(el)) return;
-          let rect = el.getBoundingClientRect();
-          if(rect.top < window.innerHeight-40){
-            el.style.transition="transform 0.73s cubic-bezier(.77,.00,.18,1.00), opacity 0.83s";
-            el.style.opacity = "1";
-            el.style.transform = "translateY(0) scale(1)";
-            throttled.push(el);
-          }
-        });
-      });
+    // Blog post scroll reveal
+    function scrollReveal() {
+      const el = document.querySelector('.blog-post');
+      if(!el) return;
+      function checkReveal() {
+        const rect = el.getBoundingClientRect();
+        if(rect.top < window.innerHeight-50 && !el.classList.contains('revealed')) {
+          el.classList.add('revealed');
+        }
+      }
+      window.addEventListener('scroll', checkReveal);
+      checkReveal();
     }
-    animateOnScroll();
+    scrollReveal();
+
+    // Blog post card tilt on hover
+    const blogPost = document.querySelector('.blog-post');
+    blogPost.addEventListener('mousemove', function(e){
+      const rect = blogPost.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const xc = rect.width/2, yc = rect.height/2;
+      const dx = (x-xc)/xc, dy = (y-yc)/yc;
+      blogPost.style.transform = `scale(1.021) translateY(-7px) rotate3d(${dy.toFixed(2)},${dx.toFixed(2)},0,6deg)`;
+    });
+    blogPost.addEventListener('mouseleave', function(){
+      blogPost.style.transform = "scale(1) translateY(0) rotate3d(0,0,0,0deg)";
+    });
+
+    // AI Core orb tooltip logic (for accessibility)
+    document.getElementById('ai-core').addEventListener('mouseenter',()=>{
+      document.getElementById('ai-core-tooltip').style.opacity = "1";
+    });
+    document.getElementById('ai-core').addEventListener('mouseleave',()=>{
+      document.getElementById('ai-core-tooltip').style.opacity = "0";
+    });
+
+    // Mouse trail (tiny light dots)
+    let trailDots = [];
+    window.addEventListener('mousemove', function(e){
+      let dot = document.createElement('div');
+      dot.className = 'trail-dot';
+      dot.style.left = (e.clientX-3)+'px';
+      dot.style.top = (e.clientY-3)+'px';
+      document.body.appendChild(dot);
+      trailDots.push(dot);
+      setTimeout(()=>{dot.style.opacity="0";},190);
+      setTimeout(()=>{dot.remove();},420);
+      if(trailDots.length>40) {
+        trailDots.shift().remove();
+      }
+    });
 
     // Ambient sound toggle
     const soundBtn = document.getElementById('sound-toggle');
@@ -444,7 +580,7 @@
     soundBtn.addEventListener('click', ()=>{
       soundOn = !soundOn;
       if(soundOn){
-        audio.volume = 0.18;
+        audio.volume = 0.19;
         audio.play();
         soundBtn.textContent = 'AI Hum: On';
       } else {
@@ -452,11 +588,10 @@
         soundBtn.textContent = 'AI Hum: Off';
       }
     });
-
-    // On page load, fade in
-    window.addEventListener('DOMContentLoaded', ()=>{
-      document.querySelector('header').style.animationDelay = "0.2s";
-      document.querySelector('.blog-post').style.animationDelay = "2.3s";
+    // Autoplay only if allowed
+    document.addEventListener('DOMContentLoaded', ()=>{
+      audio.volume = 0.19;
+      audio.play().then(()=>{soundOn=true;soundBtn.textContent='AI Hum: On';}).catch(()=>{soundBtn.textContent='AI Hum: Off';});
     });
   </script>
 </body>
