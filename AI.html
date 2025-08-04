@@ -5,161 +5,121 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI: Powering Brains, Braining Power</title>
   <style>
+    :root {
+      --neon1: #1fa2ff;
+      --neon2: #f8ffae;
+      --neon3: #2c5364;
+      --neon4: #ffffff;
+      --neon5: #ff57a6;
+      --neon6: #53ffe2;
+      --blog-post-shadow: 0 16px 40px 0 rgba(31,162,255,0.18), 0 2px 4px 0 rgba(0,0,0,0.03);
+    }
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Segoe UI', 'Montserrat', 'Roboto', Arial, sans-serif;
       padding: 2rem;
       min-height: 100vh;
       margin: 0;
       color: #232323;
-      background: linear-gradient(120deg, #0f2027 0%, #2c5364 40%, #1fa2ff 70%, #f8ffae 100%);
-      background-size: 350% 350%;
-      animation: globeGradient 16s ease-in-out infinite;
+      background: radial-gradient(ellipse at 60% 0%, #1fa2ff 0%, #2c5364 50%, #1fa2ff 100%);
+      background-size: 500% 500%;
+      animation: bgPulse 16s cubic-bezier(.68,.01,.11,.98) infinite alternate;
       position: relative;
       overflow-x: hidden;
+      overflow-y: auto;
+      transition: background 0.6s;
     }
-    @keyframes globeGradient {
+    @keyframes bgPulse {
       0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+      50% { background-position: 100% 30%; }
       100% { background-position: 0% 50%; }
     }
 
-    /* Particle/Neural Network Background Animation */
-    #particle-bg {
+    /* Neural net background canvas */
+    #neural-bg {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
-      pointer-events: none;
       z-index: 0;
-      opacity: 0.22;
+      pointer-events: none;
+      opacity: 0.16;
       mix-blend-mode: lighten;
     }
 
-    /* Circuit Line Animation */
+    /* Circuit energy lines SVG overlay */
     #circuit-bg {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 1;
       pointer-events: none;
-      z-index: 0;
-      opacity: 0.14;
+      opacity: 0.13;
       mix-blend-mode: screen;
-      animation: circuit-fade 8s linear infinite alternate;
-    }
-    @keyframes circuit-fade {
-      0% { opacity: 0.09; }
-      100% { opacity: 0.19; }
     }
 
+    /* Floating SVGs - Orbs & Cells */
     .global-bg {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
       pointer-events: none;
-      z-index: 1;
-      opacity: 0.12;
+      z-index: 2;
       overflow: hidden;
     }
     .orbit1, .orbit2, .orbit3, .orbit4, .orbit5 {
       position: absolute;
-      filter: drop-shadow(0 6px 16px #0005);
-      animation-timing-function: ease-in-out;
+      filter: drop-shadow(0 8px 24px #1fa2ff88);
       will-change: transform;
-      perspective: 800px;
-      transition: transform 0.4s cubic-bezier(0.32,1.56,0.64,1);
+      transition: filter 0.4s;
+      /* Will get parallax/3D via JS */
     }
-    .orbit1 {
-      left: 7vw; top: 8vh;
-      width: 180px;
-      animation: orbit1move 20s infinite alternate, rotateOrb 24s linear infinite;
-      transform-style: preserve-3d;
+    .orbit1 { left: 7vw; top: 8vh; width: 180px; }
+    .orbit2 { right: 10vw; bottom: 12vh; width: 130px; }
+    .orbit3 { left: 65vw; top: 60vh; width: 110px; }
+    .orbit4 { left: 45vw; top: 15vh; width: 80px; }
+    .orbit5 { right: 24vw; top: 56vh; width: 60px; }
+
+    /* Orb Glow Animation */
+    @keyframes orbGlow {
+      0% { filter: drop-shadow(0 8px 24px #1fa2ff88); }
+      50% { filter: drop-shadow(0 14px 40px #f8ffae99); }
+      100% { filter: drop-shadow(0 8px 24px #1fa2ff88); }
     }
-    .orbit2 {
-      right: 10vw; bottom: 12vh;
-      width: 130px;
-      animation: orbit2move 23s infinite alternate, rotateOrbReverse 22s linear infinite;
+    /* Orb Rotate Animation */
+    @keyframes orbRot {
+      0% { transform: rotateY(0deg) rotate(0deg);}
+      100% { transform: rotateY(360deg) rotate(60deg);}
     }
-    .orbit3 {
-      left: 65vw; top: 60vh;
-      width: 110px;
-      animation: orbit3move 22s infinite alternate-reverse, rotateOrb 19s linear infinite;
-    }
-    .orbit4 {
-      left: 45vw; top: 15vh;
-      width: 80px;
-      animation: orbit4move 27s infinite alternate, rotateOrbReverse 17s linear infinite;
-    }
-    .orbit5 {
-      right: 24vw; top: 56vh;
-      width: 60px;
-      animation: orbit5move 30s infinite alternate, rotateOrb 15s linear infinite;
-    }
-    @keyframes orbit1move {
-      0% { transform: translateY(0) scale(1) rotateY(0deg) rotate(0deg);}
-      100% { transform: translateY(45px) scale(1.11) rotateY(10deg) rotate(8deg);}
-    }
-    @keyframes orbit2move {
-      0% { transform: translateY(0) scale(1) rotateY(0deg) rotate(0deg);}
-      100% { transform: translateY(-36px) scale(1.08) rotateY(-6deg) rotate(-7deg);}
-    }
-    @keyframes orbit3move {
-      0% { transform: translateY(0) scale(1);}
-      100% { transform: translateY(60px) scale(0.97) rotateY(12deg) rotate(12deg);}
-    }
-    @keyframes orbit4move {
-      0% { transform: translateX(0) scale(1);}
-      100% { transform: translateX(22px) scale(1.09) rotateY(-20deg);}
-    }
-    @keyframes orbit5move {
-      0% { transform: translateY(0) scale(1);}
-      100% { transform: translateY(18px) scale(1.04) rotateY(16deg);}
-    }
-    @keyframes rotateOrb {
-      0% { transform: rotateY(0deg);}
-      100% { transform: rotateY(360deg);}
-    }
-    @keyframes rotateOrbReverse {
-      0% { transform: rotateY(0deg);}
-      100% { transform: rotateY(-360deg);}
+    .orbit1, .orbit2, .orbit3, .orbit4, .orbit5 {
+      animation: orbGlow 6s infinite alternate, orbRot 32s linear infinite;
     }
 
     header {
       text-align: center;
       margin-bottom: 2rem;
-      z-index: 2;
+      z-index: 10;
       position: relative;
       opacity: 0;
       transform: translateY(60px);
-      animation: fadeUp 1.2s cubic-bezier(0.32,1.56,0.64,1) 0.4s forwards;
+      animation: fadeUp 1.5s cubic-bezier(.77,.00,.18,1.00) 0.2s forwards;
     }
     @keyframes fadeUp {
       from {opacity: 0; transform: translateY(60px);}
       to {opacity: 1; transform: translateY(0);}
     }
     header h1 {
-      font-size: 2.3rem;
+      font-size: 2.7rem;
       font-weight: 700;
-      margin-bottom: 0.5rem;
-      letter-spacing: 1.2px;
-      background: linear-gradient(92deg,#1fa2ff 40%,#f8ffae 70%,#2c5364 100%);
+      margin-bottom: 0.75rem;
+      letter-spacing: 1.8px;
+      background: linear-gradient(92deg,var(--neon1) 40%,var(--neon2) 70%,var(--neon3) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      filter: drop-shadow(0 0 10px #1fa2ff88);
       opacity: 0;
-      animation: typewriter 1.6s steps(22) 0.8s forwards, flicker 2.2s linear 2.3s 1;
+      animation: liquidReveal 2.2s cubic-bezier(.75,0,.25,1) 0.7s forwards;
     }
-    @keyframes typewriter {
-      from {width: 0; opacity: 0;}
-      to {width: 100%; opacity: 1;}
-    }
-    @keyframes flicker {
-      0%,100% {opacity:1;}
-      2% {opacity:0.82;}
-      4% {opacity:0.95;}
-      6% {opacity:0.79;}
-      8% {opacity:1;}
-      10% {opacity:0.93;}
-      12% {opacity:1;}
-      14% {opacity:0.85;}
-      16% {opacity:1;}
-      18% {opacity:0.92;}
-      20% {opacity:1;}
+    @keyframes liquidReveal {
+      0% { clip-path: inset(0 100% 0 0); opacity: 0;}
+      40% { opacity: 0.6; }
+      100% { clip-path: inset(0 0 0 0); opacity: 1;}
     }
     header p {
       font-size: 1.15rem;
@@ -170,59 +130,71 @@
       border-radius: 30px;
       box-shadow: 0 2px 13px rgba(31,162,255,0.09);
       opacity: 0;
-      animation: fadeInSubtitle 1.2s cubic-bezier(0.32,1.56,0.64,1) 2.1s forwards;
+      animation: fadeInSubtitle 1.3s cubic-bezier(.77,.00,.18,1.00) 2.3s forwards;
     }
     @keyframes fadeInSubtitle {
       from {opacity: 0; transform: translateY(16px);}
       to {opacity: 1; transform: translateY(0);}
     }
     .blog-post {
-      background: rgba(255,255,255,0.98);
-      padding: 2rem 2.2rem 1.7rem 2.2rem;
-      margin: 2rem auto 1.5rem auto;
-      border-radius: 18px;
-      max-width: 800px;
-      box-shadow: 0 12px 32px 0 rgba(31,162,255,0.09), 0 2px 4px 0 rgba(0,0,0,0.02);
-      z-index: 2;
+      background: rgba(255,255,255,0.97);
+      padding: 2.2rem 2.7rem 2rem 2.7rem;
+      margin: 2.5rem auto 1.5rem auto;
+      border-radius: 24px;
+      max-width: 820px;
+      box-shadow: var(--blog-post-shadow);
+      z-index: 10;
       position: relative;
-      border: 2px solid #eaeaea;
+      border: 2.5px solid transparent;
       opacity: 0;
-      transform: translateY(60px);
-      animation: fadeUp 1.2s cubic-bezier(0.32,1.56,0.64,1) 1.5s forwards;
-      transition: box-shadow 0.24s, transform 0.3s;
+      transform: translateY(60px) scale(.98);
+      animation: blogPopIn 1.5s cubic-bezier(.77,.00,.18,1.00) 2.3s forwards;
+      transition: box-shadow 0.28s, border 0.28s, filter 0.28s, transform 0.28s;
+      will-change: filter, transform;
+      overflow: hidden;
+      backdrop-filter: blur(2px);
+    }
+    @keyframes blogPopIn {
+      0% { opacity: 0; transform: translateY(60px) scale(.97);}
+      70% { opacity: .7; transform: translateY(-4px) scale(1.01);}
+      100% { opacity: 1; transform: translateY(0) scale(1);}
+    }
+    .blog-post:before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 28px;
+      pointer-events: none;
+      z-index: 0;
+      background: linear-gradient(92deg,#1fa2ff99 30%,#f8ffae88 60%,#ff57a655 95%);
+      opacity: 0.22;
+      filter: blur(8px);
+      transition: opacity 0.33s;
+    }
+    .blog-post:hover:before {
+      opacity: 0.45;
     }
     .blog-post:hover {
-      box-shadow: 0 0 32px 0 #1fa2ff55, 0 2px 4px 0 rgba(0,0,0,0.07), 0 12px 32px 0 rgba(31,162,255,0.17);
-      transform: scale(1.04) translateY(-5px) rotate3d(0.2,0.7,0,4deg);
-      border-color: #1fa2ff44;
+      box-shadow: 0 0 44px 0 #1fa2ff45, 0 2px 8px 0 rgba(31,162,255,0.17), 0 16px 40px 0 rgba(31,162,255,0.28);
+      border-color: #1fa2ff55;
+      filter: drop-shadow(0 0 18px #f8ffae66);
+      transform: scale(1.022) translateY(-5px) rotate3d(.12,.6,0,3deg);
     }
-    .blog-post h2 {
-      color: #1fa2ff;
-      margin-top: 0;
-      letter-spacing: 0.5px;
+    .blog-post h2, .blog-post p.date, .blog-post p {
       opacity: 0;
-      animation: fadeInStagger 0.8s 2.1s forwards;
+      transform: translateY(18px);
+      animation: drawIn 0.7s cubic-bezier(.77,.00,.18,1.00) 2.9s forwards;
+      animation-fill-mode: forwards;
     }
-    .blog-post p.date {
-      font-size: 0.98rem;
-      color: #2c5364;
-      letter-spacing: 1.5px;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      opacity: 0;
-      animation: fadeInStagger 0.7s 2.3s forwards;
-    }
-    .blog-post p {
-      color: #222;
-      opacity: 0;
-      animation: fadeInStagger 0.7s 2.5s forwards;
-    }
-    @keyframes fadeInStagger {
-      from {opacity: 0; transform: translateY(10px);}
+    .blog-post h2 { animation-delay: 2.9s;}
+    .blog-post p.date { animation-delay: 3.1s;}
+    .blog-post p { animation-delay: 3.3s;}
+    @keyframes drawIn {
+      from {opacity: 0; transform: translateY(18px);}
       to {opacity: 1; transform: translateY(0);}
     }
 
-    /* Ambient sound toggle button */
+    /* AI Hum Toggle Button */
     #sound-toggle {
       position: fixed;
       right: 24px;
@@ -241,6 +213,7 @@
       transition: box-shadow 0.22s, background 0.22s;
       font-family: 'Segoe UI', sans-serif;
       user-select: none;
+      filter: drop-shadow(0 0 8px #1fa2ff44);
     }
     #sound-toggle:hover {
       background: linear-gradient(120deg,#2c5364 20%,#f8ffae 70%,#1fa2ff 100%);
@@ -254,76 +227,72 @@
   </style>
 </head>
 <body>
-  <!-- Particle/Neural Network Animation Canvas -->
-  <canvas id="particle-bg"></canvas>
-  <!-- Circuit Line SVG Animation -->
+  <!-- Neural Net Background Animation -->
+  <canvas id="neural-bg"></canvas>
+  <!-- Circuit/Energy Lines SVG Animation -->
   <svg id="circuit-bg" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg" width="100vw" height="100vh">
     <g>
-      <path d="M60,120 Q120,80 180,140 T300,200 Q350,250 400,220 T500,180" stroke="#1fa2ff99" stroke-width="2" fill="none">
-        <animate attributeName="stroke-dashoffset" from="120" to="0" dur="4s" repeatCount="indefinite"/>
-      </path>
-      <path d="M1200,800 Q1250,860 1300,820 T1350,780 Q1380,770 1400,760" stroke="#f8ffae88" stroke-width="2" fill="none">
-        <animate attributeName="stroke-dashoffset" from="100" to="0" dur="4.5s" repeatCount="indefinite"/>
-      </path>
-      <path d="M400,400 Q420,370 450,410 T510,430 Q570,400 610,420" stroke="#2c536499" stroke-width="3" fill="none">
-        <animate attributeName="stroke-dashoffset" from="80" to="0" dur="5s" repeatCount="indefinite"/>
-      </path>
+      <path id="path1" d="M60,120 Q180,60 320,160 T600,250 Q820,320 1000,180 T1300,320" stroke="#1fa2ff99" stroke-width="3" fill="none"/>
+      <path id="path2" d="M200,720 Q420,680 540,820 T820,900 Q1050,750 1350,780" stroke="#f8ffae88" stroke-width="2.5" fill="none"/>
+      <path id="path3" d="M400,400 Q420,370 450,410 T510,430 Q570,400 610,420" stroke="#53ffe299" stroke-width="3" fill="none"/>
+      <path id="path4" d="M800,200 Q900,350 1100,280 Q1200,200 1300,350" stroke="#ff57a677" stroke-width="2.7" fill="none"/>
     </g>
   </svg>
-  <!-- Global learning-themed floating SVGs (background) -->
+  <!-- Floating SVG Orbs (AI nodes, power cells) -->
   <div class="global-bg">
-    <svg class="orbit1" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="orbit1" viewBox="0 0 120 120" fill="none">
       <circle cx="60" cy="60" r="50" stroke="url(#globeGrad1)" stroke-width="7" fill="url(#globeGrad2)" />
       <defs>
-        <linearGradient id="globeGrad1" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+        <linearGradient id="globeGrad1" x1="0" y1="0" x2="120" y2="120">
           <stop stop-color="#1fa2ff" />
           <stop offset="1" stop-color="#f8ffae" />
         </linearGradient>
-        <radialGradient id="globeGrad2" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+        <radialGradient id="globeGrad2" cx="50%" cy="50%" r="50%">
           <stop offset="0%" stop-color="#f8ffae" />
           <stop offset="100%" stop-color="#1fa2ff" />
         </radialGradient>
       </defs>
     </svg>
-    <svg class="orbit2" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="orbit2" viewBox="0 0 90 90" fill="none">
       <ellipse cx="45" cy="45" rx="40" ry="30" fill="url(#orbitGrad1)" />
       <defs>
-        <linearGradient id="orbitGrad1" x1="0" y1="0" x2="90" y2="90" gradientUnits="userSpaceOnUse">
+        <linearGradient id="orbitGrad1" x1="0" y1="0" x2="90" y2="90">
           <stop stop-color="#f8ffae" />
           <stop offset="1" stop-color="#2c5364" />
         </linearGradient>
       </defs>
     </svg>
-    <svg class="orbit3" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="orbit3" viewBox="0 0 100 100" fill="none">
       <rect x="18" y="18" width="64" height="64" rx="32" fill="url(#squareGrad1)" />
       <defs>
-        <linearGradient id="squareGrad1" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+        <linearGradient id="squareGrad1" x1="0" y1="0" x2="100" y2="100">
           <stop stop-color="#1fa2ff" />
           <stop offset="1" stop-color="#f8ffae" />
         </linearGradient>
       </defs>
     </svg>
     <!-- Additional AI node orb -->
-    <svg class="orbit4" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="orbit4" viewBox="0 0 60 60" fill="none">
       <circle cx="30" cy="30" r="25" fill="url(#nodeGrad1)" stroke="#1fa2ff" stroke-width="2"/>
       <defs>
-        <radialGradient id="nodeGrad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+        <radialGradient id="nodeGrad1" cx="50%" cy="50%" r="50%">
           <stop offset="0%" stop-color="#f8ffae" />
           <stop offset="100%" stop-color="#1fa2ff" />
         </radialGradient>
       </defs>
     </svg>
     <!-- Power cell orb -->
-    <svg class="orbit5" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="orbit5" viewBox="0 0 50 50" fill="none">
       <ellipse cx="25" cy="25" rx="20" ry="16" fill="url(#cellGrad1)" />
       <defs>
-        <linearGradient id="cellGrad1" x1="0" y1="0" x2="50" y2="50" gradientUnits="userSpaceOnUse">
+        <linearGradient id="cellGrad1" x1="0" y1="0" x2="50" y2="50">
           <stop stop-color="#1fa2ff" />
           <stop offset="1" stop-color="#f8ffae" />
         </linearGradient>
       </defs>
     </svg>
   </div>
+  <!-- Main Content -->
   <header>
     <h1>AI: Powering Brains, Braining Power</h1>
     <p>The strange but electrifying love story of energy systems and artificial intelligence.</p>
@@ -339,70 +308,134 @@
     <source src="https://cdn.pixabay.com/audio/2022/02/23/audio_115b6a6c48.mp3" type="audio/mp3">
   </audio>
   <script>
-    // Particle/Neural Network Animation
-    const canvas = document.getElementById('particle-bg');
+    // Neural net background - gently moving parallax nodes + links
+    const canvas = document.getElementById('neural-bg');
     const ctx = canvas.getContext('2d');
     let w = window.innerWidth, h = window.innerHeight;
-    canvas.width = w;
-    canvas.height = h;
-
-    // Responsive resize
-    window.addEventListener('resize', () => {
+    function resizeCanvas() {
       w = window.innerWidth;
       h = window.innerHeight;
       canvas.width = w;
       canvas.height = h;
-    });
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
-    // Neural particles
-    const NODES = 36, LINKS = 54;
+    // Neural net: node objects
+    const NODES = 36, LINKS = 60;
     let nodes = [], links = [];
     for(let i=0;i<NODES;i++){
       nodes.push({
         x: Math.random()*w,
         y: Math.random()*h,
-        r: Math.random()*2.7+1.5,
-        vx: (Math.random()-0.5)*0.18,
-        vy: (Math.random()-0.5)*0.18,
-        phase: Math.random()*2*Math.PI
+        r: Math.random()*2.9+2.1,
+        vx: (Math.random()-0.5)*0.11,
+        vy: (Math.random()-0.5)*0.11,
+        phase: Math.random()*2*Math.PI,
+        parallax: 0
       });
     }
     for(let i=0;i<LINKS;i++){
       let a = Math.floor(Math.random()*NODES), b = Math.floor(Math.random()*NODES);
       if(a!==b) links.push([a,b]);
     }
+    // Parallax (mousemove)
+    let parallaxX = 0, parallaxY = 0;
+    window.addEventListener('mousemove', e=>{
+      parallaxX = (e.clientX/w - 0.5)*38;
+      parallaxY = (e.clientY/h - 0.5)*18;
+    });
     function drawNeural(){
       ctx.clearRect(0,0,w,h);
       for(const n of nodes){
         ctx.beginPath();
-        ctx.arc(n.x, n.y, n.r, 0, 2 * Math.PI);
-        ctx.fillStyle = "rgba(31,162,255,0.56)";
+        ctx.arc(n.x+n.parallax, n.y+n.parallax, n.r, 0, 2 * Math.PI);
+        ctx.fillStyle = "rgba(31,162,255,0.42)";
         ctx.shadowColor = "#f8ffae";
-        ctx.shadowBlur = 12;
+        ctx.shadowBlur = 13;
         ctx.fill();
         ctx.shadowBlur = 0;
       }
       for(const link of links){
         let a = nodes[link[0]], b = nodes[link[1]];
         ctx.beginPath();
-        ctx.moveTo(a.x, a.y);
-        ctx.lineTo(b.x, b.y);
-        ctx.strokeStyle = "rgba(250,255,174,0.17)";
+        ctx.moveTo(a.x+a.parallax, a.y+a.parallax);
+        ctx.lineTo(b.x+b.parallax, b.y+b.parallax);
+        ctx.strokeStyle = "rgba(250,255,174,0.13)";
         ctx.lineWidth = 1.1;
         ctx.stroke();
       }
     }
     function animateNeural(){
       for(const n of nodes){
-        n.x += n.vx + Math.sin(Date.now()/700+n.phase)*0.12;
-        n.y += n.vy + Math.cos(Date.now()/900+n.phase)*0.09;
-        if(n.x < 0 || n.x > w) n.vx *= -1;
-        if(n.y < 0 || n.y > h) n.vy *= -1;
+        n.x += n.vx + Math.sin(Date.now()/1000+n.phase)*0.08;
+        n.y += n.vy + Math.cos(Date.now()/1300+n.phase)*0.07;
+        // gently keep in bounds
+        if(n.x < 0) n.x = w;
+        if(n.x > w) n.x = 0;
+        if(n.y < 0) n.y = h;
+        if(n.y > h) n.y = 0;
+        // parallax
+        n.parallax = (parallaxX*Math.sin(n.phase) + parallaxY*Math.cos(n.phase))*0.3;
       }
       drawNeural();
       requestAnimationFrame(animateNeural);
     }
     animateNeural();
+
+    // Circuit energy lines glow/pulse animation
+    function animateCircuit() {
+      let t = Date.now()/1200;
+      function pulsePath(id, color, glowStrength, speed, offset) {
+        const path = document.getElementById(id);
+        if(path) {
+          let glow = Math.abs(Math.sin(t*speed+offset))*glowStrength+0.14;
+          path.setAttribute("stroke", color);
+          path.setAttribute("style", `filter: drop-shadow(0 0 ${Math.floor(glow*22)}px ${color}); opacity:${glow}`);
+        }
+      }
+      pulsePath("path1","#1fa2ff99",1.1,1,0.2);
+      pulsePath("path2","#f8ffae88",1.2,1.2,0.6);
+      pulsePath("path3","#53ffe299",1.3,1.3,0.1);
+      pulsePath("path4","#ff57a677",1.1,1.1,0.7);
+      requestAnimationFrame(animateCircuit);
+    }
+    animateCircuit();
+
+    // Floating SVGs - glow & parallax tilt
+    const orbClasses = ['orbit1','orbit2','orbit3','orbit4','orbit5'];
+    let orbEls = orbClasses.map(cls=>document.querySelector('.'+cls));
+    window.addEventListener('mousemove', e=>{
+      let cx = (e.clientX/w - 0.5), cy = (e.clientY/h - 0.5);
+      orbEls.forEach((el,i)=>{
+        let tilt = (i%2===0 ? 1 : -1)*cx*18;
+        let lift = cy*8;
+        el.style.transform = `rotateY(${tilt}deg) rotate(${lift}deg) scale(1.08)`;
+      });
+    });
+    orbEls.forEach((el,i)=>{
+      el.addEventListener('mouseenter',()=>{el.style.filter="drop-shadow(0 0 54px #ff57a6cc)";});
+      el.addEventListener('mouseleave',()=>{el.style.filter="drop-shadow(0 8px 24px #1fa2ff88)";});
+    });
+
+    // Scroll: Animate elements with easing
+    function animateOnScroll() {
+      const elements = document.querySelectorAll('header, .blog-post');
+      const throttled = [];
+      window.addEventListener('scroll', ()=>{
+        elements.forEach(el=>{
+          if(throttled.includes(el)) return;
+          let rect = el.getBoundingClientRect();
+          if(rect.top < window.innerHeight-40){
+            el.style.transition="transform 0.73s cubic-bezier(.77,.00,.18,1.00), opacity 0.83s";
+            el.style.opacity = "1";
+            el.style.transform = "translateY(0) scale(1)";
+            throttled.push(el);
+          }
+        });
+      });
+    }
+    animateOnScroll();
 
     // Ambient sound toggle
     const soundBtn = document.getElementById('sound-toggle');
@@ -411,7 +444,7 @@
     soundBtn.addEventListener('click', ()=>{
       soundOn = !soundOn;
       if(soundOn){
-        audio.volume = 0.17;
+        audio.volume = 0.18;
         audio.play();
         soundBtn.textContent = 'AI Hum: On';
       } else {
@@ -420,10 +453,10 @@
       }
     });
 
-    // Entry animations for all elements (staggered fade-in)
+    // On page load, fade in
     window.addEventListener('DOMContentLoaded', ()=>{
-      document.querySelector('header').style.animationDelay = "0.4s";
-      document.querySelector('.blog-post').style.animationDelay = "1.5s";
+      document.querySelector('header').style.animationDelay = "0.2s";
+      document.querySelector('.blog-post').style.animationDelay = "2.3s";
     });
   </script>
 </body>
