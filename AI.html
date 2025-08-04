@@ -223,17 +223,17 @@
       position: relative;
       border: 2px solid transparent;
       opacity: 0;
-      transform: translateY(64px) scale(.97);
-      animation: blogPopIn 1.6s cubic-bezier(.77,.00,.18,1.00) 3.3s forwards;
+      transform: scale(0.7);
+      animation: scaleUp 0.7s cubic-bezier(.68,.01,.11,.98) 3.3s forwards;
+      transform-origin: top center;
       transition: box-shadow 0.25s, border 0.25s, filter 0.25s, transform 0.25s;
       will-change: filter, transform;
       overflow: hidden;
       backdrop-filter: blur(2.5px);
     }
-    @keyframes blogPopIn {
-      0% { opacity: 0; transform: translateY(64px) scale(.97);}
-      80% { opacity: .8; transform: translateY(-7px) scale(1.03);}
-      100% { opacity: 1; transform: translateY(0) scale(1);}
+    @keyframes scaleUp {
+      0% { transform: scale(0.7); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
     .blog-post:before {
       content: "";
