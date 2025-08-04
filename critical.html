@@ -5,9 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Warning: May Cause Extreme Energy Dependence. (We're Talking Critical Minerals Here.) – WiseWatt</title>
   <style>
+    :root {
+      --main-padding: clamp(0.7rem, 3vw, 2rem);
+      --blog-max-width: min(800px, 96vw);
+      --h1-size: clamp(1.2rem, 4vw, 2.2rem);
+      --h2-size: clamp(1rem, 2.7vw, 1.5rem);
+      --label-size: clamp(0.87rem, 2vw, 1.5rem);
+      --fact-font-size: clamp(0.8rem, 1.6vw, 0.95rem);
+      --header-p-font: clamp(0.93rem, 2vw, 1.13rem);
+    }
+    html {
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
     body {
       font-family: 'Segoe UI', sans-serif;
-      padding: 2rem;
+      padding: var(--main-padding);
       min-height: 100vh;
       margin: 0;
       color: #232323;
@@ -52,17 +68,17 @@
     }
     .crystal1 {
       left: 12vw; top: 7vh;
-      width: 170px;
+      width: clamp(90px, 20vw, 170px);
       animation: crystal1move 17s infinite alternate;
     }
     .crystal2 {
       right: 15vw; bottom: 10vh;
-      width: 130px;
+      width: clamp(80px, 16vw, 130px);
       animation: crystal2move 21s infinite alternate;
     }
     .crystal3 {
       left: 65vw; top: 60vh;
-      width: 110px;
+      width: clamp(60px, 12vw, 110px);
       animation: crystal3move 20s infinite alternate-reverse;
     }
     @keyframes crystal1move {
@@ -81,7 +97,7 @@
     .periodic-label {
       position: fixed;
       font-family: 'Consolas', monospace;
-      font-size: 1.5rem;
+      font-size: var(--label-size);
       font-weight: bold;
       color: #8ed6ff;
       background: rgba(44,54,67,0.83);
@@ -118,15 +134,15 @@
       position: fixed;
       right: 2vw;
       bottom: 3vh;
-      width: 64px;
-      height: 80px;
+      width: clamp(32px, 7vw, 64px);
+      height: clamp(40px, 10vw, 80px);
       z-index: 10;
       pointer-events: auto;
       cursor: pointer;
     }
     #mining-hammer-svg {
-      width: 64px;
-      height: 80px;
+      width: 100%;
+      height: 100%;
       filter: drop-shadow(0 2px 8px #bfa14b88);
       transition: filter 0.2s;
     }
@@ -136,14 +152,14 @@
       bottom: 10px;
       background: #232323e6;
       color: #bfa14b;
-      font-size: 0.95rem;
+      font-size: var(--fact-font-size);
       border-radius: 8px;
       padding: 8px 14px;
       box-shadow: 0 0 12px #8ed6ff99;
       opacity: 0;
       transition: opacity 0.3s;
       pointer-events: none;
-      max-width: 220px;
+      max-width: clamp(130px, 22vw, 220px);
       z-index: 10;
     }
     #mining-hammer-container:hover #hammer-fact,
@@ -166,7 +182,7 @@
       position: relative;
     }
     header h1 {
-      font-size: 2.2rem;
+      font-size: var(--h1-size);
       font-weight: 800;
       margin-bottom: 0.5rem;
       letter-spacing: 1.2px;
@@ -177,7 +193,7 @@
       filter: drop-shadow(0 2px 8px #23232388);
     }
     header p {
-      font-size: 1.13rem;
+      font-size: var(--header-p-font);
       color: #e7e6e1;
       background: rgba(34,34,34,0.5);
       display: inline-block;
@@ -188,15 +204,16 @@
 
     .blog-post {
       background: linear-gradient(120deg, #232323 60%, #3a3d44 100%);
-      padding: 2rem 2.2rem 1.7rem 2.2rem;
+      padding: var(--main-padding);
       margin: 2rem auto 1.5rem auto;
       border-radius: 18px;
-      max-width: 800px;
+      max-width: var(--blog-max-width);
       box-shadow: 0 12px 32px 0 rgba(191,161,75,0.14), 0 2px 4px 0 rgba(0,0,0,0.06);
       z-index: 1;
       position: relative;
       border: 2px solid #6e5c24;
       animation: popCard 1.4s cubic-bezier(0.32,1.56,0.64,1) 0.5s backwards;
+      font-size: clamp(0.98rem, 2vw, 1.13rem);
     }
     @keyframes popCard {
       0% { transform: scale(0.93) translateY(40px); opacity: 0;}
@@ -207,9 +224,10 @@
       margin-top: 0;
       letter-spacing: 0.5px;
       text-shadow: 0 2px 8px #212121;
+      font-size: var(--h2-size);
     }
     .blog-post p.date {
-      font-size: 0.98rem;
+      font-size: clamp(0.88rem, 2vw, 0.98rem);
       color: #8ed6ff;
       letter-spacing: 1.5px;
       font-weight: 600;
@@ -225,7 +243,7 @@
       position: fixed;
       left: 2vw; bottom: 3vh;
       z-index: 12;
-      font-size: 1.9rem;
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
       background: #232323e6;
       color: #8ed6ff;
       border-radius: 50%;
@@ -276,15 +294,15 @@
       position: fixed;
       left: 50vw;
       bottom: 13vh;
-      width: 140px;
-      height: 140px;
+      width: clamp(60px, 15vw, 140px);
+      height: clamp(60px, 15vw, 140px);
       z-index: 7;
       pointer-events: none;
       transform: translateX(-50%);
     }
     #core-anim-svg {
-      width: 140px;
-      height: 140px;
+      width: 100%;
+      height: 100%;
       animation: rotateCore 9s linear infinite;
       filter: drop-shadow(0 0 22px #8ed6ff99);
     }
@@ -296,8 +314,8 @@
       position: fixed;
       left: 8vw;
       top: 8vh;
-      width: 100px;
-      height: 100px;
+      width: clamp(54px, 12vw, 100px);
+      height: clamp(54px, 12vw, 100px);
       z-index: 8;
       pointer-events: none;
       opacity: 0.7;
@@ -318,97 +336,21 @@
       border-radius:7px;
       padding:7px 14px;
       box-shadow:0 0 11px #8ed6ff99;
-      font-size:0.97em;
+      font-size: var(--fact-font-size);
       opacity:0;
       transition:opacity 0.24s;
       max-width:210px;
     }
 
-    /* --- Mobile Friendly Styles --- */
-    @media (max-width: 700px) {
-      body {
-        padding: 0.7rem;
-      }
-      #mining-hammer-container {
-        right: 1vw;
-        bottom: 1vh;
-        width: 42px;
-        height: 52px;
-      }
-      #mining-hammer-svg {
-        width: 42px;
-        height: 52px;
-      }
-      #hammer-fact {
-        font-size: 0.8rem;
-        right: 46px;
-        max-width: 130px;
-        bottom: 0px;
-        padding: 6px 8px;
-      }
-      #sound-toggle {
-        left: 1vw;
-        bottom: 1vh;
-        font-size: 1.4rem;
-        padding: 5px;
-      }
-      #core-anim-container {
-        width: 86px;
-        height: 86px;
-        left: 50vw;
-        bottom: 6vh;
-      }
-      #core-anim-svg {
-        width: 86px;
-        height: 86px;
-      }
-      #radar-svg {
-        left: 3vw;
-        top: 2vh;
-        width: 54px;
-        height: 54px;
-      }
-      header h1 {
-        font-size: 1.13rem;
-      }
-      header p {
-        font-size: 0.93rem;
-        padding: 0.3em 0.5em;
-      }
-      .blog-post {
-        padding: 1.1rem 0.5rem;
-        max-width: 99vw;
-        margin: 1.2rem auto 0.6rem auto;
-        font-size: 0.98rem;
-      }
-      .blog-post h2 {
-        font-size: 1.2rem;
-      }
-      .blog-post p.date {
-        font-size: 0.88rem;
-      }
-      .periodic-label {
-        font-size: 1.03rem;
-        padding: 2px 5px;
-      }
-      #mini-fact-popup {
-        font-size: 0.83em;
-        max-width: 120px;
-        padding: 5px 8px;
-      }
-    }
+    /* --- Responsive Positioning for Labels --- */
+    /* Labels use JS for dynamic positioning, but fallback for ultra small screens */
     @media (max-width: 440px) {
-      header h1 {
-        font-size: 0.72rem;
-      }
-      .blog-post h2 {
-        font-size: 0.89rem;
-      }
       .periodic-label {
         font-size: 0.87rem;
         padding: 1px 4px;
       }
     }
+
     /* --- End Mobile Styles --- */
   </style>
 </head>
@@ -530,12 +472,12 @@
     <p class="date">July 15, 2025</p>
     <p>This is where your blog content goes. Add insights, updates, or commentary for your readers.</p>
   </div>
-  <span class="periodic-label" id="label-co" style="left:18vw;top:22vh;">Co</span>
-  <span class="periodic-label" id="label-li" style="left:62vw;top:44vh;">Li</span>
-  <span class="periodic-label" id="label-nd" style="left:33vw;top:66vh;">Nd</span>
-  <span class="periodic-label" id="label-ni" style="left:80vw;top:28vh;">Ni</span>
-  <span class="periodic-label" id="label-cu" style="left:55vw;top:11vh;">Cu</span>
-  <span class="periodic-label" id="label-mn" style="left:21vw;top:73vh;">Mn</span>
+  <span class="periodic-label" id="label-co">Co</span>
+  <span class="periodic-label" id="label-li">Li</span>
+  <span class="periodic-label" id="label-nd">Nd</span>
+  <span class="periodic-label" id="label-ni">Ni</span>
+  <span class="periodic-label" id="label-cu">Cu</span>
+  <span class="periodic-label" id="label-mn">Mn</span>
   <div id="mini-fact-popup"></div>
   <audio id="mining-audio" loop preload="auto">
     <source src="https://cdn.jsdelivr.net/gh/rohitvj1994/wisewatt.github.io/mining_ambient.mp3" type="audio/mpeg">
@@ -561,7 +503,8 @@
           </radialGradient>
         </defs>
         <rect x="0" y="0" width="${window.innerWidth}" height="${window.innerHeight}" fill="url(#earthGradient)" />
-        <path d="M0 ${window.innerHeight*0.65} Q${window.innerWidth*0.33} ${window.innerHeight*0.59} ${window.innerWidth*0.65} ${window.innerHeight*0.8} Q${window.innerWidth*0.95} ${window.innerHeight*0.68} ${window.innerWidth} ${window.innerHeight*0.88}" stroke="url(#veinGlowCross)" stroke-width="36" fill="none" opacity="0.31"/>
+        <path d="M0 ${window.innerHeight*0.65} Q${window.innerWidth*0.33} ${window.innerHeight*0.59} ${window.innerWidth*0.65} ${window.innerHeight*0.8} Q${window.innerWidth*0.95} ${window.innerHeight*0.92} ${window.innerWidth} ${window.innerHeight*0.68}"
+          stroke="#bfa14b" stroke-width="24" fill="none" opacity="0.08"/>
         <ellipse cx="${window.innerWidth*0.44}" cy="${window.innerHeight*0.69}" rx="190" ry="44" fill="url(#veinGlowCross)" opacity="0.18"/>
         <ellipse cx="${window.innerWidth*0.14}" cy="${window.innerHeight*0.82}" rx="90" ry="21" fill="url(#veinGlowCross)" opacity="0.14"/>
         <ellipse cx="${window.innerWidth*0.87}" cy="${window.innerHeight*0.9}" rx="110" ry="28" fill="url(#veinGlowCross)" opacity="0.14"/>
@@ -582,6 +525,42 @@
     function isMobile() {
       return window.innerWidth < 700;
     }
+
+    function positionLabels() {
+      // Dynamic positioning based on screen size
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      if(isMobile()){
+        document.getElementById('label-co').style.left = Math.max(8, vw*0.08) + "px";
+        document.getElementById('label-co').style.top = Math.max(18, vh*0.18) + "px";
+        document.getElementById('label-li').style.left = Math.max(52, vw*0.52) + "px";
+        document.getElementById('label-li').style.top = Math.max(28, vh*0.28) + "px";
+        document.getElementById('label-nd').style.left = Math.max(23, vw*0.23) + "px";
+        document.getElementById('label-nd').style.top = Math.max(54, vh*0.54) + "px";
+        document.getElementById('label-ni').style.left = Math.max(68, vw*0.68) + "px";
+        document.getElementById('label-ni').style.top = Math.max(23, vh*0.23) + "px";
+        document.getElementById('label-cu').style.left = Math.max(39, vw*0.39) + "px";
+        document.getElementById('label-cu').style.top = Math.max(8, vh*0.08) + "px";
+        document.getElementById('label-mn').style.left = Math.max(13, vw*0.13) + "px";
+        document.getElementById('label-mn').style.top = Math.max(68, vh*0.68) + "px";
+      } else {
+        document.getElementById('label-co').style.left = vw*0.18 + "px";
+        document.getElementById('label-co').style.top = vh*0.22 + "px";
+        document.getElementById('label-li').style.left = vw*0.62 + "px";
+        document.getElementById('label-li').style.top = vh*0.44 + "px";
+        document.getElementById('label-nd').style.left = vw*0.33 + "px";
+        document.getElementById('label-nd').style.top = vh*0.66 + "px";
+        document.getElementById('label-ni').style.left = vw*0.80 + "px";
+        document.getElementById('label-ni').style.top = vh*0.28 + "px";
+        document.getElementById('label-cu').style.left = vw*0.55 + "px";
+        document.getElementById('label-cu').style.top = vh*0.11 + "px";
+        document.getElementById('label-mn').style.left = vw*0.21 + "px";
+        document.getElementById('label-mn').style.top = vh*0.73 + "px";
+      }
+    }
+    window.addEventListener('resize', positionLabels);
+    positionLabels();
+
     document.addEventListener('mousemove', function(e) {
       if (isMobile()) return;
       const dot = document.createElement('div');
@@ -690,36 +669,11 @@
     },1200);
 
     window.addEventListener('resize', function(){
-      // reposition periodic labels on mobile for best fit
-      if(isMobile()){
-        document.getElementById('label-co').style.left = "8vw";
-        document.getElementById('label-co').style.top = "18vh";
-        document.getElementById('label-li').style.left = "52vw";
-        document.getElementById('label-li').style.top = "28vh";
-        document.getElementById('label-nd').style.left = "23vw";
-        document.getElementById('label-nd').style.top = "54vh";
-        document.getElementById('label-ni').style.left = "68vw";
-        document.getElementById('label-ni').style.top = "23vh";
-        document.getElementById('label-cu').style.left = "39vw";
-        document.getElementById('label-cu').style.top = "8vh";
-        document.getElementById('label-mn').style.left = "13vw";
-        document.getElementById('label-mn').style.top = "68vh";
-      } else {
-        document.getElementById('label-co').style.left = "18vw";
-        document.getElementById('label-co').style.top = "22vh";
-        document.getElementById('label-li').style.left = "62vw";
-        document.getElementById('label-li').style.top = "44vh";
-        document.getElementById('label-nd').style.left = "33vw";
-        document.getElementById('label-nd').style.top = "66vh";
-        document.getElementById('label-ni').style.left = "80vw";
-        document.getElementById('label-ni').style.top = "28vh";
-        document.getElementById('label-cu').style.left = "55vw";
-        document.getElementById('label-cu').style.top = "11vh";
-        document.getElementById('label-mn').style.left = "21vw";
-        document.getElementById('label-mn').style.top = "73vh";
-      }
+      positionLabels();
     });
-    window.dispatchEvent(new Event('resize'));
+
+    // Initial label positioning
+    positionLabels();
   </script>
 </body>
 </html>
