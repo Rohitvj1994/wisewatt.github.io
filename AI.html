@@ -4,7 +4,44 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI: Powering Brains, Braining Power</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Explore the fascinating intersection of artificial intelligence and energy systems. Discover insights about AI's role in powering smarter, more efficient energy grids." />
+  <meta name="keywords" content="artificial intelligence, AI, energy systems, smart grid, power management, technology, innovation" />
+  <meta name="author" content="WiseWatt" />
+  
+  <!-- OpenGraph Meta Tags for Social Sharing -->
+  <meta property="og:title" content="AI: Powering Brains, Braining Power" />
+  <meta property="og:description" content="The strange but electrifying love story of energy systems and artificial intelligence." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rohitvj1994.github.io/wisewatt.github.io/AI.html" />
+  <meta property="og:site_name" content="WiseWatt" />
+  
+  <!-- Security -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: https:; img-src 'self' data: https:; media-src 'self' https:; connect-src 'self' https:;" />
   <style>
+    /* Reduced motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      html, body {
+        animation: none !important;
+      }
+      .orbit1, .orbit2, .orbit3 {
+        animation: none !important;
+      }
+      #ai-core-orb {
+        animation: none !important;
+      }
+      header h1 {
+        animation: fadeUp 1.6s cubic-bezier(.77,.00,.18,1.00) 0.3s forwards !important;
+      }
+      header p {
+        animation: pulseSubtitle 2.2s cubic-bezier(.77,.00,.18,1.00) 2.7s forwards !important;
+      }
+      .blog-post {
+        animation: blogPopIn 1.6s cubic-bezier(.77,.00,.18,1.00) 0.3s forwards !important;
+      }
+    }
+
     :root {
       --neon1: #1fa2ff;
       --neon2: #f8ffae;
@@ -185,8 +222,8 @@
     }
     header p {
       font-size: 1.15rem;
-      color: #444;
-      background: rgba(255,255,255,0.68);
+      color: #222; /* Improved contrast */
+      background: rgba(255,255,255,0.85); /* Slightly more opaque for better contrast */
       display: inline-block;
       padding: 0.5em 1.2em;
       border-radius: 30px;
@@ -284,7 +321,7 @@
       font-size: 1.07rem;
       cursor: pointer;
       opacity: 0.94;
-      transition: box-shadow 0.22s, background 0.22s;
+      transition: box-shadow 0.22s, background 0.22s, transform 0.2s;
       font-family: 'Segoe UI', sans-serif;
       user-select: none;
       filter: drop-shadow(0 0 8px #1fa2ff44);
@@ -293,30 +330,125 @@
       background: linear-gradient(120deg,#2c5364 20%,#f8ffae 70%,#1fa2ff 100%);
       box-shadow: 0 0 24px #1fa2ff44;
     }
+    #sound-toggle:focus {
+      outline: 3px solid #f8ffae;
+      outline-offset: 2px;
+      box-shadow: 0 0 24px #1fa2ff44, 0 0 0 3px #f8ffae;
+    }
+    #sound-toggle.sound-on {
+      background: linear-gradient(92deg,#53ffe2 40%,#f8ffae 70%,#1fa2ff 100%);
+      filter: drop-shadow(0 0 12px #53ffe2);
+    }
+    #sound-toggle.sound-on:hover {
+      background: linear-gradient(120deg,#1fa2ff 20%,#53ffe2 70%,#f8ffae 100%);
+    }
+
+    /* Focus states for interactive elements */
+    #ai-core:focus {
+      outline: 3px solid #f8ffae;
+      outline-offset: 3px;
+      border-radius: 50%;
+    }
+    
+    /* Volume control slider */
+    #volume-control {
+      position: fixed;
+      right: 24px;
+      bottom: 80px;
+      z-index: 30;
+      background: rgba(255,255,255,0.95);
+      padding: 1em;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(31,162,255,0.2);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      transform: translateY(20px);
+    }
+    #volume-control.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    #volume-slider {
+      width: 100px;
+      margin: 0.5em 0;
+    }
+
+    /* Loading indicator */
+    #loading-indicator {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255,255,255,0.95);
+      padding: 2em;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(31,162,255,0.2);
+      z-index: 1000;
+      text-align: center;
+      opacity: 1;
+      transition: opacity 0.5s;
+    }
+    #loading-indicator.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #1fa2ff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1em auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
 
     /* Responsiveness */
     @media (max-width: 900px) {
-      .blog-post { padding: 1.2rem 0.7rem; }
-      header h1 { font-size: 1.4rem; }
+      .blog-post { padding: 1.5rem 1rem; margin: 2rem auto 1rem auto; }
+      header h1 { font-size: 2rem; }
+      header p { font-size: 1rem; padding: 0.4em 1em; }
       #ai-core { width: 48px; height: 48px; left: 12px; bottom: 12px;}
       #ai-core-tooltip { font-size: 0.93rem; left: 58px; bottom: 2px;}
-      #sound-toggle { font-size: 1rem; padding: 0.6em 1em;}
+      #sound-toggle { font-size: 1rem; padding: 0.6em 1em; right: 12px; bottom: 12px; }
+      #volume-control { right: 12px; bottom: 68px; }
+      .orbit1, .orbit2, .orbit3 { width: 120px !important; }
     }
     @media (max-width: 600px) {
       .orbit1, .orbit2, .orbit3 { width: 80px !important; }
-      .blog-post { padding: 0.8rem 0.4rem;}
-      header h1 { font-size: 1.01rem;}
+      .blog-post { padding: 1rem 0.8rem; margin: 1.5rem auto 1rem auto; }
+      header h1 { font-size: 1.5rem; }
+      header p { font-size: 0.9rem; }
       #ai-core { width: 34px; height: 34px; left: 6px; bottom: 6px;}
       #ai-core-tooltip { font-size: 0.8rem; left: 38px; bottom: -6px;}
+      #sound-toggle { font-size: 0.9rem; padding: 0.5em 0.8em; right: 6px; bottom: 6px; }
+      #volume-control { right: 6px; bottom: 52px; padding: 0.8em; }
+      #volume-slider { width: 80px; }
+    }
+    @media (max-width: 400px) {
+      header h1 { font-size: 1.2rem; }
+      .blog-post { padding: 0.8rem 0.6rem; }
+      .orbit1, .orbit2, .orbit3 { width: 60px !important; }
     }
   </style>
 </head>
 <body>
+  <!-- Loading indicator -->
+  <div id="loading-indicator">
+    <div class="loading-spinner"></div>
+    <p>Loading AI experience...</p>
+  </div>
+
   <!-- Neural Net Background Animation -->
-  <canvas id="neural-bg"></canvas>
+  <canvas id="neural-bg" aria-hidden="true"></canvas>
 
   <!-- Circuit/Energy Lines SVG Animation -->
-  <svg id="circuit-bg" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg" width="100vw" height="100vh">
+  <svg id="circuit-bg" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg" width="100vw" height="100vh" aria-hidden="true" alt="Animated energy circuit lines">
     <g>
       <path id="path1" d="M60,120 Q180,60 320,160 T600,250 Q820,320 1000,180 T1300,320" stroke="#1fa2ff99" stroke-width="3" fill="none"/>
       <path id="path2" d="M200,720 Q420,680 540,820 T820,900 Q1050,750 1350,780" stroke="#f8ffae88" stroke-width="2.5" fill="none"/>
@@ -326,8 +458,8 @@
   </svg>
 
   <!-- Floating SVG Orbits (AI nodes, power cells) -->
-  <div class="global-bg">
-    <svg class="orbit1" viewBox="0 0 120 120" fill="none">
+  <div class="global-bg" aria-hidden="true">
+    <svg class="orbit1" viewBox="0 0 120 120" fill="none" alt="AI processing node visualization">
       <circle cx="60" cy="60" r="50" stroke="url(#globeGrad1)" stroke-width="7" fill="url(#globeGrad2)" />
       <defs>
         <linearGradient id="globeGrad1" x1="0" y1="0" x2="120" y2="120">
@@ -340,7 +472,7 @@
         </radialGradient>
       </defs>
     </svg>
-    <svg class="orbit2" viewBox="0 0 90 90" fill="none">
+    <svg class="orbit2" viewBox="0 0 90 90" fill="none" alt="Energy flow visualization">
       <ellipse cx="45" cy="45" rx="40" ry="30" fill="url(#orbitGrad1)" />
       <defs>
         <linearGradient id="orbitGrad1" x1="0" y1="0" x2="90" y2="90">
@@ -349,7 +481,7 @@
         </linearGradient>
       </defs>
     </svg>
-    <svg class="orbit3" viewBox="0 0 100 100" fill="none">
+    <svg class="orbit3" viewBox="0 0 100 100" fill="none" alt="Power grid node">
       <rect x="18" y="18" width="64" height="64" rx="32" fill="url(#squareGrad1)" />
       <defs>
         <linearGradient id="squareGrad1" x1="0" y1="0" x2="100" y2="100">
@@ -360,9 +492,13 @@
     </svg>
   </div>
 
-  <!-- AI Core Orb (Optional Enhancement) -->
-  <div id="ai-core" title="">
-    <svg id="ai-core-orb" viewBox="0 0 70 70" fill="none">
+  <!-- AI Core Orb (Interactive Element) -->
+  <button id="ai-core" 
+          tabindex="0" 
+          role="button" 
+          aria-label="AI core interface - click for information"
+          aria-describedby="ai-core-tooltip">
+    <svg id="ai-core-orb" viewBox="0 0 70 70" fill="none" alt="AI core orb">
       <circle cx="35" cy="35" r="32" fill="url(#coreGrad1)" />
       <circle cx="35" cy="35" r="19" fill="url(#coreGrad2)" />
       <defs>
@@ -376,214 +512,541 @@
         </radialGradient>
       </defs>
     </svg>
-    <span id="ai-core-tooltip">The mind of the grid watches you.</span>
-  </div>
+    <span id="ai-core-tooltip" role="tooltip" aria-live="polite">The mind of the grid watches you.</span>
+  </button>
 
-  <!-- Main Content (No structural change) -->
-  <header>
-    <h1>AI: Powering Brains, Braining Power</h1>
-    <p>The strange but electrifying love story of energy systems and artificial intelligence.</p>
-  </header>
-  <div class="blog-post">
-    <h2>Sample Blog Post Title</h2>
-    <p class="date">July 15, 2025</p>
-    <p>This is where your blog content goes. Add insights, updates, or commentary for your readers.</p>
+  <!-- Main Content -->
+  <main>
+    <header>
+      <h1>AI: Powering Brains, Braining Power</h1>
+      <p>The strange but electrifying love story of energy systems and artificial intelligence.</p>
+    </header>
+    
+    <section class="content-section">
+      <article class="blog-post">
+        <h2>Sample Blog Post Title</h2>
+        <p class="date">July 15, 2025</p>
+        <p>This is where your blog content goes. Add insights, updates, or commentary for your readers.</p>
+      </article>
+    </section>
+  </main>
+
+  <!-- Audio Controls -->
+  <div id="volume-control" role="region" aria-label="Volume control">
+    <label for="volume-slider">Volume:</label>
+    <input type="range" id="volume-slider" min="0" max="100" value="19" aria-label="Ambient sound volume">
+    <span id="volume-display">19%</span>
   </div>
 
   <!-- Ambient sound toggle button and audio element -->
-  <button id="sound-toggle" aria-label="Toggle ambient sound">AI Hum: Off</button>
-  <audio id="ambient-audio" loop>
+  <button id="sound-toggle" 
+          aria-label="Toggle ambient AI sound" 
+          aria-pressed="false"
+          role="switch">AI Hum: Off</button>
+  
+  <audio id="ambient-audio" loop preload="metadata" aria-label="Ambient AI sound">
     <source src="https://cdn.pixabay.com/audio/2022/02/23/audio_115b6a6c48.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
   </audio>
   <script>
-    /* Neural Net Background Animation */
-    const canvas = document.getElementById('neural-bg');
-    const ctx = canvas.getContext('2d');
-    let w = window.innerWidth, h = window.innerHeight;
-    function resizeCanvas() {
-      w = window.innerWidth;
-      h = window.innerHeight;
-      canvas.width = w;
-      canvas.height = h;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    /**
+     * AI.html Enhanced Interactive Experience
+     * Main functionality for neural animations, sound controls, and accessibility
+     */
 
-    // Neural net nodes + links
-    const NODES = 34, LINKS = 60;
-    let nodes = [], links = [];
-    for(let i=0;i<NODES;i++){
-      nodes.push({
-        x: Math.random()*w,
-        y: Math.random()*h,
-        r: Math.random()*2.9+2.1,
-        vx: (Math.random()-0.5)*0.11,
-        vy: (Math.random()-0.5)*0.11,
-        phase: Math.random()*2*Math.PI,
-        parallax: 0
-      });
-    }
-    for(let i=0;i<LINKS;i++){
-      let a = Math.floor(Math.random()*NODES), b = Math.floor(Math.random()*NODES);
-      if(a!==b) links.push([a,b]);
-    }
-    // Parallax from mouse
-    let parallaxX = 0, parallaxY = 0;
-    window.addEventListener('mousemove', e=>{
-      parallaxX = (e.clientX/w - 0.5)*38;
-      parallaxY = (e.clientY/h - 0.5)*18;
-    });
-    // Parallax from scroll
-    let parallaxScrollY = 0;
-    window.addEventListener('scroll', ()=>{
-      parallaxScrollY = window.scrollY * 0.14;
-    });
-    function drawNeural(){
-      ctx.clearRect(0,0,w,h);
-      for(const n of nodes){
-        ctx.beginPath();
-        ctx.arc(n.x+n.parallax, n.y+n.parallax+parallaxScrollY, n.r, 0, 2 * Math.PI);
-        ctx.fillStyle = "rgba(31,162,255,0.36)";
-        ctx.shadowColor = "#f8ffae";
-        ctx.shadowBlur = 12;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      }
-      for(const link of links){
-        let a = nodes[link[0]], b = nodes[link[1]];
-        ctx.beginPath();
-        ctx.moveTo(a.x+a.parallax, a.y+a.parallax+parallaxScrollY);
-        ctx.lineTo(b.x+b.parallax, b.y+b.parallax+parallaxScrollY);
-        ctx.strokeStyle = "rgba(250,255,174,0.10)";
-        ctx.lineWidth = 1.1;
-        ctx.stroke();
-      }
-    }
-    function animateNeural(){
-      for(const n of nodes){
-        n.x += n.vx + Math.sin(Date.now()/1200+n.phase)*0.09;
-        n.y += n.vy + Math.cos(Date.now()/1300+n.phase)*0.07;
-        // gently keep in bounds
-        if(n.x < 0) n.x = w;
-        if(n.x > w) n.x = 0;
-        if(n.y < 0) n.y = h;
-        if(n.y > h) n.y = 0;
-        // parallax
-        n.parallax = (parallaxX*Math.sin(n.phase) + parallaxY*Math.cos(n.phase))*0.3;
-      }
-      drawNeural();
-      requestAnimationFrame(animateNeural);
-    }
-    animateNeural();
+    // Global state management
+    const AppState = {
+      soundOn: false,
+      volume: 0.19,
+      isLoading: true,
+      reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    };
 
-    // Circuit energy lines glow/pulse animation
-    function animateCircuit() {
-      let t = Date.now()/1200;
-      function pulsePath(id, color, glowStrength, speed, offset) {
+    // DOM element references for performance
+    const DOM = {
+      canvas: null,
+      ctx: null,
+      soundBtn: null,
+      audio: null,
+      volumeControl: null,
+      volumeSlider: null,
+      volumeDisplay: null,
+      aiCore: null,
+      tooltip: null,
+      loadingIndicator: null
+    };
+
+    /**
+     * Initialize DOM references and loading indicator
+     */
+    function initializeDOM() {
+      DOM.canvas = document.getElementById('neural-bg');
+      DOM.ctx = DOM.canvas.getContext('2d');
+      DOM.soundBtn = document.getElementById('sound-toggle');
+      DOM.audio = document.getElementById('ambient-audio');
+      DOM.volumeControl = document.getElementById('volume-control');
+      DOM.volumeSlider = document.getElementById('volume-slider');
+      DOM.volumeDisplay = document.getElementById('volume-display');
+      DOM.aiCore = document.getElementById('ai-core');
+      DOM.tooltip = document.getElementById('ai-core-tooltip');
+      DOM.loadingIndicator = document.getElementById('loading-indicator');
+    }
+
+    /**
+     * Neural Network Background Animation Module
+     */
+    const NeuralBackground = {
+      w: 0, h: 0,
+      nodes: [], links: [],
+      parallaxX: 0, parallaxY: 0, parallaxScrollY: 0,
+      
+      init() {
+        this.resizeCanvas();
+        window.addEventListener('resize', () => this.resizeCanvas());
+        this.generateNodes();
+        this.generateLinks();
+        this.setupParallax();
+        if (!AppState.reducedMotion) {
+          this.animate();
+        }
+      },
+      
+      resizeCanvas() {
+        this.w = window.innerWidth;
+        this.h = window.innerHeight;
+        DOM.canvas.width = this.w;
+        DOM.canvas.height = this.h;
+      },
+      
+      generateNodes() {
+        const NODES = 34;
+        this.nodes = [];
+        for(let i = 0; i < NODES; i++){
+          this.nodes.push({
+            x: Math.random() * this.w,
+            y: Math.random() * this.h,
+            r: Math.random() * 2.9 + 2.1,
+            vx: (Math.random() - 0.5) * 0.11,
+            vy: (Math.random() - 0.5) * 0.11,
+            phase: Math.random() * 2 * Math.PI,
+            parallax: 0
+          });
+        }
+      },
+      
+      generateLinks() {
+        const LINKS = 60;
+        this.links = [];
+        for(let i = 0; i < LINKS; i++){
+          let a = Math.floor(Math.random() * this.nodes.length);
+          let b = Math.floor(Math.random() * this.nodes.length);
+          if(a !== b) this.links.push([a, b]);
+        }
+      },
+      
+      setupParallax() {
+        // Mouse parallax
+        window.addEventListener('mousemove', e => {
+          this.parallaxX = (e.clientX / this.w - 0.5) * 38;
+          this.parallaxY = (e.clientY / this.h - 0.5) * 18;
+        });
+        
+        // Scroll parallax
+        window.addEventListener('scroll', () => {
+          this.parallaxScrollY = window.scrollY * 0.14;
+        });
+      },
+      
+      draw() {
+        DOM.ctx.clearRect(0, 0, this.w, this.h);
+        
+        // Draw nodes
+        for(const n of this.nodes){
+          DOM.ctx.beginPath();
+          DOM.ctx.arc(n.x + n.parallax, n.y + n.parallax + this.parallaxScrollY, n.r, 0, 2 * Math.PI);
+          DOM.ctx.fillStyle = "rgba(31,162,255,0.36)";
+          DOM.ctx.shadowColor = "#f8ffae";
+          DOM.ctx.shadowBlur = 12;
+          DOM.ctx.fill();
+          DOM.ctx.shadowBlur = 0;
+        }
+        
+        // Draw links
+        for(const link of this.links){
+          let a = this.nodes[link[0]], b = this.nodes[link[1]];
+          DOM.ctx.beginPath();
+          DOM.ctx.moveTo(a.x + a.parallax, a.y + a.parallax + this.parallaxScrollY);
+          DOM.ctx.lineTo(b.x + b.parallax, b.y + b.parallax + this.parallaxScrollY);
+          DOM.ctx.strokeStyle = "rgba(250,255,174,0.10)";
+          DOM.ctx.lineWidth = 1.1;
+          DOM.ctx.stroke();
+        }
+      },
+      
+      update() {
+        for(const n of this.nodes){
+          n.x += n.vx + Math.sin(Date.now() / 1200 + n.phase) * 0.09;
+          n.y += n.vy + Math.cos(Date.now() / 1300 + n.phase) * 0.07;
+          
+          // Keep nodes in bounds
+          if(n.x < 0) n.x = this.w;
+          if(n.x > this.w) n.x = 0;
+          if(n.y < 0) n.y = this.h;
+          if(n.y > this.h) n.y = 0;
+          
+          // Update parallax
+          n.parallax = (this.parallaxX * Math.sin(n.phase) + this.parallaxY * Math.cos(n.phase)) * 0.3;
+        }
+      },
+      
+      animate() {
+        this.update();
+        this.draw();
+        requestAnimationFrame(() => this.animate());
+      }
+    };
+
+    /**
+     * Circuit Animation Module
+     */
+    const CircuitAnimation = {
+      init() {
+        if (!AppState.reducedMotion) {
+          this.animate();
+        }
+      },
+      
+      pulsePath(id, color, glowStrength, speed, offset) {
         const path = document.getElementById(id);
         if(path) {
-          let glow = Math.abs(Math.sin(t*speed+offset))*glowStrength+0.14;
+          let t = Date.now() / 1200;
+          let glow = Math.abs(Math.sin(t * speed + offset)) * glowStrength + 0.14;
           path.setAttribute("stroke", color);
-          path.setAttribute("style", `filter: drop-shadow(0 0 ${Math.floor(glow*22)}px ${color}); opacity:${glow}`);
+          path.setAttribute("style", `filter: drop-shadow(0 0 ${Math.floor(glow * 22)}px ${color}); opacity:${glow}`);
+        }
+      },
+      
+      animate() {
+        this.pulsePath("path1", "#1fa2ff99", 1.1, 1, 0.2);
+        this.pulsePath("path2", "#f8ffae88", 1.2, 1.2, 0.6);
+        this.pulsePath("path3", "#53ffe299", 1.3, 1.3, 0.1);
+        this.pulsePath("path4", "#ff57a677", 1.1, 1.1, 0.7);
+        requestAnimationFrame(() => this.animate());
+      }
+    };
+
+    /**
+     * Floating Orbs Animation Module
+     */
+    const FloatingOrbs = {
+      init() {
+        const orbClasses = ['orbit1', 'orbit2', 'orbit3'];
+        const orbEls = orbClasses.map(cls => document.querySelector('.' + cls));
+        
+        // Mouse interaction
+        window.addEventListener('mousemove', e => {
+          let cx = (e.clientX / window.innerWidth - 0.5);
+          let cy = (e.clientY / window.innerHeight - 0.5);
+          
+          orbEls.forEach((el, i) => {
+            if (el && !AppState.reducedMotion) {
+              let tilt = (i % 2 === 0 ? 1 : -1) * cx * 22;
+              el.style.transform = `rotate3d(${cx.toFixed(2)},${cy.toFixed(2)},0,${tilt}deg) scale(1.09)`;
+            }
+          });
+        });
+        
+        // Hover effects
+        orbEls.forEach(el => {
+          if (el) {
+            el.addEventListener('mouseenter', () => {
+              el.style.filter = "drop-shadow(0 0 54px #ff57a6cc)";
+            });
+            el.addEventListener('mouseleave', () => {
+              el.style.filter = "drop-shadow(0 12px 32px #1fa2ff66)";
+            });
+          }
+        });
+      }
+    };
+
+    /**
+     * Audio Control Module
+     */
+    const AudioController = {
+      init() {
+        this.setupEventListeners();
+        this.updateVolumeDisplay();
+      },
+      
+      setupEventListeners() {
+        // Sound toggle
+        DOM.soundBtn.addEventListener('click', () => this.toggleSound());
+        DOM.soundBtn.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.toggleSound();
+          }
+        });
+        
+        // Volume control
+        DOM.volumeSlider.addEventListener('input', (e) => this.setVolume(e.target.value));
+        
+        // Show/hide volume control
+        DOM.soundBtn.addEventListener('mouseenter', () => this.showVolumeControl());
+        DOM.soundBtn.addEventListener('focus', () => this.showVolumeControl());
+        
+        const hideVolume = () => {
+          setTimeout(() => {
+            if (!DOM.volumeControl.matches(':hover') && !DOM.soundBtn.matches(':hover,:focus')) {
+              this.hideVolumeControl();
+            }
+          }, 200);
+        };
+        
+        DOM.soundBtn.addEventListener('mouseleave', hideVolume);
+        DOM.soundBtn.addEventListener('blur', hideVolume);
+        DOM.volumeControl.addEventListener('mouseleave', hideVolume);
+      },
+      
+      toggleSound() {
+        AppState.soundOn = !AppState.soundOn;
+        DOM.soundBtn.setAttribute('aria-pressed', AppState.soundOn.toString());
+        
+        if (AppState.soundOn) {
+          DOM.audio.volume = AppState.volume;
+          DOM.audio.play().catch(console.warn);
+          DOM.soundBtn.textContent = 'AI Hum: On';
+          DOM.soundBtn.classList.add('sound-on');
+        } else {
+          DOM.audio.pause();
+          DOM.soundBtn.textContent = 'AI Hum: Off';
+          DOM.soundBtn.classList.remove('sound-on');
+        }
+      },
+      
+      setVolume(value) {
+        AppState.volume = value / 100;
+        DOM.audio.volume = AppState.volume;
+        this.updateVolumeDisplay();
+      },
+      
+      updateVolumeDisplay() {
+        DOM.volumeDisplay.textContent = Math.round(AppState.volume * 100) + '%';
+        DOM.volumeSlider.value = AppState.volume * 100;
+      },
+      
+      showVolumeControl() {
+        DOM.volumeControl.classList.add('visible');
+      },
+      
+      hideVolumeControl() {
+        DOM.volumeControl.classList.remove('visible');
+      }
+    };
+
+    /**
+     * AI Core Interaction Module
+     */
+    const AICoreController = {
+      init() {
+        this.setupEventListeners();
+      },
+      
+      setupEventListeners() {
+        // Mouse events
+        DOM.aiCore.addEventListener('mouseenter', () => this.showTooltip());
+        DOM.aiCore.addEventListener('mouseleave', () => this.hideTooltip());
+        
+        // Keyboard events
+        DOM.aiCore.addEventListener('focus', () => this.showTooltip());
+        DOM.aiCore.addEventListener('blur', () => this.hideTooltip());
+        DOM.aiCore.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            this.hideTooltip();
+            DOM.aiCore.blur();
+          }
+        });
+        
+        // Click event for interaction
+        DOM.aiCore.addEventListener('click', () => {
+          // Add click functionality here if needed
+          console.log('AI Core activated');
+        });
+      },
+      
+      showTooltip() {
+        DOM.tooltip.style.opacity = "1";
+        DOM.tooltip.setAttribute('aria-hidden', 'false');
+      },
+      
+      hideTooltip() {
+        DOM.tooltip.style.opacity = "0";
+        DOM.tooltip.setAttribute('aria-hidden', 'true');
+      }
+    };
+
+    /**
+     * Blog Post Enhancement Module
+     */
+    const BlogPostController = {
+      init() {
+        this.setupScrollReveal();
+        this.setupInteractions();
+      },
+      
+      setupScrollReveal() {
+        const blogPost = document.querySelector('.blog-post');
+        if (!blogPost) return;
+        
+        const checkReveal = () => {
+          const rect = blogPost.getBoundingClientRect();
+          if (rect.top < window.innerHeight - 50 && !blogPost.classList.contains('revealed')) {
+            blogPost.classList.add('revealed');
+          }
+        };
+        
+        window.addEventListener('scroll', checkReveal);
+        checkReveal();
+      },
+      
+      setupInteractions() {
+        const blogPost = document.querySelector('.blog-post');
+        if (!blogPost || AppState.reducedMotion) return;
+        
+        blogPost.addEventListener('mousemove', (e) => {
+          const rect = blogPost.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const xc = rect.width / 2, yc = rect.height / 2;
+          const dx = (x - xc) / xc, dy = (y - yc) / yc;
+          blogPost.style.transform = `scale(1.021) translateY(-7px) rotate3d(${dy.toFixed(2)},${dx.toFixed(2)},0,6deg)`;
+        });
+        
+        blogPost.addEventListener('mouseleave', () => {
+          blogPost.style.transform = "scale(1) translateY(0) rotate3d(0,0,0,0deg)";
+        });
+      }
+    };
+
+    /**
+     * Mouse Trail Effect Module
+     */
+    const MouseTrail = {
+      dots: [],
+      
+      init() {
+        if (!AppState.reducedMotion) {
+          window.addEventListener('mousemove', (e) => this.createTrailDot(e));
+        }
+      },
+      
+      createTrailDot(e) {
+        const dot = document.createElement('div');
+        dot.className = 'trail-dot';
+        dot.style.left = (e.clientX - 3) + 'px';
+        dot.style.top = (e.clientY - 3) + 'px';
+        document.body.appendChild(dot);
+        
+        this.dots.push(dot);
+        
+        setTimeout(() => { dot.style.opacity = "0"; }, 190);
+        setTimeout(() => { 
+          dot.remove();
+          this.dots = this.dots.filter(d => d !== dot);
+        }, 420);
+        
+        // Limit trail length for performance
+        if (this.dots.length > 40) {
+          this.dots.shift()?.remove();
         }
       }
-      pulsePath("path1","#1fa2ff99",1.1,1,0.2);
-      pulsePath("path2","#f8ffae88",1.2,1.2,0.6);
-      pulsePath("path3","#53ffe299",1.3,1.3,0.1);
-      pulsePath("path4","#ff57a677",1.1,1.1,0.7);
-      requestAnimationFrame(animateCircuit);
-    }
-    animateCircuit();
+    };
 
-    // Floating SVGs - glow, slow 3D rotation, mouse parallax tilt
-    const orbClasses = ['orbit1','orbit2','orbit3'];
-    let orbEls = orbClasses.map(cls=>document.querySelector('.'+cls));
-    window.addEventListener('mousemove', e=>{
-      let cx = (e.clientX/w - 0.5), cy = (e.clientY/h - 0.5);
-      orbEls.forEach((el,i)=>{
-        let tilt = (i%2===0 ? 1 : -1)*cx*22;
-        let lift = cy*8;
-        el.style.transform = `rotate3d(${cx.toFixed(2)},${cy.toFixed(2)},0,${tilt}deg) scale(1.09)`;
+    /**
+     * Loading Manager
+     */
+    const LoadingManager = {
+      init() {
+        // Hide loading indicator after page assets are loaded
+        window.addEventListener('load', () => {
+          setTimeout(() => {
+            DOM.loadingIndicator.classList.add('hidden');
+            AppState.isLoading = false;
+          }, 1000);
+        });
+        
+        // Try autoplay audio after user interaction
+        this.setupAutoplay();
+      },
+      
+      setupAutoplay() {
+        document.addEventListener('DOMContentLoaded', () => {
+          DOM.audio.volume = AppState.volume;
+          DOM.audio.play()
+            .then(() => {
+              AppState.soundOn = true;
+              DOM.soundBtn.textContent = 'AI Hum: On';
+              DOM.soundBtn.classList.add('sound-on');
+              DOM.soundBtn.setAttribute('aria-pressed', 'true');
+            })
+            .catch(() => {
+              DOM.soundBtn.textContent = 'AI Hum: Off';
+              DOM.soundBtn.setAttribute('aria-pressed', 'false');
+            });
+        });
+      }
+    };
+
+    /**
+     * Global keyboard event handler
+     */
+    function setupGlobalKeyboardEvents() {
+      document.addEventListener('keydown', (e) => {
+        // ESC key to dismiss all tooltips and reset focus
+        if (e.key === 'Escape') {
+          AICoreController.hideTooltip();
+          AudioController.hideVolumeControl();
+          if (document.activeElement && document.activeElement.blur) {
+            document.activeElement.blur();
+          }
+        }
+        
+        // Space/Enter for sound toggle when button is focused
+        if ((e.key === ' ' || e.key === 'Enter') && document.activeElement === DOM.soundBtn) {
+          e.preventDefault();
+          AudioController.toggleSound();
+        }
       });
-    });
-    orbEls.forEach((el,i)=>{
-      el.addEventListener('mouseenter',()=>{el.style.filter="drop-shadow(0 0 54px #ff57a6cc)";});
-      el.addEventListener('mouseleave',()=>{el.style.filter="drop-shadow(0 12px 32px #1fa2ff66)";});
-    });
-
-    // Blog post scroll reveal
-    function scrollReveal() {
-      const el = document.querySelector('.blog-post');
-      if(!el) return;
-      function checkReveal() {
-        const rect = el.getBoundingClientRect();
-        if(rect.top < window.innerHeight-50 && !el.classList.contains('revealed')) {
-          el.classList.add('revealed');
-        }
-      }
-      window.addEventListener('scroll', checkReveal);
-      checkReveal();
     }
-    scrollReveal();
 
-    // Blog post card tilt on hover
-    const blogPost = document.querySelector('.blog-post');
-    blogPost.addEventListener('mousemove', function(e){
-      const rect = blogPost.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const xc = rect.width/2, yc = rect.height/2;
-      const dx = (x-xc)/xc, dy = (y-yc)/yc;
-      blogPost.style.transform = `scale(1.021) translateY(-7px) rotate3d(${dy.toFixed(2)},${dx.toFixed(2)},0,6deg)`;
-    });
-    blogPost.addEventListener('mouseleave', function(){
-      blogPost.style.transform = "scale(1) translateY(0) rotate3d(0,0,0,0deg)";
-    });
+    /**
+     * Main Application Initialization
+     */
+    function initializeApp() {
+      initializeDOM();
+      
+      // Initialize all modules
+      NeuralBackground.init();
+      CircuitAnimation.init();
+      FloatingOrbs.init();
+      AudioController.init();
+      AICoreController.init();
+      BlogPostController.init();
+      MouseTrail.init();
+      LoadingManager.init();
+      
+      setupGlobalKeyboardEvents();
+      
+      console.log('AI.html Enhanced Experience Loaded');
+    }
 
-    // AI Core orb tooltip logic (for accessibility)
-    document.getElementById('ai-core').addEventListener('mouseenter',()=>{
-      document.getElementById('ai-core-tooltip').style.opacity = "1";
-    });
-    document.getElementById('ai-core').addEventListener('mouseleave',()=>{
-      document.getElementById('ai-core-tooltip').style.opacity = "0";
-    });
-
-    // Mouse trail (tiny light dots)
-    let trailDots = [];
-    window.addEventListener('mousemove', function(e){
-      let dot = document.createElement('div');
-      dot.className = 'trail-dot';
-      dot.style.left = (e.clientX-3)+'px';
-      dot.style.top = (e.clientY-3)+'px';
-      document.body.appendChild(dot);
-      trailDots.push(dot);
-      setTimeout(()=>{dot.style.opacity="0";},190);
-      setTimeout(()=>{dot.remove();},420);
-      if(trailDots.length>40) {
-        trailDots.shift().remove();
-      }
-    });
-
-    // Ambient sound toggle
-    const soundBtn = document.getElementById('sound-toggle');
-    const audio = document.getElementById('ambient-audio');
-    let soundOn = false;
-    soundBtn.addEventListener('click', ()=>{
-      soundOn = !soundOn;
-      if(soundOn){
-        audio.volume = 0.19;
-        audio.play();
-        soundBtn.textContent = 'AI Hum: On';
-      } else {
-        audio.pause();
-        soundBtn.textContent = 'AI Hum: Off';
-      }
-    });
-    // Autoplay only if allowed
-    document.addEventListener('DOMContentLoaded', ()=>{
-      audio.volume = 0.19;
-      audio.play().then(()=>{soundOn=true;soundBtn.textContent='AI Hum: On';}).catch(()=>{soundBtn.textContent='AI Hum: Off';});
-    });
+    // Start the application when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeApp);
+    } else {
+      initializeApp();
+    }
   </script>
 </body>
 </html>
