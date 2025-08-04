@@ -5,35 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Warning: May Cause Extreme Energy Dependence. (We're Talking Critical Minerals Here.) – WiseWatt</title>
   <style>
+    /* Metallic-glow background gradient with deeper hues */
     body {
       font-family: 'Segoe UI', sans-serif;
       padding: 2rem;
       min-height: 100vh;
       margin: 0;
       color: #232323;
-      background: linear-gradient(120deg, #212121 0%, #444444 50%, #bfa14b 100%, #8ed6ff 120%);
-      background-size: 300% 300%;
-      animation: mineralsGradient 18s ease-in-out infinite;
+      background: linear-gradient(120deg, #191b20 0%, #282e3e 30%, #1a274c 55%, #8ed6ff 80%, #bfa14b 100%);
+      background-size: 400% 400%;
+      animation: mineralsGradient 20s ease-in-out infinite;
       position: relative;
       overflow-x: hidden;
     }
     @keyframes mineralsGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0% { background-position: 0% 70%; }
+      50% { background-position: 100% 30%; }
+      100% { background-position: 0% 70%; }
     }
+    /* Particle effects using CSS animation */
+    .particles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.09;
+      background: radial-gradient(circle at 30% 30%, #e3e3e3 0%, #bfa14b 90%);
+      box-shadow: 0 0 16px 5px #f3e9c7, 0 0 2px 1px #212121;
+      animation: particleMove 14s linear infinite;
+    }
+    .particle.p1 { width: 22px; height: 22px; left: 8vw; top: 18vh; animation-delay: 0s;}
+    .particle.p2 { width: 18px; height: 18px; left: 65vw; top: 5vh; animation-delay: 2s;}
+    .particle.p3 { width: 28px; height: 28px; left: 40vw; top: 70vh; animation-delay: 5s;}
+    .particle.p4 { width: 13px; height: 13px; left: 80vw; top: 30vh; animation-delay: 7s;}
+    .particle.p5 { width: 19px; height: 19px; left: 14vw; top: 78vh; animation-delay: 10s;}
+    @keyframes particleMove {
+      0% { transform: translateY(0) scale(1); opacity:0.16;}
+      80% { opacity:0.12;}
+      100% { transform: translateY(-60px) scale(1.1); opacity:0.09;}
+    }
+    /* Mineral-themed floating SVGs (background) - enhanced */
     .mineral-bg {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.13;
+      opacity: 0.19;
       overflow: hidden;
     }
     .crystal1, .crystal2, .crystal3 {
       position: absolute;
-      filter: drop-shadow(0 4px 18px #0007);
+      filter: drop-shadow(0 8px 28px #000b) drop-shadow(0 0px 35px #bfa14b80);
       animation-timing-function: ease-in-out;
+      transition: opacity 0.6s;
     }
     .crystal1 {
       left: 12vw; top: 7vh;
@@ -51,21 +81,29 @@
       animation: crystal3move 20s infinite alternate-reverse;
     }
     @keyframes crystal1move {
-      0% { transform: translateY(0) scale(1) rotate(0deg); }
-      100% { transform: translateY(35px) scale(1.13) rotate(11deg); }
+      0% { transform: translateY(0) scale(1) rotate(0deg);}
+      100% { transform: translateY(35px) scale(1.13) rotate(11deg);}
     }
     @keyframes crystal2move {
-      0% { transform: translateY(0) scale(1) rotate(0deg); }
-      100% { transform: translateY(-29px) scale(1.09) rotate(-8deg); }
+      0% { transform: translateY(0) scale(1) rotate(0deg);}
+      100% { transform: translateY(-29px) scale(1.09) rotate(-8deg);}
     }
     @keyframes crystal3move {
-      0% { transform: translateY(0) scale(1); }
-      100% { transform: translateY(50px) scale(0.97) rotate(8deg); }
+      0% { transform: translateY(0) scale(1);}
+      100% { transform: translateY(50px) scale(0.97) rotate(8deg);}
     }
+    /* Slower animations on mobile for efficiency */
+    @media (max-width: 700px) {
+      .crystal1, .crystal2, .crystal3 {
+        animation-duration: 27s !important;
+      }
+      .particles { opacity: 0.11;}
+    }
+    /* Header with etched metal shimmer effect */
     header {
       text-align: center;
       margin-bottom: 2rem;
-      z-index: 1;
+      z-index: 2;
       position: relative;
     }
     header h1 {
@@ -73,58 +111,276 @@
       font-weight: 800;
       margin-bottom: 0.5rem;
       letter-spacing: 1.2px;
-      background: linear-gradient(92deg,#bfa14b 30%,#8ed6ff 70%,#f3f3f3 100%);
+      background: linear-gradient(90deg, #d1d1d7 0%, #bfa14b 25%, #8ed6ff 50%, #232323 80%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      text-shadow: 0 2px 6px #191b20aa, 0 0px 20px #8ed6ff44;
+      filter: drop-shadow(0 1px 0 #f3e9c7) drop-shadow(0 2px 15px #bfa14b80);
+      animation: shimmerTitle 2.4s ease-in-out;
     }
+    @keyframes shimmerTitle {
+      0% { opacity: 0; transform: translateY(18px);}
+      100% { opacity: 1; transform: translateY(0);}
+    }
+    /* Subtitle badge with semi-glowing dark-glass effect */
     header p {
       font-size: 1.13rem;
       color: #e7e6e1;
-      background: rgba(34,34,34,0.5);
       display: inline-block;
-      padding: 0.5em 1.2em;
+      padding: 0.7em 1.4em;
       border-radius: 30px;
-      box-shadow: 0 2px 11px rgba(186,161,75,0.09);
+      box-shadow: 0 4px 22px #8ed6ff33, 0 2px 11px #bfa14b25;
+      background: linear-gradient(90deg, #232323dd 60%, #151515bb 100%);
+      border: 1.2px solid #8ed6ff44;
+      backdrop-filter: blur(2.4px);
+      position: relative;
     }
+    header p:before {
+      content: '';
+      position: absolute;
+      left: 10px; top: 10px;
+      width: 8px; height: 8px;
+      background: radial-gradient(#bfa14b88 60%, transparent 100%);
+      border-radius: 50%;
+      filter: blur(1px);
+      animation: blinkBadge 2.2s infinite alternate;
+    }
+    @keyframes blinkBadge {
+      0% {opacity: 0.6;}
+      100% {opacity: 1;}
+    }
+    /* Responsive header */
+    @media (max-width: 700px) {
+      header h1 { font-size: 1.20rem; }
+      header p { font-size: 0.96rem; padding: 0.4em 0.8em;}
+    }
+    /* Glowing mineral badge */
+    .mineral-badge {
+      margin: 0.7em auto 0.3em auto;
+      padding: 0.5em 1em;
+      display: inline-block;
+      border-radius: 18px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, #8ed6ff22 0%, #bfa14b22 100%);
+      border: 2.2px solid #bfa14b99;
+      box-shadow: 0 0 10px #bfa14b77, 0 0 18px #8ed6ff33;
+      color: #bfa14b;
+      font-size: 1.08rem;
+      text-shadow: 0 1px 4px #21212199;
+    }
+    /* Blog post container with glowing borders and deep shadow */
     .blog-post {
       background: rgba(34,32,32,0.97);
       padding: 2rem 2.2rem 1.7rem 2.2rem;
       margin: 2rem auto 1.5rem auto;
       border-radius: 18px;
       max-width: 800px;
-      box-shadow: 0 12px 32px 0 rgba(191,161,75,0.14), 0 2px 4px 0 rgba(0,0,0,0.06);
-      z-index: 1;
+      box-shadow: 0 16px 44px 0 rgba(191,161,75,0.25), 0 2px 8px 0 rgba(0,0,0,0.13), 0 0 0 4px #8ed6ff18;
+      z-index: 2;
       position: relative;
-      border: 2px solid #6e5c24;
+      border: 2.5px solid #8ed6ff99;
       animation: popCard 1.4s cubic-bezier(0.32,1.56,0.64,1) 0.5s backwards;
+      transition: box-shadow 0.3s, border-color 0.4s;
     }
     @keyframes popCard {
-      0% { transform: scale(0.93) translateY(40px); opacity: 0; }
+      0% { transform: scale(0.93) translateY(60px); opacity: 0; }
       100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+    .blog-post:hover, .blog-post:focus-within {
+      box-shadow: 0 0 32px #8ed6ff88, 0 0 10px #bfa14b77, 0 12px 38px #191b2099;
+      border-color: #bfa14b;
     }
     .blog-post h2 {
       color: #bfa14b;
       margin-top: 0;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.7px;
+      font-size: 1.45rem;
+      font-weight: 700;
+      text-shadow: 0 1px 8px #8ed6ff33;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeSlideUp 1.5s 0.7s forwards;
     }
     .blog-post p.date {
-      font-size: 0.98rem;
+      font-size: 1.04rem;
       color: #8ed6ff;
       letter-spacing: 1.5px;
       font-weight: 600;
       margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeSlideUp 1.5s 1.1s forwards;
+    }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
     }
     .blog-post p {
       color: #e7e7e7;
     }
+    /* Mineral fact quote box */
+    .mineral-fact {
+      margin: 1.7em 0 1em 0;
+      padding: 1.1em 1.4em;
+      border-left: 5px solid #8ed6ff;
+      background: linear-gradient(90deg, #232323dd 80%, #8ed6ff22 100%);
+      border-radius: 16px;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: #bfa14b;
+      box-shadow: 0 0 18px #8ed6ff22;
+      position: relative;
+    }
+    .mineral-fact:before {
+      content: "💡";
+      font-size: 1.2em;
+      position: absolute;
+      left: 10px; top: 8px;
+      opacity: 0.7;
+      filter: drop-shadow(0 2px 6px #8ed6ff88);
+    }
+    /* Icon bullet list */
+    .icon-list {
+      list-style: none;
+      padding: 0;
+      margin: 1.4em 0 1em 0;
+      display: grid;
+      gap: 0.85em;
+    }
+    .icon-list li {
+      display: flex;
+      align-items: center;
+      font-size: 1.09rem;
+      color: #dee6ef;
+      background: linear-gradient(90deg, #232323 80%, #8ed6ff11 100%);
+      border-radius: 12px;
+      padding: 0.35em 0.7em 0.35em 0.4em;
+      box-shadow: 0 0 7px #8ed6ff11;
+      transition: background 0.18s;
+    }
+    .icon-list svg {
+      width: 1.35em; height: 1.35em; margin-right: 0.8em;
+      vertical-align: middle;
+      filter: drop-shadow(0 0 5px #8ed6ff44);
+      flex-shrink: 0;
+    }
+    .icon-list li:hover {
+      background: linear-gradient(90deg, #8ed6ff33 50%, #232323 100%);
+    }
+    /* Mineral ticker bar */
+    .mineral-ticker {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto 1em auto;
+      height: 2.1em;
+      overflow: hidden;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #232323dd 80%, #bfa14b22 100%);
+      box-shadow: 0 0 12px #8ed6ff33;
+      border: 1.4px solid #8ed6ff44;
+      font-size: 0.96rem;
+      color: #bfa14b;
+      position: relative;
+      z-index: 3;
+    }
+    .ticker-text {
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      animation: tickerMove 14s linear infinite;
+    }
+    @keyframes tickerMove {
+      0% { transform: translateX(100%);}
+      100% { transform: translateX(-100%);}
+    }
+    .ticker-icon {
+      margin: 0 0.5em;
+      font-size: 1.05em;
+      vertical-align: middle;
+    }
+    /* Tooltip info icon */
+    .fact-tooltip {
+      position: absolute;
+      top: 1.2em; right: 1.2em;
+      cursor: pointer;
+      z-index: 4;
+      background: none;
+      border: none;
+      outline: none;
+    }
+    .fact-tooltip svg {
+      width: 1.3em; height: 1.3em;
+      filter: drop-shadow(0 0 7px #8ed6ff66);
+      transition: transform 0.2s;
+    }
+    .fact-tooltip:hover svg, .fact-tooltip:focus svg {
+      transform: scale(1.15);
+    }
+    .tooltip-popup {
+      display: none;
+      position: absolute;
+      top: 2.6em; right: 0.5em;
+      width: 240px;
+      background: linear-gradient(120deg, #232323f0 80%, #8ed6ff22 100%);
+      border: 2px solid #8ed6ff99;
+      border-radius: 16px;
+      color: #dee6ef;
+      padding: 1em 1em 0.8em 1em;
+      font-size: 0.98rem;
+      box-shadow: 0 0 22px #8ed6ff33;
+      z-index: 5;
+      animation: fadeInTooltip 0.5s;
+    }
+    @keyframes fadeInTooltip {
+      from { opacity: 0; transform: translateY(-17px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .fact-tooltip:focus + .tooltip-popup,
+    .fact-tooltip:hover + .tooltip-popup {
+      display: block;
+    }
+    /* View Global Critical Mineral Map */
+    .map-btn {
+      display: inline-block;
+      margin: 1.2em auto 0.7em auto;
+      padding: 0.55em 1.2em;
+      border-radius: 22px;
+      background: linear-gradient(90deg, #8ed6ff33 60%, #bfa14b33 100%);
+      color: #232323;
+      font-weight: 700;
+      font-size: 1.07rem;
+      border: 2px solid #bfa14b99;
+      box-shadow: 0 0 10px #8ed6ff44;
+      cursor: pointer;
+      transition: background 0.20s;
+    }
+    .map-btn:hover, .map-btn:focus {
+      background: linear-gradient(90deg, #bfa14b77 40%, #8ed6ff55 100%);
+      color: #232323;
+    }
+    /* Responsive blog post */
     @media (max-width: 700px) {
       .blog-post { padding: 1.2rem 0.7rem; }
-      header h1 { font-size: 1.2rem; }
+      .mineral-fact { padding: 0.7em 0.7em; font-size: 0.98rem;}
+      .icon-list li { font-size: 0.97rem; padding: 0.3em 0.4em;}
+      .mineral-badge { font-size: 0.93rem; padding: 0.3em 0.6em;}
+      .map-btn { padding: 0.39em 0.7em; font-size: 0.98rem;}
+      .mineral-ticker { font-size: 0.89rem; height: 1.8em;}
+      .tooltip-popup { width: 180px; font-size: 0.91rem;}
     }
   </style>
 </head>
 <body>
+  <!-- Particle effect layer -->
+  <div class="particles">
+    <div class="particle p1"></div>
+    <div class="particle p2"></div>
+    <div class="particle p3"></div>
+    <div class="particle p4"></div>
+    <div class="particle p5"></div>
+  </div>
   <!-- Mineral-themed floating SVGs (background) -->
   <div class="mineral-bg">
     <svg class="crystal1" viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -132,6 +388,7 @@
       <defs>
         <linearGradient id="gold1" x1="0" y1="0" x2="120" y2="140" gradientUnits="userSpaceOnUse">
           <stop stop-color="#bfa14b" />
+          <stop offset="0.4" stop-color="#8ed6ff" />
           <stop offset="1" stop-color="#f3e9c7" />
         </linearGradient>
       </defs>
@@ -141,6 +398,7 @@
       <defs>
         <linearGradient id="cobalt1" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
           <stop stop-color="#8ed6ff" />
+          <stop offset="0.7" stop-color="#1a274c" />
           <stop offset="1" stop-color="#232323" />
         </linearGradient>
       </defs>
@@ -149,8 +407,9 @@
       <ellipse cx="50" cy="50" rx="46" ry="37" fill="url(#graphite1)" />
       <defs>
         <linearGradient id="graphite1" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#444444" />
-          <stop offset="1" stop-color="#bfa14b" />
+          <stop stop-color="#282e3e" />
+          <stop offset="0.5" stop-color="#bfa14b" />
+          <stop offset="1" stop-color="#8ed6ff" />
         </linearGradient>
       </defs>
     </svg>
@@ -158,11 +417,77 @@
   <header>
     <h1>Critical Minerals: How Critical Are Critical Minerals?</h1>
     <p>Warning: May Cause Extreme Energy Dependence. (We're Talking Critical Minerals Here.)</p>
+    <div class="mineral-badge">Lithium • Cobalt • Nickel • Graphite</div>
+    <button class="map-btn">📍 View Global Critical Mineral Map</button>
   </header>
+  <div class="mineral-ticker">
+    <div class="ticker-text">
+      <span class="ticker-icon">🔋</span> Lithium $82,400/T ↑ | 
+      <span class="ticker-icon">🧲</span> Cobalt $31,200/T ↓ | 
+      <span class="ticker-icon">🌞</span> China leads in Graphite | 
+      <span class="ticker-icon">🚙</span> Nickel $19,000/T ↑ | 
+      <span class="ticker-icon">🌍</span> DRC #1 for Cobalt | 
+      <span class="ticker-icon">🏭</span> Australia #1 for Lithium
+    </div>
+  </div>
   <div class="blog-post">
+    <button class="fact-tooltip" tabindex="0" aria-label="See mineral fact">
+      <svg viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="10" fill="#8ed6ff" opacity="0.33"/>
+        <circle cx="12" cy="12" r="8" fill="#bfa14b" opacity="0.22"/>
+        <text x="12" y="16" text-anchor="middle" font-size="13" font-family="Segoe UI" fill="#8ed6ff">i</text>
+      </svg>
+    </button>
+    <div class="tooltip-popup">
+      <strong>Mineral Fact Sheet</strong><br/>
+      <ul style="margin:0.5em 0 0 0.5em; padding:0; list-style:none;">
+        <li><b>Lithium</b>: Key for EV batteries, 60% mined in Australia.</li>
+        <li><b>Cobalt</b>: Essential for magnets & batteries, 70% mined in DRC.</li>
+        <li><b>Nickel</b>: Used in solar panels, Indonesia rising in production.</li>
+        <li><b>Graphite</b>: Crucial for anodes, China dominates supply.</li>
+      </ul>
+    </div>
     <h2>Sample Blog Post Title</h2>
     <p class="date">July 15, 2025</p>
     <p>This is where your blog content goes. Add insights, updates, or commentary for your readers.</p>
+    <!-- Mineral fact blockquote box -->
+    <div class="mineral-fact">
+      “By 2030, demand for lithium is expected to triple—making it the ‘white gold’ of the energy transition.”
+    </div>
+    <!-- Icon bullet list with SVGs -->
+    <ul class="icon-list">
+      <li>
+        <svg viewBox="0 0 32 32" fill="none">
+          <rect x="7" y="11" width="18" height="10" rx="3" fill="#8ed6ff" stroke="#bfa14b" stroke-width="2"/>
+          <rect x="13" y="14" width="6" height="4" rx="1.2" fill="#bfa14b" />
+          <rect x="24" y="14" width="2" height="4" rx="1" fill="#8ed6ff" />
+        </svg>
+        Battery Storage
+      </li>
+      <li>
+        <svg viewBox="0 0 32 32" fill="none">
+          <rect x="7" y="7" width="18" height="18" rx="9" fill="#8ed6ff" stroke="#bfa14b" stroke-width="2"/>
+          <rect x="9" y="15" width="14" height="2" rx="1" fill="#bfa14b"/>
+        </svg>
+        Magnet Applications
+      </li>
+      <li>
+        <svg viewBox="0 0 32 32" fill="none">
+          <rect x="5" y="16" width="22" height="8" rx="4" fill="#8ed6ff" stroke="#bfa14b" stroke-width="2"/>
+          <rect x="10" y="22" width="12" height="2" rx="1" fill="#bfa14b"/>
+          <rect x="7" y="10" width="18" height="8" rx="4" fill="#bfa14b" opacity="0.44"/>
+        </svg>
+        Electric Vehicle (EV)
+      </li>
+      <li>
+        <svg viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="13" fill="#8ed6ff" stroke="#bfa14b" stroke-width="2"/>
+          <rect x="12" y="8" width="8" height="12" rx="2" fill="#bfa14b"/>
+          <rect x="14" y="20" width="4" height="4" rx="2" fill="#8ed6ff"/>
+        </svg>
+        Solar Energy
+      </li>
+    </ul>
   </div>
 </body>
 </html>
