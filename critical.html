@@ -329,6 +329,34 @@
       body {
         padding: 0.7rem;
       }
+      /* Reduce background element opacity for better readability */
+      .crystal1, .crystal2, .crystal3 {
+        opacity: 0.15;
+        z-index: 0;
+      }
+      .vein, .vein2, .vein3 {
+        opacity: 0.1;
+      }
+      /* Ensure main content stays above background elements */
+      .blog-post {
+        z-index: 5;
+        background: linear-gradient(120deg, rgba(35,35,35,0.95) 60%, rgba(58,61,68,0.95) 100%);
+      }
+      /* Add spacing and better positioning for periodic labels */
+      .periodic-label {
+        z-index: 6;
+        background: rgba(44,54,67,0.95);
+        box-shadow: 0 0 12px #bfa14b99, 0 2px 8px rgba(0,0,0,0.6);
+        margin: 4px;
+        border: 1px solid rgba(191,161,75,0.3);
+      }
+      /* Ensure header text has better contrast */
+      header {
+        z-index: 5;
+      }
+      header p {
+        background: rgba(34,34,34,0.85);
+      }
       #mining-hammer-container {
         right: 1vw;
         bottom: 1vh;
@@ -690,20 +718,20 @@
     },1200);
 
     window.addEventListener('resize', function(){
-      // reposition periodic labels on mobile for best fit
+      // reposition periodic labels on mobile for best fit and avoid content overlap
       if(isMobile()){
-        document.getElementById('label-co').style.left = "8vw";
-        document.getElementById('label-co').style.top = "18vh";
-        document.getElementById('label-li').style.left = "52vw";
-        document.getElementById('label-li').style.top = "28vh";
-        document.getElementById('label-nd').style.left = "23vw";
-        document.getElementById('label-nd').style.top = "54vh";
-        document.getElementById('label-ni').style.left = "68vw";
-        document.getElementById('label-ni').style.top = "23vh";
-        document.getElementById('label-cu').style.left = "39vw";
-        document.getElementById('label-cu').style.top = "8vh";
-        document.getElementById('label-mn').style.left = "13vw";
-        document.getElementById('label-mn').style.top = "68vh";
+        document.getElementById('label-co').style.left = "5vw";
+        document.getElementById('label-co').style.top = "12vh";
+        document.getElementById('label-li').style.left = "70vw";
+        document.getElementById('label-li').style.top = "20vh";
+        document.getElementById('label-nd').style.left = "75vw";
+        document.getElementById('label-nd').style.top = "50vh";
+        document.getElementById('label-ni').style.left = "60vw";
+        document.getElementById('label-ni').style.top = "18vh";
+        document.getElementById('label-cu').style.left = "25vw";
+        document.getElementById('label-cu').style.top = "5vh";
+        document.getElementById('label-mn').style.left = "8vw";
+        document.getElementById('label-mn').style.top = "62vh";
       } else {
         document.getElementById('label-co').style.left = "18vw";
         document.getElementById('label-co').style.top = "22vh";
