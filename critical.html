@@ -11,28 +11,59 @@
       min-height: 100vh;
       margin: 0;
       color: #232323;
-      background: linear-gradient(120deg, #212121 0%, #444444 50%, #bfa14b 100%, #8ed6ff 120%);
-      background-size: 300% 300%;
-      animation: mineralsGradient 18s ease-in-out infinite;
+      background: linear-gradient(120deg, #1a1a1a 0%, #2c5aa0 25%, #c0c0c0 50%, #bfa14b 75%, #1a1a1a 100%);
+      background-size: 400% 400%;
+      animation: mineralsGradient 20s ease-in-out infinite;
+      box-shadow: inset 0 0 100px rgba(191,161,75,0.1), inset 0 0 200px rgba(46,90,160,0.05);
       position: relative;
       overflow-x: hidden;
     }
     @keyframes mineralsGradient {
       0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+      25% { background-position: 100% 0%; }
+      50% { background-position: 100% 100%; }
+      75% { background-position: 0% 100%; }
       100% { background-position: 0% 50%; }
+    }
+    
+    /* Glimmering particle effects */
+    .particles {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: radial-gradient(circle, #bfa14b 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 8s infinite linear;
+    }
+    .particle:nth-child(2) { left: 20%; animation-delay: -2s; animation-duration: 10s; }
+    .particle:nth-child(3) { left: 40%; animation-delay: -4s; animation-duration: 12s; }
+    .particle:nth-child(4) { left: 60%; animation-delay: -6s; animation-duration: 9s; }
+    .particle:nth-child(5) { left: 80%; animation-delay: -8s; animation-duration: 11s; }
+    
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
     }
     .mineral-bg {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.13;
+      opacity: 0.15;
       overflow: hidden;
     }
-    .crystal1, .crystal2, .crystal3 {
+    .crystal1, .crystal2, .crystal3, .crystal4, .crystal5 {
       position: absolute;
-      filter: drop-shadow(0 4px 18px #0007);
+      filter: drop-shadow(0 4px 18px #0007) drop-shadow(0 0 15px rgba(191,161,75,0.2));
       animation-timing-function: ease-in-out;
     }
     .crystal1 {
@@ -50,17 +81,35 @@
       width: 110px;
       animation: crystal3move 20s infinite alternate-reverse;
     }
+    .crystal4 {
+      right: 70vw; top: 25vh;
+      width: 90px;
+      animation: crystal4move 19s infinite alternate;
+    }
+    .crystal5 {
+      left: 80vw; bottom: 35vh;
+      width: 120px;
+      animation: crystal5move 22s infinite alternate-reverse;
+    }
     @keyframes crystal1move {
-      0% { transform: translateY(0) scale(1) rotate(0deg); }
-      100% { transform: translateY(35px) scale(1.13) rotate(11deg); }
+      0% { transform: translateY(0) scale(1) rotate(0deg); filter: drop-shadow(0 4px 18px #0007) drop-shadow(0 0 15px rgba(191,161,75,0.2)); }
+      100% { transform: translateY(35px) scale(1.13) rotate(11deg); filter: drop-shadow(0 6px 25px #0009) drop-shadow(0 0 25px rgba(191,161,75,0.4)); }
     }
     @keyframes crystal2move {
-      0% { transform: translateY(0) scale(1) rotate(0deg); }
-      100% { transform: translateY(-29px) scale(1.09) rotate(-8deg); }
+      0% { transform: translateY(0) scale(1) rotate(0deg); filter: drop-shadow(0 4px 18px #0007) drop-shadow(0 0 15px rgba(142,214,255,0.2)); }
+      100% { transform: translateY(-29px) scale(1.09) rotate(-8deg); filter: drop-shadow(0 6px 25px #0009) drop-shadow(0 0 25px rgba(142,214,255,0.4)); }
     }
     @keyframes crystal3move {
-      0% { transform: translateY(0) scale(1); }
-      100% { transform: translateY(50px) scale(0.97) rotate(8deg); }
+      0% { transform: translateY(0) scale(1) rotate(0deg); filter: drop-shadow(0 4px 18px #0007) drop-shadow(0 0 15px rgba(68,68,68,0.3)); }
+      100% { transform: translateY(50px) scale(0.97) rotate(8deg); filter: drop-shadow(0 6px 25px #0009) drop-shadow(0 0 25px rgba(68,68,68,0.5)); }
+    }
+    @keyframes crystal4move {
+      0% { transform: translateY(0) scale(1) rotate(0deg); }
+      100% { transform: translateY(-40px) scale(1.15) rotate(-12deg); }
+    }
+    @keyframes crystal5move {
+      0% { transform: translateY(0) scale(1) rotate(0deg); }
+      100% { transform: translateY(25px) scale(0.92) rotate(15deg); }
     }
     header {
       text-align: center;
@@ -73,31 +122,268 @@
       font-weight: 800;
       margin-bottom: 0.5rem;
       letter-spacing: 1.2px;
-      background: linear-gradient(92deg,#bfa14b 30%,#8ed6ff 70%,#f3f3f3 100%);
+      background: linear-gradient(45deg, #bfa14b 0%, #f3f3f3 25%, #c0c0c0 50%, #8ed6ff 75%, #bfa14b 100%);
+      background-size: 400% 400%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: shimmer 3s ease-in-out infinite;
+      text-shadow: 0 0 30px rgba(191,161,75,0.3);
+      position: relative;
+    }
+    
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    
+    header h1::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+      background-size: 200% 200%;
+      animation: metalShine 4s ease-in-out infinite;
+      z-index: 1;
+    }
+    
+    @keyframes metalShine {
+      0%, 100% { background-position: -200% 0; }
+      50% { background-position: 200% 0; }
     }
     header p {
       font-size: 1.13rem;
       color: #e7e6e1;
-      background: rgba(34,34,34,0.5);
+      background: linear-gradient(135deg, rgba(34,34,34,0.85) 0%, rgba(46,90,160,0.2) 50%, rgba(34,34,34,0.85) 100%);
       display: inline-block;
-      padding: 0.5em 1.2em;
-      border-radius: 30px;
-      box-shadow: 0 2px 11px rgba(186,161,75,0.09);
+      padding: 0.7em 1.5em;
+      border-radius: 35px;
+      box-shadow: 0 4px 20px rgba(191,161,75,0.15), 
+                  inset 0 1px 0 rgba(255,255,255,0.1),
+                  0 0 40px rgba(46,90,160,0.1);
+      border: 1px solid rgba(191,161,75,0.3);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    header p::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%; right: 0; bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(191,161,75,0.1), transparent);
+      animation: badgeGlow 6s ease-in-out infinite;
+    }
+    
+    @keyframes badgeGlow {
+      0%, 100% { left: -100%; }
+      50% { left: 100%; }
+    }
+    
+    /* Mineral Badge Styles */
+    .mineral-badge-container {
+      text-align: center;
+      margin: 2rem 0;
+      z-index: 1;
+      position: relative;
+    }
+    
+    .mineral-badge {
+      display: inline-block;
+      background: linear-gradient(145deg, rgba(34,34,34,0.9) 0%, rgba(46,90,160,0.1) 50%, rgba(34,34,34,0.9) 100%);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      border: 2px solid rgba(191,161,75,0.6);
+      box-shadow: 0 0 30px rgba(191,161,75,0.3), 
+                  inset 0 1px 0 rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      animation: pulseGlow 4s ease-in-out infinite;
+    }
+    
+    .mineral-item {
+      color: #bfa14b;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(191,161,75,0.5);
+      font-size: 1.1rem;
+    }
+    
+    .separator {
+      color: #8ed6ff;
+      margin: 0 1rem;
+      font-size: 1.2rem;
+      text-shadow: 0 0 8px rgba(142,214,255,0.7);
+    }
+    
+    @keyframes pulseGlow {
+      0%, 100% { 
+        box-shadow: 0 0 30px rgba(191,161,75,0.3), 
+                    inset 0 1px 0 rgba(255,255,255,0.1);
+      }
+      50% { 
+        box-shadow: 0 0 50px rgba(191,161,75,0.5), 
+                    0 0 20px rgba(142,214,255,0.3),
+                    inset 0 1px 0 rgba(255,255,255,0.15);
+      }
+    }
+    
+    /* Global Mineral Map Button */
+    .map-button-container {
+      text-align: center;
+      margin: 2rem 0;
+      z-index: 1;
+      position: relative;
+    }
+    
+    .mineral-map-btn {
+      background: linear-gradient(135deg, rgba(46,90,160,0.8) 0%, rgba(191,161,75,0.3) 50%, rgba(46,90,160,0.8) 100%);
+      color: #e7e6e1;
+      border: 2px solid rgba(142,214,255,0.6);
+      padding: 1rem 2.5rem;
+      border-radius: 40px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(46,90,160,0.2);
+      backdrop-filter: blur(8px);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .mineral-map-btn:hover {
+      background: linear-gradient(135deg, rgba(46,90,160,0.9) 0%, rgba(191,161,75,0.5) 50%, rgba(46,90,160,0.9) 100%);
+      border-color: rgba(191,161,75,0.8);
+      box-shadow: 0 12px 35px rgba(46,90,160,0.3), 0 0 20px rgba(191,161,75,0.3);
+      transform: translateY(-3px);
+    }
+    
+    .mineral-map-btn::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%; right: 0; bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .mineral-map-btn:hover::before {
+      left: 100%;
+    }
+    
+    /* Mineral Ticker Bar */
+    .mineral-ticker {
+      background: linear-gradient(90deg, rgba(34,34,34,0.9) 0%, rgba(46,90,160,0.1) 50%, rgba(34,34,34,0.9) 100%);
+      border: 1px solid rgba(191,161,75,0.3);
+      border-radius: 15px;
+      padding: 1rem;
+      margin: 2rem auto;
+      max-width: 800px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .ticker-content {
+      display: flex;
+      gap: 2rem;
+      animation: tickerScroll 20s linear infinite;
+      white-space: nowrap;
+    }
+    
+    @keyframes tickerScroll {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    
+    .ticker-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.5rem 1rem;
+      background: rgba(191,161,75,0.05);
+      border-radius: 10px;
+      border: 1px solid rgba(191,161,75,0.2);
+      min-width: 280px;
+      flex-shrink: 0;
+    }
+    
+    .mineral-name {
+      color: #bfa14b;
+      font-weight: 700;
+      text-shadow: 0 0 8px rgba(191,161,75,0.3);
+      min-width: 70px;
+    }
+    
+    .price {
+      color: #e7e6e1;
+      font-weight: 600;
+      min-width: 90px;
+    }
+    
+    .trend {
+      font-weight: 600;
+      min-width: 60px;
+    }
+    
+    .trend.up {
+      color: #4ade80;
+      text-shadow: 0 0 8px rgba(74,222,128,0.3);
+    }
+    
+    .trend.down {
+      color: #f87171;
+      text-shadow: 0 0 8px rgba(248,113,113,0.3);
+    }
+    
+    .country {
+      color: #8ed6ff;
+      font-size: 0.9rem;
+      text-shadow: 0 0 8px rgba(142,214,255,0.3);
     }
     .blog-post {
-      background: rgba(34,32,32,0.97);
+      background: linear-gradient(145deg, rgba(34,32,32,0.97) 0%, rgba(42,42,42,0.95) 100%);
       padding: 2rem 2.2rem 1.7rem 2.2rem;
       margin: 2rem auto 1.5rem auto;
       border-radius: 18px;
       max-width: 800px;
-      box-shadow: 0 12px 32px 0 rgba(191,161,75,0.14), 0 2px 4px 0 rgba(0,0,0,0.06);
+      box-shadow: 0 12px 32px 0 rgba(191,161,75,0.14), 
+                  0 2px 4px 0 rgba(0,0,0,0.06),
+                  inset 0 1px 0 rgba(255,255,255,0.05);
       z-index: 1;
       position: relative;
-      border: 2px solid #6e5c24;
+      border: 2px solid rgba(110,92,36,0.8);
       animation: popCard 1.4s cubic-bezier(0.32,1.56,0.64,1) 0.5s backwards;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+    
+    .blog-post:hover {
+      border-color: rgba(191,161,75,0.9);
+      box-shadow: 0 20px 60px 0 rgba(191,161,75,0.25), 
+                  0 0 40px rgba(142,214,255,0.15),
+                  inset 0 1px 0 rgba(255,255,255,0.1);
+      transform: translateY(-5px);
+    }
+    
+    .blog-post::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 18px;
+      padding: 2px;
+      background: linear-gradient(45deg, rgba(191,161,75,0.5), rgba(142,214,255,0.3), rgba(191,161,75,0.5));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: exclude;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .blog-post:hover::before {
+      opacity: 1;
     }
     @keyframes popCard {
       0% { transform: scale(0.93) translateY(40px); opacity: 0; }
@@ -107,24 +393,261 @@
       color: #bfa14b;
       margin-top: 0;
       letter-spacing: 0.5px;
+      animation: fadeSlideUp 1s ease-out 0.8s backwards;
+      text-shadow: 0 0 20px rgba(191,161,75,0.3);
     }
+    
     .blog-post p.date {
       font-size: 0.98rem;
       color: #8ed6ff;
       letter-spacing: 1.5px;
       font-weight: 600;
       margin-bottom: 1rem;
+      animation: fadeSlideUp 1s ease-out 1s backwards;
+      text-shadow: 0 0 15px rgba(142,214,255,0.3);
+    }
+    
+    @keyframes fadeSlideUp {
+      0% { 
+        opacity: 0; 
+        transform: translateY(30px);
+      }
+      100% { 
+        opacity: 1; 
+        transform: translateY(0);
+      }
     }
     .blog-post p {
       color: #e7e7e7;
+      line-height: 1.6;
+    }
+    
+    /* Mineral Fact Highlight Box */
+    .mineral-fact-box {
+      background: linear-gradient(135deg, rgba(191,161,75,0.15) 0%, rgba(46,90,160,0.1) 100%);
+      border-left: 4px solid #bfa14b;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(191,161,75,0.1);
+      backdrop-filter: blur(5px);
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .fact-icon {
+      font-size: 2rem;
+      filter: drop-shadow(0 0 10px rgba(191,161,75,0.5));
+    }
+    
+    .fact-content {
+      color: #e7e6e1;
+      flex: 1;
+    }
+    
+    .fact-content strong {
+      color: #bfa14b;
+      text-shadow: 0 0 8px rgba(191,161,75,0.3);
+    }
+    
+    /* Icon List Styles */
+    .icon-list {
+      margin: 2rem 0;
+    }
+    
+    .icon-list h3 {
+      color: #8ed6ff;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 15px rgba(142,214,255,0.3);
+      font-size: 1.3rem;
+    }
+    
+    .icon-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1rem 0;
+      padding: 0.8rem;
+      background: rgba(46,90,160,0.05);
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      border-left: 3px solid transparent;
+    }
+    
+    .icon-item:hover {
+      background: rgba(191,161,75,0.1);
+      border-left-color: #bfa14b;
+      transform: translateX(5px);
+    }
+    
+    .icon {
+      width: 24px;
+      height: 24px;
+      color: #8ed6ff;
+      filter: drop-shadow(0 0 8px rgba(142,214,255,0.3));
+      flex-shrink: 0;
+    }
+    
+    .icon-item span {
+      color: #e7e6e1;
+      font-weight: 500;
+    }
+    
+    /* Tooltip Info Section */
+    .info-section {
+      margin: 2rem 0;
+      position: relative;
+    }
+    
+    .info-trigger {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(142,214,255,0.2) 0%, rgba(191,161,75,0.1) 100%);
+      color: #8ed6ff;
+      padding: 0.8rem 1.5rem;
+      border-radius: 25px;
+      cursor: pointer;
+      border: 1px solid rgba(142,214,255,0.3);
+      transition: all 0.3s ease;
+      font-weight: 600;
+      text-shadow: 0 0 10px rgba(142,214,255,0.3);
+    }
+    
+    .info-trigger:hover {
+      background: linear-gradient(135deg, rgba(142,214,255,0.3) 0%, rgba(191,161,75,0.2) 100%);
+      border-color: rgba(191,161,75,0.5);
+      box-shadow: 0 8px 25px rgba(142,214,255,0.2);
+      transform: translateY(-2px);
+    }
+    
+    .tooltip-content {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: linear-gradient(145deg, rgba(34,34,34,0.95) 0%, rgba(46,90,160,0.1) 100%);
+      border: 2px solid rgba(191,161,75,0.4);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-top: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      z-index: 10;
+    }
+    
+    .info-trigger:hover + .tooltip-content,
+    .tooltip-content:hover {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    .tooltip-content h4 {
+      color: #bfa14b;
+      margin: 0 0 1rem 0;
+      text-shadow: 0 0 10px rgba(191,161,75,0.3);
+    }
+    
+    .tooltip-content ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .tooltip-content li {
+      color: #e7e6e1;
+      margin: 0.8rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    
+    .tooltip-content li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: #8ed6ff;
+      text-shadow: 0 0 8px rgba(142,214,255,0.5);
+    }
+    
+    .tooltip-content strong {
+      color: #bfa14b;
     }
     @media (max-width: 700px) {
       .blog-post { padding: 1.2rem 0.7rem; }
       header h1 { font-size: 1.2rem; }
+      .crystal1, .crystal2, .crystal3, .crystal4, .crystal5 {
+        animation-duration: 25s; /* Slower animations on mobile */
+      }
+      .particle {
+        animation-duration: 15s !important; /* Slower particle animation */
+      }
+      .blog-post:hover {
+        transform: none; /* Disable hover transform on mobile */
+      }
+      .mineral-badge {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+      }
+      .mineral-item {
+        font-size: 0.9rem;
+      }
+      .separator {
+        margin: 0 0.5rem;
+      }
+      .mineral-map-btn {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+      }
+      .ticker-content {
+        animation-duration: 30s; /* Slower ticker on mobile */
+      }
+      .ticker-item {
+        min-width: 240px;
+        gap: 0.5rem;
+      }
+      .mineral-fact-box {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+      }
+      .icon-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+      }
+      .tooltip-content {
+        position: relative;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        margin-top: 1rem;
+      }
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Glimmering particle effects -->
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+  
   <!-- Mineral-themed floating SVGs (background) -->
   <div class="mineral-bg">
     <svg class="crystal1" viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -154,15 +677,140 @@
         </linearGradient>
       </defs>
     </svg>
+    <svg class="crystal4" viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="40,5 75,95 5,95" fill="url(#nickel1)" />
+      <defs>
+        <linearGradient id="nickel1" x1="0" y1="0" x2="80" y2="100" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#c0c0c0" />
+          <stop offset="1" stop-color="#8ed6ff" />
+        </linearGradient>
+      </defs>
+    </svg>
+    <svg class="crystal5" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="10" width="100" height="60" rx="15" fill="url(#lithium1)" />
+      <defs>
+        <linearGradient id="lithium1" x1="0" y1="0" x2="120" y2="80" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#8ed6ff" />
+          <stop offset="0.5" stop-color="#c0c0c0" />
+          <stop offset="1" stop-color="#bfa14b" />
+        </linearGradient>
+      </defs>
+    </svg>
   </div>
   <header>
     <h1>Critical Minerals: How Critical Are Critical Minerals?</h1>
     <p>Warning: May Cause Extreme Energy Dependence. (We're Talking Critical Minerals Here.)</p>
   </header>
+  
+  <!-- Glowing Mineral Badge -->
+  <div class="mineral-badge-container">
+    <div class="mineral-badge">
+      <span class="mineral-item">Lithium</span>
+      <span class="separator">•</span>
+      <span class="mineral-item">Cobalt</span>
+      <span class="separator">•</span>
+      <span class="mineral-item">Nickel</span>
+      <span class="separator">•</span>
+      <span class="mineral-item">Graphite</span>
+    </div>
+  </div>
+  
+  <!-- Global Critical Mineral Map Button -->
+  <div class="map-button-container">
+    <button class="mineral-map-btn">
+      📍 View Global Critical Mineral Map
+    </button>
+  </div>
+  <!-- Mineral Ticker Bar -->
+  <div class="mineral-ticker">
+    <div class="ticker-content">
+      <div class="ticker-item">
+        <span class="mineral-name">Lithium</span>
+        <span class="price">$78,450/t</span>
+        <span class="trend up">↗ +2.3%</span>
+        <span class="country">🇦🇺 Australia</span>
+      </div>
+      <div class="ticker-item">
+        <span class="mineral-name">Cobalt</span>
+        <span class="price">$34,200/t</span>
+        <span class="trend down">↘ -1.8%</span>
+        <span class="country">🇨🇩 DRC</span>
+      </div>
+      <div class="ticker-item">
+        <span class="mineral-name">Nickel</span>
+        <span class="price">$23,870/t</span>
+        <span class="trend up">↗ +4.1%</span>
+        <span class="country">🇮🇩 Indonesia</span>
+      </div>
+      <div class="ticker-item">
+        <span class="mineral-name">Graphite</span>
+        <span class="price">$2,840/t</span>
+        <span class="trend up">↗ +0.7%</span>
+        <span class="country">🇨🇳 China</span>
+      </div>
+    </div>
+  </div>
+  
   <div class="blog-post">
     <h2>Sample Blog Post Title</h2>
     <p class="date">July 15, 2025</p>
     <p>This is where your blog content goes. Add insights, updates, or commentary for your readers.</p>
+    
+    <!-- Mineral Fact Highlight Box -->
+    <div class="mineral-fact-box">
+      <div class="fact-icon">💎</div>
+      <div class="fact-content">
+        <strong>Critical Mineral Fact:</strong> Lithium demand is expected to increase by 4000% by 2030 as electric vehicle adoption accelerates globally.
+      </div>
+    </div>
+    
+    <!-- Icon Bullet List -->
+    <div class="icon-list">
+      <h3>Applications in Clean Energy:</h3>
+      <div class="icon-item">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="12" height="12" rx="2" stroke="currentColor" stroke-width="2"/>
+          <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        <span>Battery Storage Systems - Advanced lithium-ion technology</span>
+      </div>
+      <div class="icon-item">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        <span>Magnetic Components - Rare earth magnets for wind turbines</span>
+      </div>
+      <div class="icon-item">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 7h-3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h3m0-10V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2m0-10h-1" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        <span>Electric Vehicles - Critical materials in EV powertrains</span>
+      </div>
+      <div class="icon-item">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        <span>Solar Panels - Silver and other critical materials in photovoltaics</span>
+      </div>
+    </div>
+    
+    <!-- Tooltip Info Section -->
+    <div class="info-section">
+      <span class="info-trigger" data-tooltip="Click to view detailed mineral supply chain data and geographical distribution">
+        ℹ️ Mineral Supply Info
+      </span>
+      <div class="tooltip-content">
+        <h4>Critical Mineral Supply Chain</h4>
+        <ul>
+          <li><strong>Lithium:</strong> 70% from Australia, Chile, Argentina</li>
+          <li><strong>Cobalt:</strong> 60% from Democratic Republic of Congo</li>
+          <li><strong>Nickel:</strong> 30% from Indonesia, Philippines</li>
+          <li><strong>Graphite:</strong> 65% from China</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </body>
 </html>
