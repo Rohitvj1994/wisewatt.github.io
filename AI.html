@@ -3,11 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>AI: Powering Brains, Braining Power</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Animation and icon libraries -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
 </head>
 <body>
-    <h1>AI: Powering Brains, Braining Power</h1>
-    <h2>The strange but electrifying love story of energy systems and artificial intelligence.</h2>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Switch theme">
+        <i class="fa fa-moon"></i>
+    </button>
+    <header>
+        <div class="sun-logo" data-aos="fade-down">
+            <svg width="46" height="46" fill="#00e5ff">
+                <circle cx="23" cy="23" r="22" stroke="#ffab00" stroke-width="2" fill="#012f24"/>
+                <polyline points="23,8 28,23 23,38" style="fill:none;stroke:#00e5ff;stroke-width:3" />
+                <ellipse cx="23" cy="23" rx="8" ry="13" style="fill:none;stroke:#00e5ff;stroke-width:2"/>
+            </svg>
+        </div>
+        <h1 data-aos="fade-up" data-aos-delay="100">AI: Powering Brains, Braining Power</h1>
+        <h2 data-aos="fade-up" data-aos-delay="200">The strange but electrifying love story of energy systems and artificial intelligence.</h2>
+    </header>
+    <section class="blog-list" data-aos="fade-up" data-aos-delay="300">
+        <h3>Related Blogs</h3>
+        <ul>
+            <li><a href="blog1.html">How AI is Transforming Modern Energy Systems</a></li>
+            <li><a href="blog2.html">Smart Grids: Where Machine Learning Meets Power</a></li>
+            <li><a href="blog3.html">Energy Data + Neural Networks: Brighter Futures</a></li>
+        </ul>
+    </section>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+        }
+    </script>
 </body>
 </html>
