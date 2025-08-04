@@ -5,35 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Warning: May Cause Extreme Energy Dependence. (We're Talking Critical Minerals Here.) – WiseWatt</title>
   <style>
+    /* --- Underground Mineral Cross-section Background --- */
     body {
       font-family: 'Segoe UI', sans-serif;
       padding: 2rem;
       min-height: 100vh;
       margin: 0;
       color: #232323;
-      background: linear-gradient(120deg, #212121 0%, #444444 50%, #bfa14b 100%, #8ed6ff 120%);
-      background-size: 300% 300%;
-      animation: mineralsGradient 18s ease-in-out infinite;
+      background: #161b1d;
       position: relative;
       overflow-x: hidden;
+      /* Custom cross-section background via SVG */
     }
-    @keyframes mineralsGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    /* Layered SVG background for underground cross-section */
+    #mineral-bg-svg {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
     }
+
+    /* --- Crystal Veins Animation --- */
+    .vein {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0.4;
+      animation: pulseVein 6s infinite alternate;
+      filter: blur(1.2px) drop-shadow(0 0 18px #8ed6ff88) brightness(1.2);
+    }
+    .vein2 { animation-delay: 2s; opacity: 0.35; }
+    .vein3 { animation-delay: 3.5s; opacity: 0.28; }
+
+    @keyframes pulseVein {
+      0% { opacity: 0.16; filter: blur(1.4px) brightness(0.9);}
+      50% { opacity: 0.5; filter: blur(2px) brightness(1.4);}
+      100% { opacity: 0.2; filter: blur(1.2px) brightness(1);}
+    }
+
+    /* --- Crystal SVGs --- */
     .mineral-bg {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
       pointer-events: none;
-      z-index: 0;
-      opacity: 0.13;
+      z-index: 2;
+      opacity: 1;
       overflow: hidden;
     }
     .crystal1, .crystal2, .crystal3 {
       position: absolute;
-      filter: drop-shadow(0 4px 18px #0007);
+      filter: drop-shadow(0 4px 18px #0007) drop-shadow(0 0 16px #8ed6ff66);
       animation-timing-function: ease-in-out;
+      opacity: 0.79;
+      transition: filter 0.2s;
     }
     .crystal1 {
       left: 12vw; top: 7vh;
@@ -51,17 +74,102 @@
       animation: crystal3move 20s infinite alternate-reverse;
     }
     @keyframes crystal1move {
-      0% { transform: translateY(0) scale(1) rotate(0deg); }
-      100% { transform: translateY(35px) scale(1.13) rotate(11deg); }
+      0% { transform: translateY(0) scale(1) rotate(0deg);}
+      100% { transform: translateY(35px) scale(1.13) rotate(11deg);}
     }
     @keyframes crystal2move {
-      0% { transform: translateY(0) scale(1) rotate(0deg); }
-      100% { transform: translateY(-29px) scale(1.09) rotate(-8deg); }
+      0% { transform: translateY(0) scale(1) rotate(0deg);}
+      100% { transform: translateY(-29px) scale(1.09) rotate(-8deg);}
     }
     @keyframes crystal3move {
-      0% { transform: translateY(0) scale(1); }
-      100% { transform: translateY(50px) scale(0.97) rotate(8deg); }
+      0% { transform: translateY(0) scale(1);}
+      100% { transform: translateY(50px) scale(0.97) rotate(8deg);}
     }
+
+    /* --- Flickering Periodic Labels --- */
+    .periodic-label {
+      position: fixed;
+      font-family: 'Consolas', monospace;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #8ed6ff;
+      background: rgba(44,54,67,0.83);
+      border-radius: 8px;
+      padding: 2px 6px;
+      opacity: 0;
+      box-shadow: 0 0 12px #bfa14b99;
+      pointer-events: auto;
+      z-index: 4;
+      transition: opacity 0.18s;
+      animation: flickerLabel 5.2s infinite;
+      user-select: none;
+      cursor: pointer;
+    }
+    @keyframes flickerLabel {
+      0%, 100% { opacity: 0; }
+      5% { opacity: 0.8;}
+      10% { opacity: 0.2;}
+      12% { opacity: 1;}
+      14% { opacity: 0.7;}
+      17% { opacity: 0.95;}
+      20% { opacity: 0.6;}
+      22% { opacity: 0.99;}
+      25% { opacity: 0.45;}
+      26% { opacity: 0.9;}
+      30% { opacity: 0.3;}
+      32% { opacity: 0.8;}
+      34% { opacity: 0.2;}
+      36% { opacity: 0.75;}
+      90% { opacity: 0;}
+    }
+
+    /* --- Mining Hammer Animation --- */
+    #mining-hammer-container {
+      position: fixed;
+      right: 2vw;
+      bottom: 3vh;
+      width: 64px;
+      height: 80px;
+      z-index: 10;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+    #mining-hammer-svg {
+      width: 64px;
+      height: 80px;
+      filter: drop-shadow(0 2px 8px #bfa14b88);
+      transition: filter 0.2s;
+    }
+    #hammer-fact {
+      position: absolute;
+      right: 70px;
+      bottom: 10px;
+      background: #232323e6;
+      color: #bfa14b;
+      font-size: 0.95rem;
+      border-radius: 8px;
+      padding: 8px 14px;
+      box-shadow: 0 0 12px #8ed6ff99;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      max-width: 220px;
+      z-index: 10;
+    }
+    #mining-hammer-container:hover #hammer-fact {
+      opacity: 1;
+    }
+
+    @keyframes hammerStrike {
+      0% { transform: rotate(-10deg) translateY(0); }
+      20% { transform: rotate(0deg) translateY(-7px);}
+      30% { transform: rotate(12deg) translateY(-14px);}
+      50% { transform: rotate(-8deg) translateY(0);}
+      70% { transform: rotate(-12deg) translateY(4px);}
+      100% { transform: rotate(-10deg) translateY(0);}
+    }
+
+    /* --- Blog content --- */
     header {
       text-align: center;
       margin-bottom: 2rem;
@@ -77,6 +185,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      filter: drop-shadow(0 2px 8px #23232388);
     }
     header p {
       font-size: 1.13rem;
@@ -88,7 +197,7 @@
       box-shadow: 0 2px 11px rgba(186,161,75,0.09);
     }
     .blog-post {
-      background: rgba(34,32,32,0.97);
+      background: linear-gradient(120deg, #232323 60%, #3a3d44 100%);
       padding: 2rem 2.2rem 1.7rem 2.2rem;
       margin: 2rem auto 1.5rem auto;
       border-radius: 18px;
@@ -100,13 +209,14 @@
       animation: popCard 1.4s cubic-bezier(0.32,1.56,0.64,1) 0.5s backwards;
     }
     @keyframes popCard {
-      0% { transform: scale(0.93) translateY(40px); opacity: 0; }
-      100% { transform: scale(1) translateY(0); opacity: 1; }
+      0% { transform: scale(0.93) translateY(40px); opacity: 0;}
+      100% { transform: scale(1) translateY(0); opacity: 1;}
     }
     .blog-post h2 {
       color: #bfa14b;
       margin-top: 0;
       letter-spacing: 0.5px;
+      text-shadow: 0 2px 8px #212121;
     }
     .blog-post p.date {
       font-size: 0.98rem;
@@ -114,17 +224,152 @@
       letter-spacing: 1.5px;
       font-weight: 600;
       margin-bottom: 1rem;
+      text-shadow: 0 2px 8px #23232377;
     }
     .blog-post p {
       color: #e7e7e7;
+      text-shadow: 0 2px 8px #21212177;
     }
     @media (max-width: 700px) {
       .blog-post { padding: 1.2rem 0.7rem; }
-      header h1 { font-size: 1.2rem; }
+      header h1 { font-size: 1.2rem;}
+    }
+
+    /* --- Mining Sound Toggle --- */
+    #sound-toggle {
+      position: fixed;
+      left: 2vw; bottom: 3vh;
+      z-index: 12;
+      font-size: 1.9rem;
+      background: #232323e6;
+      color: #8ed6ff;
+      border-radius: 50%;
+      padding: 8px;
+      box-shadow: 0 0 12px #8ed6ff88;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    #sound-toggle.active {
+      color: #bfa14b;
+      background: #34342a;
+      box-shadow: 0 0 18px #bfa14b99;
+    }
+
+    /* --- Mouse mineral trail --- */
+    .mineral-trail-dot {
+      position: fixed;
+      pointer-events: none;
+      border-radius: 50%;
+      z-index: 999;
+      will-change: opacity, transform;
+      background: radial-gradient(circle at 40% 40%, #8ed6ff 0%, #bfa14b 90%, #232323 100%);
+      box-shadow: 0 0 30px 8px #8ed6ff44, 0 0 12px 4px #bfa14b66;
+      opacity: 0.72;
+      animation: fadeTrailDot 1.8s forwards;
+    }
+    @keyframes fadeTrailDot {
+      0% { opacity: 0.93; transform: scale(1);}
+      65% { opacity: 0.48; transform: scale(1.18);}
+      100% { opacity: 0; transform: scale(1.42);}
+    }
+
+    /* --- Glow sketch --- */
+    .glow-sketch {
+      position: fixed;
+      pointer-events: none;
+      border-radius: 999px;
+      background: radial-gradient(circle, #8ed6ff99 0%, #bfa14b44 70%, transparent 100%);
+      box-shadow: 0 0 18px #bfa14b55, 0 0 34px #8ed6ff33;
+      z-index: 998;
+      opacity: 0.55;
+      animation: sketchFade 1.4s forwards;
+    }
+    @keyframes sketchFade {
+      0% { opacity: 0.55; }
+      100% { opacity: 0; }
+    }
+
+    /* --- Mineral Core Animation --- */
+    #core-anim-container {
+      position: fixed;
+      left: 50vw;
+      bottom: 13vh;
+      width: 140px;
+      height: 140px;
+      z-index: 7;
+      pointer-events: none;
+    }
+    #core-anim-svg {
+      width: 140px;
+      height: 140px;
+      animation: rotateCore 9s linear infinite;
+      filter: drop-shadow(0 0 22px #8ed6ff99);
+    }
+    @keyframes rotateCore {
+      0% {transform: rotate(0deg);}
+      100% {transform: rotate(360deg);}
+    }
+    /* --- Drilling radar --- */
+    #radar-svg {
+      position: fixed;
+      left: 8vw;
+      top: 8vh;
+      width: 100px;
+      height: 100px;
+      z-index: 8;
+      pointer-events: none;
+      opacity: 0.7;
+      animation: radarPulse 3.2s linear infinite;
+    }
+    @keyframes radarPulse {
+      0% { opacity: 0.7; }
+      50% { opacity: 1; }
+      100% { opacity: 0.7; }
     }
   </style>
 </head>
 <body>
+  <!-- Underground Mineral Cross-section SVG background -->
+  <svg id="mineral-bg-svg"></svg>
+  <!-- Animated Crystal Veins SVGs -->
+  <svg class="vein" style="top:16vh;left:8vw;" width="460" height="70" viewBox="0 0 460 70" fill="none">
+    <path d="M0 64 Q140 10 320 40 Q410 65 460 6" stroke="#8ed6ff" stroke-width="7" filter="url(#veinGlow)" />
+    <defs>
+      <filter id="veinGlow">
+        <feGaussianBlur stdDeviation="6" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+  </svg>
+  <svg class="vein vein2" style="top:42vh;left:18vw;" width="340" height="40" viewBox="0 0 340 40" fill="none">
+    <path d="M0 38 Q90 2 210 32 Q320 40 340 8" stroke="#bfa14b" stroke-width="6" filter="url(#veinGlow2)" />
+    <defs>
+      <filter id="veinGlow2">
+        <feGaussianBlur stdDeviation="6" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+  </svg>
+  <svg class="vein vein3" style="top:63vh;left:45vw;" width="300" height="40" viewBox="0 0 300 40" fill="none">
+    <path d="M0 39 Q60 13 120 35 Q190 7 300 31" stroke="#9ad6ed" stroke-width="5" filter="url(#veinGlow3)" />
+    <defs>
+      <filter id="veinGlow3">
+        <feGaussianBlur stdDeviation="4" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+  </svg>
+
   <!-- Mineral-themed floating SVGs (background) -->
   <div class="mineral-bg">
     <svg class="crystal1" viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -155,6 +400,54 @@
       </defs>
     </svg>
   </div>
+  <!-- Mining Hammer Animation & Hover Fact -->
+  <div id="mining-hammer-container">
+    <svg id="mining-hammer-svg" viewBox="0 0 64 80" xmlns="http://www.w3.org/2000/svg">
+      <rect x="26" y="30" width="12" height="36" rx="5" fill="#bfa14b" stroke="#8ed6ff" stroke-width="2"/>
+      <rect x="20" y="20" width="24" height="18" rx="5" fill="#444444" stroke="#bfa14b" stroke-width="2"/>
+      <rect x="30" y="10" width="4" height="14" rx="2" fill="#8ed6ff" stroke="#232323" stroke-width="1"/>
+      <circle cx="32" cy="70" r="7" fill="#232323" stroke="#bfa14b" stroke-width="2"/>
+      <ellipse cx="32" cy="68" rx="5" ry="1.5" fill="#8ed6ff88"/>
+    </svg>
+    <div id="hammer-fact">🔨 Did you know? Over 60% of global cobalt comes from just one country—making mineral exploration critical for energy independence.</div>
+  </div>
+  <!-- Sound Toggle -->
+  <div id="sound-toggle" title="Toggle ambient mining sound">🔊</div>
+  <!-- Rotating Mineral Core Animation -->
+  <div id="core-anim-container">
+    <svg id="core-anim-svg" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="70" cy="70" r="45" fill="#232323" stroke="#8ed6ff" stroke-width="5"/>
+      <circle cx="70" cy="70" r="32" fill="#bfa14b" opacity="0.3"/>
+      <text x="70" y="78" text-anchor="middle" font-size="2.2em" font-family="Consolas" fill="#8ed6ff" font-weight="bold" opacity="0.9">Co</text>
+      <circle cx="70" cy="70" r="17" fill="#8ed6ff" opacity="0.2"/>
+      <circle cx="70" cy="70" r="7" fill="#bfa14b" opacity="0.7"/>
+      <!-- Exploding rock effect -->
+      <g id="rock-frags">
+        <circle cx="35" cy="50" r="5" fill="#444444" />
+        <circle cx="120" cy="90" r="6" fill="#bfa14b" />
+        <circle cx="90" cy="110" r="4" fill="#8ed6ff" />
+        <circle cx="110" cy="40" r="3" fill="#bfa14b" />
+        <circle cx="50" cy="120" r="4" fill="#8ed6ff" />
+      </g>
+      <!-- Mineral names revealed -->
+      <text x="35" y="45" font-size="0.77em" fill="#8ed6ff" font-family="Consolas" opacity="0.87">Li</text>
+      <text x="120" y="87" font-size="0.85em" fill="#bfa14b" font-family="Consolas" opacity="0.87">Nd</text>
+      <text x="93" y="107" font-size="0.76em" fill="#8ed6ff" font-family="Consolas" opacity="0.87">Ni</text>
+      <text x="109" y="37" font-size="0.7em" fill="#bfa14b" font-family="Consolas" opacity="0.87">Cu</text>
+      <text x="54" y="117" font-size="0.75em" fill="#8ed6ff" font-family="Consolas" opacity="0.87">Mn</text>
+    </svg>
+  </div>
+  <!-- Drilling radar circles -->
+  <svg id="radar-svg" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="40" stroke="#bfa14b" stroke-width="3" fill="none" opacity="0.6"/>
+    <circle cx="50" cy="50" r="30" stroke="#8ed6ff" stroke-width="2" fill="none" opacity="0.5"/>
+    <circle cx="50" cy="50" r="14" stroke="#bfa14b" stroke-width="2" fill="none" opacity="0.3"/>
+    <circle cx="50" cy="50" r="4" fill="#8ed6ff" opacity="0.6"/>
+    <line x1="50" y1="50" x2="90" y2="50" stroke="#8ed6ff" stroke-width="2" opacity="0.7">
+      <animate attributeName="x2" from="90" to="50" dur="2s" repeatCount="indefinite"/>
+    </line>
+  </svg>
+
   <header>
     <h1>Critical Minerals: How Critical Are Critical Minerals?</h1>
     <p>Warning: May Cause Extreme Energy Dependence. (We're Talking Critical Minerals Here.)</p>
@@ -164,5 +457,162 @@
     <p class="date">July 15, 2025</p>
     <p>This is where your blog content goes. Add insights, updates, or commentary for your readers.</p>
   </div>
+
+  <!-- Flickering Periodic Labels -->
+  <span class="periodic-label" id="label-co" style="left:18vw;top:22vh;">Co</span>
+  <span class="periodic-label" id="label-li" style="left:62vw;top:44vh;">Li</span>
+  <span class="periodic-label" id="label-nd" style="left:33vw;top:66vh;">Nd</span>
+  <span class="periodic-label" id="label-ni" style="left:80vw;top:28vh;">Ni</span>
+  <span class="periodic-label" id="label-cu" style="left:55vw;top:11vh;">Cu</span>
+  <span class="periodic-label" id="label-mn" style="left:21vw;top:73vh;">Mn</span>
+
+  <!-- Mini-facts for flickering labels -->
+  <div id="mini-fact-popup" style="position:fixed;z-index:20;pointer-events:none;background:#232323ee;color:#8ed6ff;border-radius:7px;padding:7px 14px;box-shadow:0 0 11px #8ed6ff99;font-size:0.97em;opacity:0;transition:opacity 0.24s;max-width:210px;"></div>
+
+  <!-- Ambient mining sound -->
+  <audio id="mining-audio" loop preload="auto">
+    <source src="https://cdn.jsdelivr.net/gh/rohitvj1994/wisewatt.github.io/mining_ambient.mp3" type="audio/mpeg">
+  </audio>
+  <script>
+    /* --- Underground mineral cross-section background --- */
+    function drawMineralBG() {
+      const svg = document.getElementById('mineral-bg-svg');
+      svg.setAttribute('width', window.innerWidth);
+      svg.setAttribute('height', window.innerHeight);
+      svg.innerHTML = `
+        <defs>
+          <linearGradient id="earthGradient" x1="0" y1="0" x2="0" y2="${window.innerHeight}" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#232323"/>
+            <stop offset="25%" stop-color="#444444"/>
+            <stop offset="55%" stop-color="#2a3c3c"/>
+            <stop offset="85%" stop-color="#bfa14b"/>
+            <stop offset="100%" stop-color="#8ed6ff"/>
+          </linearGradient>
+          <radialGradient id="veinGlowCross" cx="50%" cy="35%" r="80%" fx="47%" fy="33%">
+            <stop offset="0%" stop-color="#8ed6ff99"/>
+            <stop offset="60%" stop-color="#bfa14b22"/>
+            <stop offset="100%" stop-color="#23232300"/>
+          </radialGradient>
+        </defs>
+        <rect x="0" y="0" width="${window.innerWidth}" height="${window.innerHeight}" fill="url(#earthGradient)" />
+        <!-- Stylized mineral veins -->
+        <path d="M0 ${window.innerHeight*0.65} Q${window.innerWidth*0.33} ${window.innerHeight*0.59} ${window.innerWidth*0.65} ${window.innerHeight*0.8} Q${window.innerWidth*0.95} ${window.innerHeight*0.68} ${window.innerWidth} ${window.innerHeight*0.88}" stroke="url(#veinGlowCross)" stroke-width="36" fill="none" opacity="0.31"/>
+        <ellipse cx="${window.innerWidth*0.44}" cy="${window.innerHeight*0.69}" rx="190" ry="44" fill="url(#veinGlowCross)" opacity="0.18"/>
+        <ellipse cx="${window.innerWidth*0.14}" cy="${window.innerHeight*0.82}" rx="90" ry="21" fill="url(#veinGlowCross)" opacity="0.14"/>
+        <ellipse cx="${window.innerWidth*0.87}" cy="${window.innerHeight*0.9}" rx="110" ry="28" fill="url(#veinGlowCross)" opacity="0.14"/>
+      `;
+    }
+    window.addEventListener('resize', drawMineralBG);
+    drawMineralBG();
+
+    /* --- Mining Hammer Animation --- */
+    function hammerStrikeAnim() {
+      const hammer = document.getElementById('mining-hammer-svg');
+      hammer.style.animation = 'hammerStrike 1.1s cubic-bezier(.42,1.58,.64,1.15)';
+      setTimeout(() => hammer.style.animation = '', 1100);
+    }
+    setInterval(hammerStrikeAnim, 3900);
+    document.getElementById('mining-hammer-container').addEventListener('mouseenter', hammerStrikeAnim);
+
+    /* --- Mouse mineral dust/spark trail --- */
+    document.addEventListener('mousemove', function(e) {
+      // Mineral trail
+      const dot = document.createElement('div');
+      dot.className = 'mineral-trail-dot';
+      dot.style.left = (e.clientX - 8) + 'px';
+      dot.style.top = (e.clientY - 8) + 'px';
+      dot.style.width = dot.style.height = (10 + Math.random()*8) + 'px';
+      document.body.appendChild(dot);
+      setTimeout(()=>{dot.remove()}, 1600);
+      // Glow sketch
+      if(Math.random()>0.6){
+        const glow = document.createElement('div');
+        glow.className = 'glow-sketch';
+        glow.style.left = (e.clientX - 20 + Math.random()*12) + 'px';
+        glow.style.top = (e.clientY - 20 + Math.random()*12) + 'px';
+        glow.style.width = glow.style.height = (30 + Math.random()*17) + 'px';
+        document.body.appendChild(glow);
+        setTimeout(()=>{glow.remove()}, 1400);
+      }
+    });
+
+    /* --- Flickering periodic labels facts + interaction --- */
+    const labelFacts = {
+      'label-co': 'Cobalt (Co): Essential for EV batteries, superalloys, and energy storage.',
+      'label-li': 'Lithium (Li): Key component in rechargeable batteries for clean energy.',
+      'label-nd': 'Neodymium (Nd): Powers high-strength magnets in wind turbines & EV motors.',
+      'label-ni': 'Nickel (Ni): Used in stainless steel and energy transition batteries.',
+      'label-cu': 'Copper (Cu): Backbone of electrical wiring and renewable grids.',
+      'label-mn': 'Manganese (Mn): Improves battery safety and energy density.',
+    }
+    const popup = document.getElementById('mini-fact-popup');
+    Object.keys(labelFacts).forEach(id=>{
+      const el = document.getElementById(id);
+      el.addEventListener('mouseenter', e=>{
+        popup.innerText = labelFacts[id];
+        popup.style.opacity = 1;
+        const rect = el.getBoundingClientRect();
+        popup.style.left = (rect.left + rect.width + 12) + 'px';
+        popup.style.top = (rect.top - 6) + 'px';
+      });
+      el.addEventListener('mouseleave', ()=>{
+        popup.style.opacity = 0;
+      });
+    });
+
+    /* --- Mining ambient sound toggle --- */
+    const soundToggle = document.getElementById('sound-toggle');
+    const miningAudio = document.getElementById('mining-audio');
+    let soundOn = false;
+    soundToggle.addEventListener('click', ()=>{
+      soundOn = !soundOn;
+      if(soundOn){
+        miningAudio.play();
+        soundToggle.classList.add('active');
+        soundToggle.innerText = '🔉';
+      } else {
+        miningAudio.pause();
+        soundToggle.classList.remove('active');
+        soundToggle.innerText = '🔊';
+      }
+    });
+
+    /* --- Accessibility: hide trail for reduced motion --- */
+    if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+      document.body.classList.add('reduced-motion');
+      document.addEventListener('mousemove',()=>{},true);
+    }
+
+    /* --- Radar SVG animation sync --- */
+    // Animate radar line rotation every 2s
+    const radar = document.getElementById('radar-svg');
+    let radarAngle = 0;
+    setInterval(()=>{
+      radarAngle = (radarAngle+45)%360;
+      radar.querySelector('line').setAttribute('transform','rotate('+radarAngle+' 50 50)');
+    }, 500);
+
+    /* --- Mineral Core "exploding" --- */
+    const coreAnim = document.getElementById('core-anim-svg');
+    setInterval(()=>{
+      coreAnim.querySelectorAll('#rock-frags circle').forEach((frag,i)=>{
+        frag.setAttribute('r', 3+Math.random()*7);
+        frag.setAttribute('fill', i%2==0 ? '#8ed6ff' : '#bfa14b');
+      });
+    },1200);
+
+    // Touch support: show facts on tap for labels
+    Object.keys(labelFacts).forEach(id=>{
+      const el = document.getElementById(id);
+      el.addEventListener('touchstart', e=>{
+        popup.innerText = labelFacts[id];
+        popup.style.opacity = 1;
+        const rect = el.getBoundingClientRect();
+        popup.style.left = (rect.left + rect.width + 12) + 'px';
+        popup.style.top = (rect.top - 6) + 'px';
+      });
+      el.addEventListener('touchend', ()=>{ popup.style.opacity = 0; });
+    });
+  </script>
 </body>
 </html>
