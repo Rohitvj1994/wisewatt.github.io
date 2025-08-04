@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Warning: May Cause Extreme Energy Dependence. (We're Talking Critical Minerals Here.) – WiseWatt</title>
   <style>
-    /* --- Underground Mineral Cross-section Background --- */
     body {
       font-family: 'Segoe UI', sans-serif;
       padding: 2rem;
@@ -15,17 +14,13 @@
       background: #161b1d;
       position: relative;
       overflow-x: hidden;
-      /* Custom cross-section background via SVG */
     }
-    /* Layered SVG background for underground cross-section */
     #mineral-bg-svg {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
       z-index: 0;
       pointer-events: none;
     }
-
-    /* --- Crystal Veins Animation --- */
     .vein {
       position: absolute;
       pointer-events: none;
@@ -35,14 +30,11 @@
     }
     .vein2 { animation-delay: 2s; opacity: 0.35; }
     .vein3 { animation-delay: 3.5s; opacity: 0.28; }
-
     @keyframes pulseVein {
       0% { opacity: 0.16; filter: blur(1.4px) brightness(0.9);}
       50% { opacity: 0.5; filter: blur(2px) brightness(1.4);}
       100% { opacity: 0.2; filter: blur(1.2px) brightness(1);}
     }
-
-    /* --- Crystal SVGs --- */
     .mineral-bg {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
@@ -86,7 +78,6 @@
       100% { transform: translateY(50px) scale(0.97) rotate(8deg);}
     }
 
-    /* --- Flickering Periodic Labels --- */
     .periodic-label {
       position: fixed;
       font-family: 'Consolas', monospace;
@@ -123,7 +114,6 @@
       90% { opacity: 0;}
     }
 
-    /* --- Mining Hammer Animation --- */
     #mining-hammer-container {
       position: fixed;
       right: 2vw;
@@ -156,10 +146,10 @@
       max-width: 220px;
       z-index: 10;
     }
-    #mining-hammer-container:hover #hammer-fact {
+    #mining-hammer-container:hover #hammer-fact,
+    #mining-hammer-container:active #hammer-fact {
       opacity: 1;
     }
-
     @keyframes hammerStrike {
       0% { transform: rotate(-10deg) translateY(0); }
       20% { transform: rotate(0deg) translateY(-7px);}
@@ -169,7 +159,6 @@
       100% { transform: rotate(-10deg) translateY(0);}
     }
 
-    /* --- Blog content --- */
     header {
       text-align: center;
       margin-bottom: 2rem;
@@ -196,6 +185,7 @@
       border-radius: 30px;
       box-shadow: 0 2px 11px rgba(186,161,75,0.09);
     }
+
     .blog-post {
       background: linear-gradient(120deg, #232323 60%, #3a3d44 100%);
       padding: 2rem 2.2rem 1.7rem 2.2rem;
@@ -230,12 +220,7 @@
       color: #e7e7e7;
       text-shadow: 0 2px 8px #21212177;
     }
-    @media (max-width: 700px) {
-      .blog-post { padding: 1.2rem 0.7rem; }
-      header h1 { font-size: 1.2rem;}
-    }
 
-    /* --- Mining Sound Toggle --- */
     #sound-toggle {
       position: fixed;
       left: 2vw; bottom: 3vh;
@@ -256,7 +241,6 @@
       box-shadow: 0 0 18px #bfa14b99;
     }
 
-    /* --- Mouse mineral trail --- */
     .mineral-trail-dot {
       position: fixed;
       pointer-events: none;
@@ -273,8 +257,6 @@
       65% { opacity: 0.48; transform: scale(1.18);}
       100% { opacity: 0; transform: scale(1.42);}
     }
-
-    /* --- Glow sketch --- */
     .glow-sketch {
       position: fixed;
       pointer-events: none;
@@ -290,7 +272,6 @@
       100% { opacity: 0; }
     }
 
-    /* --- Mineral Core Animation --- */
     #core-anim-container {
       position: fixed;
       left: 50vw;
@@ -299,6 +280,7 @@
       height: 140px;
       z-index: 7;
       pointer-events: none;
+      transform: translateX(-50%);
     }
     #core-anim-svg {
       width: 140px;
@@ -310,7 +292,6 @@
       0% {transform: rotate(0deg);}
       100% {transform: rotate(360deg);}
     }
-    /* --- Drilling radar --- */
     #radar-svg {
       position: fixed;
       left: 8vw;
@@ -327,12 +308,112 @@
       50% { opacity: 1; }
       100% { opacity: 0.7; }
     }
+
+    #mini-fact-popup {
+      position:fixed;
+      z-index:20;
+      pointer-events:none;
+      background:#232323ee;
+      color:#8ed6ff;
+      border-radius:7px;
+      padding:7px 14px;
+      box-shadow:0 0 11px #8ed6ff99;
+      font-size:0.97em;
+      opacity:0;
+      transition:opacity 0.24s;
+      max-width:210px;
+    }
+
+    /* --- Mobile Friendly Styles --- */
+    @media (max-width: 700px) {
+      body {
+        padding: 0.7rem;
+      }
+      #mining-hammer-container {
+        right: 1vw;
+        bottom: 1vh;
+        width: 42px;
+        height: 52px;
+      }
+      #mining-hammer-svg {
+        width: 42px;
+        height: 52px;
+      }
+      #hammer-fact {
+        font-size: 0.8rem;
+        right: 46px;
+        max-width: 130px;
+        bottom: 0px;
+        padding: 6px 8px;
+      }
+      #sound-toggle {
+        left: 1vw;
+        bottom: 1vh;
+        font-size: 1.4rem;
+        padding: 5px;
+      }
+      #core-anim-container {
+        width: 86px;
+        height: 86px;
+        left: 50vw;
+        bottom: 6vh;
+      }
+      #core-anim-svg {
+        width: 86px;
+        height: 86px;
+      }
+      #radar-svg {
+        left: 3vw;
+        top: 2vh;
+        width: 54px;
+        height: 54px;
+      }
+      header h1 {
+        font-size: 1.13rem;
+      }
+      header p {
+        font-size: 0.93rem;
+        padding: 0.3em 0.5em;
+      }
+      .blog-post {
+        padding: 1.1rem 0.5rem;
+        max-width: 99vw;
+        margin: 1.2rem auto 0.6rem auto;
+        font-size: 0.98rem;
+      }
+      .blog-post h2 {
+        font-size: 1.2rem;
+      }
+      .blog-post p.date {
+        font-size: 0.88rem;
+      }
+      .periodic-label {
+        font-size: 1.03rem;
+        padding: 2px 5px;
+      }
+      #mini-fact-popup {
+        font-size: 0.83em;
+        max-width: 120px;
+        padding: 5px 8px;
+      }
+    }
+    @media (max-width: 440px) {
+      header h1 {
+        font-size: 0.72rem;
+      }
+      .blog-post h2 {
+        font-size: 0.89rem;
+      }
+      .periodic-label {
+        font-size: 0.87rem;
+        padding: 1px 4px;
+      }
+    }
+    /* --- End Mobile Styles --- */
   </style>
 </head>
 <body>
-  <!-- Underground Mineral Cross-section SVG background -->
   <svg id="mineral-bg-svg"></svg>
-  <!-- Animated Crystal Veins SVGs -->
   <svg class="vein" style="top:16vh;left:8vw;" width="460" height="70" viewBox="0 0 460 70" fill="none">
     <path d="M0 64 Q140 10 320 40 Q410 65 460 6" stroke="#8ed6ff" stroke-width="7" filter="url(#veinGlow)" />
     <defs>
@@ -370,7 +451,6 @@
     </defs>
   </svg>
 
-  <!-- Mineral-themed floating SVGs (background) -->
   <div class="mineral-bg">
     <svg class="crystal1" viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
       <polygon points="60,10 110,130 10,130" fill="url(#gold1)" />
@@ -400,7 +480,6 @@
       </defs>
     </svg>
   </div>
-  <!-- Mining Hammer Animation & Hover Fact -->
   <div id="mining-hammer-container">
     <svg id="mining-hammer-svg" viewBox="0 0 64 80" xmlns="http://www.w3.org/2000/svg">
       <rect x="26" y="30" width="12" height="36" rx="5" fill="#bfa14b" stroke="#8ed6ff" stroke-width="2"/>
@@ -411,9 +490,7 @@
     </svg>
     <div id="hammer-fact">🔨 Did you know? Over 60% of global cobalt comes from just one country—making mineral exploration critical for energy independence.</div>
   </div>
-  <!-- Sound Toggle -->
   <div id="sound-toggle" title="Toggle ambient mining sound">🔊</div>
-  <!-- Rotating Mineral Core Animation -->
   <div id="core-anim-container">
     <svg id="core-anim-svg" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
       <circle cx="70" cy="70" r="45" fill="#232323" stroke="#8ed6ff" stroke-width="5"/>
@@ -421,7 +498,6 @@
       <text x="70" y="78" text-anchor="middle" font-size="2.2em" font-family="Consolas" fill="#8ed6ff" font-weight="bold" opacity="0.9">Co</text>
       <circle cx="70" cy="70" r="17" fill="#8ed6ff" opacity="0.2"/>
       <circle cx="70" cy="70" r="7" fill="#bfa14b" opacity="0.7"/>
-      <!-- Exploding rock effect -->
       <g id="rock-frags">
         <circle cx="35" cy="50" r="5" fill="#444444" />
         <circle cx="120" cy="90" r="6" fill="#bfa14b" />
@@ -429,7 +505,6 @@
         <circle cx="110" cy="40" r="3" fill="#bfa14b" />
         <circle cx="50" cy="120" r="4" fill="#8ed6ff" />
       </g>
-      <!-- Mineral names revealed -->
       <text x="35" y="45" font-size="0.77em" fill="#8ed6ff" font-family="Consolas" opacity="0.87">Li</text>
       <text x="120" y="87" font-size="0.85em" fill="#bfa14b" font-family="Consolas" opacity="0.87">Nd</text>
       <text x="93" y="107" font-size="0.76em" fill="#8ed6ff" font-family="Consolas" opacity="0.87">Ni</text>
@@ -437,7 +512,6 @@
       <text x="54" y="117" font-size="0.75em" fill="#8ed6ff" font-family="Consolas" opacity="0.87">Mn</text>
     </svg>
   </div>
-  <!-- Drilling radar circles -->
   <svg id="radar-svg" viewBox="0 0 100 100">
     <circle cx="50" cy="50" r="40" stroke="#bfa14b" stroke-width="3" fill="none" opacity="0.6"/>
     <circle cx="50" cy="50" r="30" stroke="#8ed6ff" stroke-width="2" fill="none" opacity="0.5"/>
@@ -447,7 +521,6 @@
       <animate attributeName="x2" from="90" to="50" dur="2s" repeatCount="indefinite"/>
     </line>
   </svg>
-
   <header>
     <h1>Critical Minerals: How Critical Are Critical Minerals?</h1>
     <p>Warning: May Cause Extreme Energy Dependence. (We're Talking Critical Minerals Here.)</p>
@@ -457,24 +530,17 @@
     <p class="date">July 15, 2025</p>
     <p>This is where your blog content goes. Add insights, updates, or commentary for your readers.</p>
   </div>
-
-  <!-- Flickering Periodic Labels -->
   <span class="periodic-label" id="label-co" style="left:18vw;top:22vh;">Co</span>
   <span class="periodic-label" id="label-li" style="left:62vw;top:44vh;">Li</span>
   <span class="periodic-label" id="label-nd" style="left:33vw;top:66vh;">Nd</span>
   <span class="periodic-label" id="label-ni" style="left:80vw;top:28vh;">Ni</span>
   <span class="periodic-label" id="label-cu" style="left:55vw;top:11vh;">Cu</span>
   <span class="periodic-label" id="label-mn" style="left:21vw;top:73vh;">Mn</span>
-
-  <!-- Mini-facts for flickering labels -->
-  <div id="mini-fact-popup" style="position:fixed;z-index:20;pointer-events:none;background:#232323ee;color:#8ed6ff;border-radius:7px;padding:7px 14px;box-shadow:0 0 11px #8ed6ff99;font-size:0.97em;opacity:0;transition:opacity 0.24s;max-width:210px;"></div>
-
-  <!-- Ambient mining sound -->
+  <div id="mini-fact-popup"></div>
   <audio id="mining-audio" loop preload="auto">
     <source src="https://cdn.jsdelivr.net/gh/rohitvj1994/wisewatt.github.io/mining_ambient.mp3" type="audio/mpeg">
   </audio>
   <script>
-    /* --- Underground mineral cross-section background --- */
     function drawMineralBG() {
       const svg = document.getElementById('mineral-bg-svg');
       svg.setAttribute('width', window.innerWidth);
@@ -495,7 +561,6 @@
           </radialGradient>
         </defs>
         <rect x="0" y="0" width="${window.innerWidth}" height="${window.innerHeight}" fill="url(#earthGradient)" />
-        <!-- Stylized mineral veins -->
         <path d="M0 ${window.innerHeight*0.65} Q${window.innerWidth*0.33} ${window.innerHeight*0.59} ${window.innerWidth*0.65} ${window.innerHeight*0.8} Q${window.innerWidth*0.95} ${window.innerHeight*0.68} ${window.innerWidth} ${window.innerHeight*0.88}" stroke="url(#veinGlowCross)" stroke-width="36" fill="none" opacity="0.31"/>
         <ellipse cx="${window.innerWidth*0.44}" cy="${window.innerHeight*0.69}" rx="190" ry="44" fill="url(#veinGlowCross)" opacity="0.18"/>
         <ellipse cx="${window.innerWidth*0.14}" cy="${window.innerHeight*0.82}" rx="90" ry="21" fill="url(#veinGlowCross)" opacity="0.14"/>
@@ -505,7 +570,6 @@
     window.addEventListener('resize', drawMineralBG);
     drawMineralBG();
 
-    /* --- Mining Hammer Animation --- */
     function hammerStrikeAnim() {
       const hammer = document.getElementById('mining-hammer-svg');
       hammer.style.animation = 'hammerStrike 1.1s cubic-bezier(.42,1.58,.64,1.15)';
@@ -513,10 +577,13 @@
     }
     setInterval(hammerStrikeAnim, 3900);
     document.getElementById('mining-hammer-container').addEventListener('mouseenter', hammerStrikeAnim);
+    document.getElementById('mining-hammer-container').addEventListener('touchstart', hammerStrikeAnim);
 
-    /* --- Mouse mineral dust/spark trail --- */
+    function isMobile() {
+      return window.innerWidth < 700;
+    }
     document.addEventListener('mousemove', function(e) {
-      // Mineral trail
+      if (isMobile()) return;
       const dot = document.createElement('div');
       dot.className = 'mineral-trail-dot';
       dot.style.left = (e.clientX - 8) + 'px';
@@ -524,7 +591,6 @@
       dot.style.width = dot.style.height = (10 + Math.random()*8) + 'px';
       document.body.appendChild(dot);
       setTimeout(()=>{dot.remove()}, 1600);
-      // Glow sketch
       if(Math.random()>0.6){
         const glow = document.createElement('div');
         glow.className = 'glow-sketch';
@@ -535,8 +601,19 @@
         setTimeout(()=>{glow.remove()}, 1400);
       }
     });
+    document.addEventListener('touchmove', function(e) {
+      if (!isMobile()) return;
+      let touch = e.touches[0];
+      if (!touch) return;
+      const dot = document.createElement('div');
+      dot.className = 'mineral-trail-dot';
+      dot.style.left = (touch.clientX - 8) + 'px';
+      dot.style.top = (touch.clientY - 8) + 'px';
+      dot.style.width = dot.style.height = (10 + Math.random()*8) + 'px';
+      document.body.appendChild(dot);
+      setTimeout(()=>{dot.remove()}, 1200);
+    });
 
-    /* --- Flickering periodic labels facts + interaction --- */
     const labelFacts = {
       'label-co': 'Cobalt (Co): Essential for EV batteries, superalloys, and energy storage.',
       'label-li': 'Lithium (Li): Key component in rechargeable batteries for clean energy.',
@@ -552,15 +629,30 @@
         popup.innerText = labelFacts[id];
         popup.style.opacity = 1;
         const rect = el.getBoundingClientRect();
-        popup.style.left = (rect.left + rect.width + 12) + 'px';
-        popup.style.top = (rect.top - 6) + 'px';
+        let left = rect.left + rect.width + 12;
+        let top = rect.top - 6;
+        // On mobile, show below element
+        if(isMobile()){
+          left = rect.left - 8;
+          top = rect.bottom + 6;
+        }
+        popup.style.left = left + 'px';
+        popup.style.top = top + 'px';
       });
-      el.addEventListener('mouseleave', ()=>{
-        popup.style.opacity = 0;
+      el.addEventListener('mouseleave', ()=>{ popup.style.opacity = 0; });
+      // Touch support
+      el.addEventListener('touchstart', e=>{
+        popup.innerText = labelFacts[id];
+        popup.style.opacity = 1;
+        const rect = el.getBoundingClientRect();
+        let left = rect.left - 8;
+        let top = rect.bottom + 6;
+        popup.style.left = left + 'px';
+        popup.style.top = top + 'px';
       });
+      el.addEventListener('touchend', ()=>{ popup.style.opacity = 0; });
     });
 
-    /* --- Mining ambient sound toggle --- */
     const soundToggle = document.getElementById('sound-toggle');
     const miningAudio = document.getElementById('mining-audio');
     let soundOn = false;
@@ -577,14 +669,11 @@
       }
     });
 
-    /* --- Accessibility: hide trail for reduced motion --- */
     if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
       document.body.classList.add('reduced-motion');
       document.addEventListener('mousemove',()=>{},true);
     }
 
-    /* --- Radar SVG animation sync --- */
-    // Animate radar line rotation every 2s
     const radar = document.getElementById('radar-svg');
     let radarAngle = 0;
     setInterval(()=>{
@@ -592,7 +681,6 @@
       radar.querySelector('line').setAttribute('transform','rotate('+radarAngle+' 50 50)');
     }, 500);
 
-    /* --- Mineral Core "exploding" --- */
     const coreAnim = document.getElementById('core-anim-svg');
     setInterval(()=>{
       coreAnim.querySelectorAll('#rock-frags circle').forEach((frag,i)=>{
@@ -601,18 +689,37 @@
       });
     },1200);
 
-    // Touch support: show facts on tap for labels
-    Object.keys(labelFacts).forEach(id=>{
-      const el = document.getElementById(id);
-      el.addEventListener('touchstart', e=>{
-        popup.innerText = labelFacts[id];
-        popup.style.opacity = 1;
-        const rect = el.getBoundingClientRect();
-        popup.style.left = (rect.left + rect.width + 12) + 'px';
-        popup.style.top = (rect.top - 6) + 'px';
-      });
-      el.addEventListener('touchend', ()=>{ popup.style.opacity = 0; });
+    window.addEventListener('resize', function(){
+      // reposition periodic labels on mobile for best fit
+      if(isMobile()){
+        document.getElementById('label-co').style.left = "8vw";
+        document.getElementById('label-co').style.top = "18vh";
+        document.getElementById('label-li').style.left = "52vw";
+        document.getElementById('label-li').style.top = "28vh";
+        document.getElementById('label-nd').style.left = "23vw";
+        document.getElementById('label-nd').style.top = "54vh";
+        document.getElementById('label-ni').style.left = "68vw";
+        document.getElementById('label-ni').style.top = "23vh";
+        document.getElementById('label-cu').style.left = "39vw";
+        document.getElementById('label-cu').style.top = "8vh";
+        document.getElementById('label-mn').style.left = "13vw";
+        document.getElementById('label-mn').style.top = "68vh";
+      } else {
+        document.getElementById('label-co').style.left = "18vw";
+        document.getElementById('label-co').style.top = "22vh";
+        document.getElementById('label-li').style.left = "62vw";
+        document.getElementById('label-li').style.top = "44vh";
+        document.getElementById('label-nd').style.left = "33vw";
+        document.getElementById('label-nd').style.top = "66vh";
+        document.getElementById('label-ni').style.left = "80vw";
+        document.getElementById('label-ni').style.top = "28vh";
+        document.getElementById('label-cu').style.left = "55vw";
+        document.getElementById('label-cu').style.top = "11vh";
+        document.getElementById('label-mn').style.left = "21vw";
+        document.getElementById('label-mn').style.top = "73vh";
+      }
     });
+    window.dispatchEvent(new Event('resize'));
   </script>
 </body>
 </html>
