@@ -223,7 +223,7 @@
       position: relative;
       border: 2px solid transparent;
       opacity: 0;
-      transform: translateY(64px) scale(.97);
+      transform: scale(0.9);
       animation: blogPopIn 1.6s cubic-bezier(.77,.00,.18,1.00) 3.3s forwards;
       transition: box-shadow 0.25s, border 0.25s, filter 0.25s, transform 0.25s;
       will-change: filter, transform;
@@ -231,9 +231,8 @@
       backdrop-filter: blur(2.5px);
     }
     @keyframes blogPopIn {
-      0% { opacity: 0; transform: translateY(64px) scale(.97);}
-      80% { opacity: .8; transform: translateY(-7px) scale(1.03);}
-      100% { opacity: 1; transform: translateY(0) scale(1);}
+      0% { opacity: 0; transform: scale(0.9);}
+      100% { opacity: 1; transform: scale(1);}
     }
     .blog-post:before {
       content: "";
@@ -264,18 +263,10 @@
       animation: none !important;
     }
     .blog-post h2, .blog-post p.date, .blog-post p {
-      opacity: 0;
-      transform: translateY(18px);
-      animation: drawIn 0.8s cubic-bezier(.77,.00,.18,1.00) 4.1s forwards;
-      animation-fill-mode: forwards;
+      opacity: 1;
+      transform: translateY(0);
     }
-    .blog-post h2 { animation-delay: 4.1s;}
-    .blog-post p.date { animation-delay: 4.3s;}
-    .blog-post p { animation-delay: 4.5s;}
-    @keyframes drawIn {
-      from {opacity: 0; transform: translateY(18px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
+
 
     /* AI Hum Toggle Button */
     #sound-toggle {
