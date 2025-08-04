@@ -168,12 +168,23 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      filter: drop-shadow(0 0 10px #1fa2ff88);
+      filter: drop-shadow(0 0 4px #1fa2ff44);
       opacity: 0;
-      animation: typewriterGlow 2.5s steps(6) 0.8s forwards, pulseText 3s infinite alternate 3.3s;
-      overflow: hidden;
-      white-space: pre-line;
+      transform: translateY(20px);
+      animation: simpleHeadingFadeIn 1.2s ease-out 0.3s forwards;
     }
+    @keyframes simpleHeadingFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /* Commented out complex animations */
+    /*
     @keyframes typewriterGlow {
       from {width: 0; opacity:0;}
       to {width: 100%; opacity:1;}
@@ -183,6 +194,7 @@
       50% { filter: drop-shadow(0 0 24px #f8ffae88);}
       100% { filter: drop-shadow(0 0 10px #1fa2ff88);}
     }
+    */
     header p {
       font-size: 1.15rem;
       color: #444;
@@ -192,18 +204,28 @@
       border-radius: 30px;
       box-shadow: 0 2px 13px rgba(31,162,255,0.09);
       opacity: 0;
-      animation: pulseSubtitle 2.2s cubic-bezier(.77,.00,.18,1.00) 2.7s forwards, subtitleGlow 3.5s infinite alternate 5.1s;
-      transition: box-shadow 0.22s;
+      transform: translateY(10px);
+      animation: simpleSubtitleFadeIn 0.8s ease-out 0.6s forwards;
+      transition: box-shadow 0.22s, background 0.22s, color 0.22s;
     }
-    @keyframes pulseSubtitle {
-      from {opacity: 0; transform: translateY(16px);}
-      to {opacity: 1; transform: translateY(0);}
+    @keyframes simpleSubtitleFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+    /* Commented out complex glow animation */
+    /*
     @keyframes subtitleGlow {
       0% { box-shadow: 0 2px 13px rgba(31,162,255,0.09);}
       50% { box-shadow: 0 0 35px #f8ffae55;}
       100% { box-shadow: 0 2px 13px rgba(31,162,255,0.09);}
     }
+    */
     header p:hover {
       box-shadow: 0 0 42px #1fa2ff99;
       background: linear-gradient(92deg,#f8ffae 0%,#1fa2ff 100%);
@@ -218,22 +240,33 @@
       margin: 2.5rem auto 1.5rem auto;
       border-radius: 24px;
       max-width: 820px;
-      box-shadow: 0 16px 40px 0 rgba(31,162,255,0.18), 0 2px 4px 0 rgba(0,0,0,0.03);
+      box-shadow: 0 8px 24px 0 rgba(31,162,255,0.12), 0 2px 4px 0 rgba(0,0,0,0.03);
       z-index: 10;
       position: relative;
-      border: 2px solid transparent;
+      border: 1px solid rgba(31,162,255,0.08);
       opacity: 0;
-      transform: scale(0.9);
-      animation: blogPopIn 1.6s cubic-bezier(.77,.00,.18,1.00) 3.3s forwards;
-      transition: box-shadow 0.25s, border 0.25s, filter 0.25s, transform 0.25s;
-      will-change: filter, transform;
-      overflow: hidden;
+      transform: translateY(20px) scale(0.98);
+      animation: gentleBlogFadeIn 1.0s ease-out 0.8s forwards;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
       backdrop-filter: blur(2.5px);
     }
-    @keyframes blogPopIn {
-      0% { opacity: 0; transform: scale(0.9);}
-      100% { opacity: 1; transform: scale(1);}
+    @keyframes gentleBlogFadeIn {
+      0% { 
+        opacity: 0; 
+        transform: translateY(20px) scale(0.98);
+      }
+      100% { 
+        opacity: 1; 
+        transform: translateY(0) scale(1);
+      }
     }
+    /* Simplified hover effect */
+    .blog-post:hover {
+      box-shadow: 0 12px 32px 0 rgba(31,162,255,0.18), 0 4px 8px 0 rgba(31,162,255,0.12);
+      transform: translateY(-2px) scale(1.01);
+    }
+    /* Commented out complex before pseudo-element and heavy effects */
+    /*
     .blog-post:before {
       content: "";
       position: absolute;
@@ -249,12 +282,7 @@
     .blog-post:hover:before {
       opacity: 0.54;
     }
-    .blog-post:hover {
-      box-shadow: 0 0 44px 0 #1fa2ff45, 0 2px 8px 0 rgba(31,162,255,0.17), 0 16px 40px 0 rgba(31,162,255,0.28);
-      border-color: #1fa2ff55;
-      filter: drop-shadow(0 0 18px #f8ffae66);
-      transform: scale(1.021) translateY(-7px) rotate3d(.13,.6,0,4deg);
-    }
+    */
     /* Blog post scroll reveal */
     .blog-post.revealed {
       opacity: 1 !important;
@@ -526,7 +554,8 @@
     }
     scrollReveal();
 
-    // Blog post card tilt on hover
+    // Blog post card tilt on hover - REMOVED FOR SIMPLICITY
+    /*
     const blogPost = document.querySelector('.blog-post');
     blogPost.addEventListener('mousemove', function(e){
       const rect = blogPost.getBoundingClientRect();
@@ -539,6 +568,7 @@
     blogPost.addEventListener('mouseleave', function(){
       blogPost.style.transform = "scale(1) translateY(0) rotate3d(0,0,0,0deg)";
     });
+    */
 
     // AI Core orb tooltip logic (for accessibility)
     document.getElementById('ai-core').addEventListener('mouseenter',()=>{
