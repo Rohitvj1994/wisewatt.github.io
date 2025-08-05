@@ -279,8 +279,14 @@
       <a href="AI.html" class="button"><span class="btn-icon btn-icon-ai"><i class="fas fa-robot"></i></span>AI Meets Energy</a>
     </div>
   </section>
+  <!-- Hidden Submit Blog Button -->
+  <button id="submitBlogBtn" style="display: none; position: fixed; bottom: 80px; right: 20px; background: #ff6b6b; color: white; border: none; padding: 12px 16px; border-radius: 50px; font-size: 0.9rem; cursor: pointer; box-shadow: 0 4px 12px rgba(255,107,107,0.3); z-index: 1001; font-family: 'Orbitron', sans-serif; font-weight: 600;" onclick="window.open('submit-blog.html', '_blank')">
+    <i class="fas fa-edit"></i> Submit Blog
+  </button>
+
   <footer>© 2025 WiseWatt. All rights reserved.</footer>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="secrets.js"></script>
   <script>
     AOS.init({ once: true, duration: 800 });
     function toggleTheme() {
@@ -291,6 +297,28 @@
     }
     window.addEventListener('scroll', () => {
       document.getElementById('backToTop').classList.toggle('show', window.scrollY > 300);
+    });
+
+    // Passkey authentication for Submit Blog button
+    let keySequence = '';
+    let timeoutId = null;
+    
+    document.addEventListener('keydown', (e) => {
+      clearTimeout(timeoutId);
+      keySequence += e.key;
+      
+      // Check if sequence matches passkey
+      if (keySequence === PASSKEY) {
+        document.getElementById('submitBlogBtn').style.display = 'block';
+        keySequence = '';
+      } else if (!PASSKEY.startsWith(keySequence)) {
+        keySequence = '';
+      }
+      
+      // Reset sequence after 2 seconds of inactivity
+      timeoutId = setTimeout(() => {
+        keySequence = '';
+      }, 2000);
     });
   </script>
 </body>

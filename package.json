@@ -1,0 +1,8 @@
+{
+  "name": "wisewatt-blog-functions",
+  "version": "1.0.0",
+  "description": "Netlify functions for WiseWatt blog submission",
+  "dependencies": {
+    "@octokit/rest": "^19.0.0"
+  }
+}

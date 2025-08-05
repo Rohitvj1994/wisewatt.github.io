@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Submit Blog - WiseWatt</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #fff;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      text-align: center;
+      margin-bottom: 2rem;
+      background: linear-gradient(45deg, #00e676, #00b0ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 2.5rem;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #fff;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+    input::placeholder, textarea::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #00e676;
+      box-shadow: 0 0 0 3px rgba(0, 230, 118, 0.2);
+    }
+    textarea {
+      resize: vertical;
+      min-height: 200px;
+    }
+    .file-input-wrapper {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+    .file-input {
+      position: absolute;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+    .file-input-display {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      border: 2px dashed rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .file-input-display:hover {
+      border-color: #00e676;
+      background: rgba(0, 230, 118, 0.1);
+    }
+    .content-type-toggle {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 1rem;
+    }
+    .toggle-btn {
+      flex: 1;
+      padding: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-align: center;
+    }
+    .toggle-btn.active {
+      background: #00e676;
+      border-color: #00e676;
+      color: #000;
+    }
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(45deg, #00e676, #00b0ff);
+      color: #fff;
+      border: none;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      margin-top: 1rem;
+    }
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 230, 118, 0.3);
+    }
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .status-message {
+      margin-top: 1rem;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      display: none;
+    }
+    .status-success {
+      background: rgba(76, 175, 80, 0.2);
+      border: 1px solid #4caf50;
+      color: #4caf50;
+    }
+    .status-error {
+      background: rgba(244, 67, 54, 0.2);
+      border: 1px solid #f44336;
+      color: #f44336;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1><i class="fas fa-edit"></i> Submit Blog Post</h1>
+    
+    <form id="blogForm">
+      <div class="form-group">
+        <label for="title">Blog Title *</label>
+        <input type="text" id="title" name="title" placeholder="Enter your blog title" required>
+      </div>
+
+      <div class="form-group">
+        <label for="theme">Theme *</label>
+        <select id="theme" name="theme" required>
+          <option value="">Select a theme</option>
+          <option value="policy">Policy Watch</option>
+          <option value="tech">Making Tech Simple</option>
+          <option value="trends">Fresh Ideas</option>
+          <option value="global">Global Lessons</option>
+          <option value="critical">Critical Minerals</option>
+          <option value="AI">AI Meets Energy</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Content Type *</label>
+        <div class="content-type-toggle">
+          <div class="toggle-btn active" data-type="text">
+            <i class="fas fa-keyboard"></i> Text Editor
+          </div>
+          <div class="toggle-btn" data-type="file">
+            <i class="fas fa-file-word"></i> Upload .docx
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" id="textContent">
+        <label for="content">Blog Content *</label>
+        <textarea id="content" name="content" placeholder="Write your blog content here..." required></textarea>
+      </div>
+
+      <div class="form-group" id="fileContent" style="display: none;">
+        <label for="docxFile">Upload .docx File *</label>
+        <div class="file-input-wrapper">
+          <input type="file" id="docxFile" name="docxFile" class="file-input" accept=".docx">
+          <div class="file-input-display">
+            <i class="fas fa-upload"></i>
+            <span id="fileDisplay">Click to upload .docx file or drag and drop</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="passkey">Passkey *</label>
+        <input type="password" id="passkey" name="passkey" placeholder="Enter passkey" required>
+      </div>
+
+      <button type="submit" class="submit-btn">
+        <i class="fas fa-paper-plane"></i> Submit Blog Post
+      </button>
+    </form>
+
+    <div id="statusMessage" class="status-message"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
+  <script src="secrets.js"></script>
+  <script src="submit.js"></script>
+</body>
+</html>
