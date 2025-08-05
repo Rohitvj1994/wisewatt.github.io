@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎮 Frequency Game – Balance the Grid</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, #f0f8ff, #e6f7ff);
+      color: #222;
+      padding: 20px;
+      margin: 0;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.5em;
+      color: #004466;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    input[type=range] {
+      width: 100%;
+    }
+    .frequency {
+      font-size: 2em;
+      text-align: center;
+      margin-top: 10px;
+      color: #0077cc;
+    }
+    #message {
+      margin-top: 15px;
+      font-weight: bold;
+      color: darkred;
+    }
+    #event-log {
+      max-height: 200px;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      padding: 10px;
+      font-size: 0.9em;
+      background: #fafafa;
+    }
+    .icon-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+    .icon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 0.85em;
+    }
+    .icon-item img {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>⚡ Frequency Game – Can You Keep the Grid at 50 Hz?</h1>
+
+  <div class="container">
+    <div class="card">
+      <label for="generation">🛠️ Total Generation (MW)</label>
+      <input type="range" id="generation" min="0" max="2000" value="1000">
+      <div class="icon-grid">
+        <div class="icon-item"><img src="https://img.icons8.com/emoji/48/000000/sun-emoji.png" alt="Solar">Solar</div>
+        <div class="icon-item"><img src="https://img.icons8.com/ios-filled/50/000000/wind.png" alt="Wind">Wind</div>
+        <div class="icon-item"><img src="https://img.icons8.com/ios-filled/50/000000/factory.png" alt="Coal">Coal</div>
+        <div class="icon-item"><img src="https://img.icons8.com/ios-filled/50/000000/fire-element.png" alt="Gas">Gas</div>
+        <div class="icon-item"><img src="https://img.icons8.com/ios-filled/50/000000/radioactive.png" alt="Nuclear">Nuclear</div>
+        <div class="icon-item"><img src="https://img.icons8.com/ios-filled/50/000000/waterfall.png" alt="Hydro">Hydro</div>
+      </div>
+
+      <label for="storage">🔋 Storage Dispatch (MW)</label>
+      <input type="range" id="storage" min="-500" max="500" value="0">
+      <div>(+ve: Discharging, -ve: Charging)</div>
+
+      <label for="demand">🏙️ Total Demand (MW)</label>
+      <input type="range" id="demand" min="500" max="2500" value="1500">
+
+      <div class="frequency">Grid Frequency: <span id="frequency">50.00</span> Hz</div>
+      <div id="message"></div>
+    </div>
+
+    <div class="card">
+      <h3>🌀 Real-Time Grid Events</h3>
+      <div id="event-log">No events yet.</div>
+    </div>
+
+    <div class="card">
+      <h3>🎛️ Controls & Insights</h3>
+      <ul>
+        <li>Try responding to random events quickly to stabilize frequency.</li>
+        <li>Watch how different sources respond to real-world challenges.</li>
+        <li>Balance reliability, flexibility, and sustainability.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const generationSlider = document.getElementById('generation');
+    const demandSlider = document.getElementById('demand');
+    const storageSlider = document.getElementById('storage');
+    const frequencyDisplay = document.getElementById('frequency');
+    const messageDisplay = document.getElementById('message');
+    const eventLog = document.getElementById('event-log');
+
+    function calculateFrequency() {
+      const generation = parseInt(generationSlider.value);
+      const demand = parseInt(demandSlider.value);
+      const storage = parseInt(storageSlider.value);
+
+      const netSupply = generation + storage;
+      const imbalance = netSupply - demand;
+      const frequency = 50 + imbalance / 1000;
+      const frequencyClamped = Math.max(48, Math.min(52, frequency));
+
+      frequencyDisplay.textContent = frequencyClamped.toFixed(2);
+
+      if (frequencyClamped > 50.2) {
+        messageDisplay.textContent = "Over-frequency! Too much generation.";
+      } else if (frequencyClamped < 49.8) {
+        messageDisplay.textContent = "Under-frequency! Demand exceeds supply.";
+      } else {
+        messageDisplay.textContent = "Grid is stable. Great job!";
+      }
+    }
+
+    generationSlider.oninput = calculateFrequency;
+    demandSlider.oninput = calculateFrequency;
+    storageSlider.oninput = calculateFrequency;
+
+    calculateFrequency();
+
+    const situations = [
+      "🌧️ Cloudy skies reduce solar output by 300 MW",
+      "🌬️ Wind drops due to low pressure – wind generation -200 MW",
+      "⚙️ Coal plant maintenance – drop 150 MW",
+      "🔥 Gas price spike! Must reduce gas by 100 MW",
+      "🌊 Hydro surge – +200 MW boost",
+      "🔋 Storage fully charged – cannot accept more",
+      "🌞 Solar ramp-up – extra 250 MW",
+      "⚡ EV charging boom – demand up by 300 MW",
+      "☢️ Nuclear maintenance – reduce 200 MW"
+    ];
+
+    function triggerRandomEvent() {
+      const event = situations[Math.floor(Math.random() * situations.length)];
+      const timestamp = new Date().toLocaleTimeString();
+      const logEntry = `[${timestamp}] ${event}`;
+      eventLog.innerHTML = logEntry + '<br>' + eventLog.innerHTML;
+
+      if (event.includes("solar")) generationSlider.value = Math.max(0, generationSlider.value - 300);
+      if (event.includes("wind")) generationSlider.value = Math.max(0, generationSlider.value - 200);
+      if (event.includes("Coal")) generationSlider.value = Math.max(0, generationSlider.value - 150);
+      if (event.includes("gas")) generationSlider.value = Math.max(0, generationSlider.value - 100);
+      if (event.includes("Hydro")) generationSlider.value = Math.min(2000, parseInt(generationSlider.value) + 200);
+      if (event.includes("Solar ramp")) generationSlider.value = Math.min(2000, parseInt(generationSlider.value) + 250);
+      if (event.includes("EV")) demandSlider.value = Math.min(2500, parseInt(demandSlider.value) + 300);
+      if (event.includes("Nuclear")) generationSlider.value = Math.max(0, generationSlider.value - 200);
+
+      calculateFrequency();
+    }
+
+    setInterval(triggerRandomEvent, 15000); // every 15 sec
+  </script>
+</body>
+</html>
