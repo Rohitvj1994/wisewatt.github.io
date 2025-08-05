@@ -160,6 +160,18 @@
       color: #7c4dff;
       animation: iconSpin 0.6s;
     }
+    /* New Frequency Game Button */
+    .button:hover .btn-icon-frequency {
+      color: #009688;
+      animation: iconWave 0.6s;
+    }
+    @keyframes iconWave {
+      0% { transform: scale(1) rotate(0deg);}
+      25% { transform: scale(1.15) rotate(-12deg);}
+      50% { transform: scale(1.15) rotate(12deg);}
+      75% { transform: scale(1.15) rotate(-12deg);}
+      100% { transform: scale(1) rotate(0deg);}
+    }
     @keyframes iconSpin {
       0% { transform: rotate(0deg);}
       100% {transform: rotate(360deg);}
@@ -259,7 +271,7 @@
   <header data-aos="fade-down">
     <div class="sun-logo">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M12 4a1 1 0 011 1v1.05a7.002 7.002 0 015.95 5.95H20a1 1 0 110 2h-1.05a7.002 7.002 0 01-5.95 5.95V20a1 1 0 11-2 0v-1.05a7.002 7.002 0 01-5.95-5.95H4a1 1 0 110-2h1.05a7.002 7.002 0 015.95-5.95V5a1 1 0 011-1z"/>
+        <path d="M12 4a1 1 0 011 1v1.05a7.002 7.002 0 015.95 5.95H20a1 1 0 110 2h-1.05a7.002 7.002 0 01-5.95 5.95V20a1 1 0 11-2 0v-1.05a7.002 7.002 0 01-5.95-5.95H4a1 1 0 110-2h1.05a7.002 7.002 0[...]
       </svg>
     </div>
     <h1>
@@ -277,6 +289,7 @@
       <a href="global.html" class="button"><span class="btn-icon btn-icon-global"><i class="fas fa-globe-asia"></i></span>Global Lessons</a>
       <a href="critical.html" class="button"><span class="btn-icon btn-icon-minerals"><i class="fas fa-gem"></i></span>Critical Minerals</a>
       <a href="AI.html" class="button"><span class="btn-icon btn-icon-ai"><i class="fas fa-robot"></i></span>AI Meets Energy</a>
+      <a href="frequency.html" class="button"><span class="btn-icon btn-icon-frequency"><i class="fas fa-wave-square"></i></span>Frequency Game</a>
     </div>
   </section>
   <footer>© 2025 WiseWatt. All rights reserved.</footer>
