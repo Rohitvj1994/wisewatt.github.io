@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Voltage Control with Renewable Generation (Per Unit)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background: #f8f8f8;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 800px;
+      margin: auto;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #2c3e50;
+    }
+    .input-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: inline-block;
+      width: 300px;
+    }
+    input[type="number"] {
+      width: 100px;
+    }
+    .result {
+      background: #eef;
+      padding: 10px;
+      border: 1px solid #ccd;
+      margin-top: 20px;
+    }
+    .bar-container {
+      margin-top: 20px;
+    }
+    .bar {
+      height: 20px;
+      background-color: #3498db;
+      margin-bottom: 10px;
+      transition: width 0.5s;
+    }
+    .label {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Voltage Control Simulator with Renewable Generation (Per Unit System)</h2>
+
+  <p><strong>Concept:</strong> In power systems, we use the "per unit" system for simplifying calculations. Here you can observe how voltage at the substation end (V1) changes as load and renewable generation vary.</p>
+
+  <p><strong>Base Values:</strong> Power Base = 100 kVA, Voltage Base = 11 kV → Impedance Base = 1210 &Omega;</p>
+
+  <div class="input-group">
+    <label for="R">Feeder Resistance R (&Omega;):</label>
+    <input type="number" id="R" value="0.3" step="0.01">
+  </div>
+
+  <div class="input-group">
+    <label for="X">Feeder Reactance X (&Omega;):</label>
+    <input type="number" id="X" value="0.1" step="0.01">
+  </div>
+
+  <div class="input-group">
+    <label for="P_load">Load Active Power PL (kW):</label>
+    <input type="number" id="P_load" value="50">
+  </div>
+
+  <div class="input-group">
+    <label for="Q_load">Load Reactive Power QL (kVAR):</label>
+    <input type="number" id="Q_load" value="30">
+  </div>
+
+  <div class="input-group">
+    <label for="P_RG">RG Active Power PRG (kW):</label>
+    <input type="number" id="P_RG" value="20">
+  </div>
+
+  <div class="input-group">
+    <label for="Q_RG">RG Reactive Power QRG (kVAR):</label>
+    <input type="number" id="Q_RG" value="10">
+  </div>
+
+  <div class="input-group">
+    <label for="V2">Voltage at Load End V2 (pu):</label>
+    <input type="number" id="V2" value="1.0" step="0.01">
+  </div>
+
+  <button onclick="calculateDrop()">Calculate Voltage Drop</button>
+
+  <div class="result" id="output"></div>
+
+  <div class="bar-container">
+    <div class="label">Voltage at Load (V2)</div>
+    <div id="bar-v2" class="bar" style="width: 100%"></div>
+    <div class="label">Voltage at Substation (V1)</div>
+    <div id="bar-v1" class="bar" style="width: 100%"></div>
+  </div>
+
+  <p><strong>Math explained (Per Unit):</strong></p>
+  <ul>
+    <li>Convert R and X to per unit using Z<sub>base</sub> = V<sup>2</sup><sub>base</sub> / S<sub>base</sub></li>
+    <li>Convert power values to per unit using S<sub>base</sub> = 100 kVA</li>
+    <li>Voltage drop = (R<sub>pu</sub> × (PL - PRG)<sub>pu</sub> + X<sub>pu</sub> × (QL - QRG)<sub>pu</sub>) / V2</li>
+    <li>V1 = V2 + Voltage Drop</li>
+  </ul>
+
+  <p><em>Change RG values to see how voltage improves or worsens based on its support or demand.</em></p>
+</div>
+
+<script>
+function calculateDrop() {
+  const Z_base = 1210;
+  const S_base = 100e3;
+
+  const R = parseFloat(document.getElementById('R').value) / Z_base;
+  const X = parseFloat(document.getElementById('X').value) / Z_base;
+  const PL = parseFloat(document.getElementById('P_load').value) * 1000 / S_base;
+  const QL = parseFloat(document.getElementById('Q_load').value) * 1000 / S_base;
+  const PRG = parseFloat(document.getElementById('P_RG').value) * 1000 / S_base;
+  const QRG = parseFloat(document.getElementById('Q_RG').value) * 1000 / S_base;
+  const V2 = parseFloat(document.getElementById('V2').value);
+
+  const P_net = PL - PRG;
+  const Q_net = QL - QRG;
+
+  const voltageDrop = (R * P_net + X * Q_net) / V2;
+  const V1 = V2 + voltageDrop;
+
+  const resultDiv = document.getElementById('output');
+  resultDiv.innerHTML = `
+    <p><strong>Net Power (Per Unit):</strong> P = ${P_net.toFixed(4)} pu, Q = ${Q_net.toFixed(4)} pu</p>
+    <p><strong>R = ${R.toExponential(2)} pu, X = ${X.toExponential(2)} pu</strong></p>
+    <p><strong>Voltage Drop (ΔV):</strong> ${voltageDrop.toFixed(6)} pu</p>
+    <p><strong>Substation Voltage (V1):</strong> ${V1.toFixed(6)} pu</p>
+  `;
+
+  const barV2 = document.getElementById('bar-v2');
+  const barV1 = document.getElementById('bar-v1');
+
+  barV2.style.width = `${Math.min(100, V2 * 100)}%`;
+  barV1.style.width = `${Math.min(100, V1 * 100)}%`;
+}
+</script>
+</body>
+</html>
