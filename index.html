@@ -1,299 +1,1025 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WiseWatt – Mapping India’s Green Transition</title>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap
-" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
-  <style>
-    :root {
-      --text-color: #fff;
-      --bg-color: linear-gradient(to top right, #0d1a26, #012f24, #2c3e50);
-      --button-bg: #00e5ff;
-      --button-hover: #ffab00;
-    }
-    body.light-theme {
-      --text-color: #000;
-      --bg-color: linear-gradient(to top right, #fff, #e8f5e9, #e3f2fd);
-    }
-    body {
-      margin: 0; font-family: 'Segoe UI', sans-serif;
-      background: var(--bg-color); color: var(--text-color);
-      position: relative; overflow-x: hidden;
-      transition: background 0.5s, color 0.5s;
-    }
-    body::before {
-      content: "";
-      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background-image: url('https://cdn-icons-png.flaticon.com/512/1046/1046890.png'),
-                        url('https://cdn-icons-png.flaticon.com/512/2910/2910764.png'),
-                        url('https://cdn-icons-png.flaticon.com/512/6147/6147367.png');
-      background-repeat: repeat; background-size: 80px;
-      opacity: 0.07; z-index: 0;
-      animation: iconsFloat 120s linear infinite;
-    }
-    @keyframes iconsFloat {
-      0% { background-position: 0 0; }
-      100% { background-position: 1000px 1000px; }
-    }
-    .theme-toggle {
-      position: absolute; top: 1.2rem; right: 1.5rem;
-      z-index: 10; background: transparent; border: none;
-      font-size: 1.5rem; color: var(--text-color); cursor: pointer;
-      transition: top 0.2s, right 0.2s;
-    }
-    header {
-      min-height: 58vh;
-      display: flex; flex-direction: column;
-      justify-content: center; align-items: center;
-      text-align: center; position: relative;
-      z-index: 1; padding: 2rem 0.5rem 1rem 0.5rem;
-      margin-bottom: 0;
-    }
-    .sun-logo {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 0.7rem;
-    }
-    .sun-logo svg {
-      width: 46px; height: 46px; fill: #ffcc00; display: block;
-    }
-    header h1 {
-      font-family: 'Orbitron', sans-serif; font-size: 3.1rem;
-      background-image: linear-gradient(90deg, #00e676, #00b0ff, #ff9100);
-      background-size: 300% auto;
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      animation: gradientMove 6s linear infinite;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-      margin-bottom: 0.6rem;
-      flex-wrap: wrap;
-      display: block;
-      transition: transform 0.18s cubic-bezier(.23,1.14,.51,1.12), filter 0.18s;
-    }
-    header h1:hover {
-      transform: scale(1.025);
-      filter: drop-shadow(0 0 18px #00e5ff66);
-    }
-    @keyframes gradientMove {
-      0% { background-position: 0% center; }
-      50% { background-position: 100% center; }
-      100% { background-position: 0% center; }
-    }
-    header p {
-      font-size: 1.11rem; max-width: 700px; margin: 0.4rem auto 0.9rem;
-      background-color: rgba(0,0,0,0.22);
-      padding: 0.6rem 1.1rem; border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.19);
-    }
-    .explore-gap {
-      height: 1.5rem;
-    }
-    section {
-      padding: 1.2rem 0.5rem 1.5rem;
-      max-width: 1000px; margin: auto;
-    }
-    h2 {
-      text-align: center; font-size: 1.55rem;
-      margin-bottom: 1.2rem; color: var(--text-color);
-      margin-top: 0.15rem;
-      letter-spacing: 0.01em;
-    }
-    .button-container {
-      display: flex; flex-wrap: wrap;
-      justify-content: center; gap: 0.9rem;
-      margin: 0 auto;
-    }
-    .button {
-      background: var(--button-bg); color: #000;
-      padding: 0.8rem 1rem; border-radius: 11px;
-      font-size: 1.08rem; font-family: 'Orbitron', sans-serif;
-      text-decoration: none; transition: all 0.3s cubic-bezier(.49,1.19,.57,1.11);
-      box-shadow: 0 3px 10px rgba(0,229,255,0.23);
-      min-width: 145px; text-align: center;
-      position: relative; z-index: 2;
-      margin-bottom: 0;
-      margin-top: 0;
-      margin-left: 0;
-      margin-right: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.7em;
-      font-weight: 600;
-      overflow: hidden;
-    }
-    .button .btn-icon {
-      font-size: 1.13em;
-      transition: transform 0.35s cubic-bezier(.43,1.21,.57,1.11), color 0.26s;
-      display: inline-block;
-    }
-    .button:hover {
-      background: var(--button-hover); color: #fff;
-      box-shadow: 0 4px 16px rgba(255,171,0,0.32);
-      transform: translateY(-2px) scale(1.045);
-    }
-    .button:hover .btn-icon-policy {
-      color: #2196f3;
-      animation: iconWobble 0.6s;
-    }
-    .button:hover .btn-icon-tech {
-      color: #43e97b;
-      animation: iconSpin 0.55s;
-    }
-    .button:hover .btn-icon-fresh {
-      color: #ff9100;
-      animation: iconPulse 0.5s;
-    }
-    .button:hover .btn-icon-global {
-      color: #00e5ff;
-      animation: iconBounce 0.5s;
-    }
-    .button:hover .btn-icon-minerals {
-      color: #ff1744;
-      animation: iconShake 0.5s;
-    }
-    .button:hover .btn-icon-ai {
-      color: #7c4dff;
-      animation: iconSpin 0.6s;
-    }
-    @keyframes iconSpin {
-      0% { transform: rotate(0deg);}
-      100% {transform: rotate(360deg);}
-    }
-    @keyframes iconPulse {
-      0%,100% { transform: scale(1);}
-      50% { transform: scale(1.33);}
-    }
-    @keyframes iconWobble {
-      15% { transform: translateX(-2px) rotate(-10deg);}
-      30% { transform: translateX(2px) rotate(10deg);}
-      45% { transform: translateX(-2px) rotate(-10deg);}
-      60% { transform: translateX(2px) rotate(10deg);}
-      100% { transform: none;}
-    }
-    @keyframes iconBounce {
-      0%,100% { transform: translateY(0);}
-      50% { transform: translateY(-8px);}
-    }
-    @keyframes iconShake {
-      10%, 90% { transform: translateX(-2px);}
-      20%, 80% { transform: translateX(2px);}
-      30%, 50%, 70% { transform: translateX(-4px);}
-      40%, 60% { transform: translateX(4px);}
-    }
-    .back-to-top {
-      position: fixed; bottom: 22px; right: 20px;
-      background: var(--button-bg); color: #000;
-      padding: 10px 14px; border-radius: 50%;
-      font-size: 1.3rem; cursor: pointer;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-      display: none; z-index: 1000;
-    }
-    .back-to-top.show { display: block; }
-    footer {
-      background: #000000cc; color: #ccc;
-      text-align: center; padding: 1.1rem 0.4rem;
-      font-size: 1.01rem;
-      letter-spacing: 0.01em;
-    }
-    /* Mobile Styling */
-    @media (max-width: 800px) {
-      .theme-toggle {
-        top: 0.5rem;
-        right: 0.5rem;
-        font-size: 1.15rem;
-      }
-      header { min-height: unset; padding: 0.8rem 0.3rem 0.5rem 0.3rem;}
-      .sun-logo svg { width: 34px; height: 34px; }
-      header h1 { font-size: 1.45rem; margin-bottom: 0.45rem;}
-      header p { font-size: 0.97rem; margin: 0.3rem auto 0.65rem; padding: 0.45rem 0.7rem;}
-      .explore-gap {
-        height: 13vh;
-        min-height: 1.5rem;
-        max-height: 18vw;
-      }
-      section { padding: 0.6rem 0.1rem 0.7rem 0.1rem; }
-      h2 { font-size: 1.01rem; margin-bottom: 0.7rem; }
-      .button-container {
-        flex-direction: column;
-        gap: 0.4rem;
-        align-items: center;
-      }
-      .button {
-        min-width: unset;
-        font-size: 0.99rem;
-        padding: 0.62rem 0.6rem;
-        width: 100%;
-        max-width: 310px;
-        margin: 0 auto;
-        margin-bottom: 0;
-      }
-      footer { padding: 0.7rem 0.2rem; font-size: 0.91rem;}
-    }
-    @media (max-width: 430px) {
-      .theme-toggle {
-        top: 0.15rem;
-        right: 0.18rem;
-        font-size: 1.03rem;
-      }
-      .sun-logo svg { width: 28px; height: 28px; }
-      header h1 { font-size: 1.05rem; }
-      h2 { font-size: 0.98rem; }
-      .button { font-size: 0.93rem; }
-      section { padding-bottom: 0.6rem; }
-      .explore-gap { height: 8vh; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WiseWatt — Reading India's Energy Transition</title>
+<meta name="description" content="An independent journal on India's energy transition. Policy, technology, global lessons and the grid behind it all." />
+ 
+<!-- Fonts: editorial serif + modern sans + mono -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Geist:wght@300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+ 
+<style>
+  /* ============ DESIGN TOKENS ============ */
+  :root {
+    --bg:        #0B0D10;
+    --bg-soft:   #11141A;
+    --surface:   #161A21;
+    --line:      #262C36;
+    --line-soft: #1C2129;
+ 
+    --ink:       #F2EBD9;   /* warm cream */
+    --ink-mute:  #9A9485;
+    --ink-dim:   #5F5B52;
+ 
+    --ember:     #E0A458;   /* solar warm */
+    --ember-hot: #F2B968;
+    --electric:  #6BCEEB;   /* cool blue */
+    --grid:      #5DAE7B;   /* line green */
+    --red:       #D86B5C;   /* fault/coal */
+ 
+    --grad-ember: linear-gradient(135deg, #F2B968 0%, #E0A458 50%, #C4823F 100%);
+    --grad-cool:  linear-gradient(135deg, #6BCEEB 0%, #5DAE7B 100%);
+ 
+    --font-display: 'Fraunces', ui-serif, Georgia, serif;
+    --font-sans:    'Geist', ui-sans-serif, system-ui, sans-serif;
+    --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+ 
+    --maxw: 1240px;
+    --ease: cubic-bezier(.2,.7,.2,1);
+  }
+ 
+  body.light {
+    --bg:        #F2EBD9;
+    --bg-soft:   #EDE4CD;
+    --surface:   #E6DCC1;
+    --line:      #C9BFA4;
+    --line-soft: #D7CDB2;
+    --ink:       #1A1814;
+    --ink-mute:  #5C574B;
+    --ink-dim:   #8A8472;
+  }
+ 
+  /* ============ RESET / BASE ============ */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--ink);
+    font-feature-settings: "ss01","cv11";
+    line-height: 1.5;
+    overflow-x: hidden;
+    transition: background .5s var(--ease), color .5s var(--ease);
+  }
+  a { color: inherit; text-decoration: none; }
+  img, svg { display: block; max-width: 100%; }
+ 
+  /* ============ NAV ============ */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background: color-mix(in oklab, var(--bg) 70%, transparent);
+    border-bottom: 1px solid transparent;
+    transition: border-color .3s var(--ease), background .3s var(--ease);
+  }
+  .nav.scrolled { border-bottom-color: var(--line-soft); }
+  .nav-inner {
+    max-width: var(--maxw); margin: 0 auto;
+    padding: .9rem 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1.5rem;
+  }
+  .brand {
+    display: flex; align-items: center; gap: .6rem;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.3rem;
+    letter-spacing: -.01em;
+  }
+  .brand-mark {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--grad-ember);
+    box-shadow: 0 0 0 1px var(--line), 0 0 24px -2px var(--ember);
+    position: relative;
+  }
+  .brand-mark::after {
+    content: ""; position: absolute; inset: 6px;
+    border-radius: 50%; background: var(--bg);
+    box-shadow: inset 0 0 0 2px var(--ember);
+  }
+  .brand em {
+    font-style: italic; font-weight: 400;
+    color: var(--ink-mute);
+  }
+  .nav-meta {
+    display: flex; align-items: center; gap: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .nav-meta .dot {
+    display: inline-block;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--grid);
+    margin-right: .4rem;
+    animation: pulse 2s var(--ease) infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .4; transform: scale(.8); }
+  }
+  .theme-btn {
+    background: none; border: 1px solid var(--line);
+    color: var(--ink); width: 34px; height: 34px;
+    border-radius: 50%; cursor: pointer;
+    display: grid; place-items: center;
+    transition: all .2s var(--ease);
+  }
+  .theme-btn:hover { border-color: var(--ember); color: var(--ember); }
+  @media (max-width: 720px){
+    .nav-meta .label-hide { display: none; }
+  }
+ 
+  /* ============ HERO ============ */
+  .hero {
+    position: relative;
+    padding: 9rem 1.5rem 4rem;
+    max-width: var(--maxw); margin: 0 auto;
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .hero-grid-bg {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 75%);
+    opacity: .5;
+    pointer-events: none;
+  }
+  .hero-label {
+    font-family: var(--font-mono);
+    font-size: .78rem;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 2rem;
+    display: flex; align-items: center; gap: .8rem;
+    opacity: 0; animation: rise .8s var(--ease) .1s forwards;
+  }
+  .hero-label::before {
+    content: ""; width: 32px; height: 1px; background: var(--ember);
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+    font-weight: 350;
+    font-size: clamp(2.4rem, 7vw, 6rem);
+    line-height: .98;
+    letter-spacing: -0.03em;
+    max-width: 18ch;
+    margin-bottom: 2rem;
+  }
+  .hero h1 .word {
+    opacity: 0;
+    display: inline-block;
+    animation: rise .9s var(--ease) forwards;
+  }
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ember);
+    font-variation-settings: "opsz" 144, "SOFT" 100;
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-sub {
+    font-size: clamp(1rem, 1.4vw, 1.2rem);
+    color: var(--ink-mute);
+    max-width: 52ch;
+    margin-bottom: 3rem;
+    line-height: 1.55;
+    opacity: 0;
+    animation: rise .9s var(--ease) .9s forwards;
+  }
+  .hero-sub strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0;
+    animation: rise .9s var(--ease) 1.1s forwards;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: .6rem;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: .95rem;
+    padding: .9rem 1.4rem;
+    border-radius: 100px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all .25s var(--ease);
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+  .btn-primary:hover {
+    background: var(--ember);
+    border-color: var(--ember);
+    color: #1A1814;
+    transform: translateY(-2px);
+  }
+  .btn:hover { border-color: var(--ember); color: var(--ember); }
+  .btn .arrow { transition: transform .25s var(--ease); }
+  .btn:hover .arrow { transform: translateX(4px); }
+ 
+  /* Hero live counter */
+  .hero-pulse {
+    margin-top: 5rem;
+    padding: 1.2rem 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: color-mix(in oklab, var(--surface) 60%, transparent);
+    backdrop-filter: blur(8px);
+    display: flex; align-items: center; gap: 1.2rem;
+    flex-wrap: wrap;
+    max-width: 720px;
+    opacity: 0;
+    animation: rise 1s var(--ease) 1.4s forwards;
+  }
+  .hero-pulse .icon {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: color-mix(in oklab, var(--ember) 15%, transparent);
+    border: 1px solid color-mix(in oklab, var(--ember) 30%, transparent);
+    display: grid; place-items: center;
+    color: var(--ember);
+    flex-shrink: 0;
+  }
+  .hero-pulse .copy {
+    flex: 1; min-width: 200px;
+    font-size: .92rem;
+    color: var(--ink-mute);
+    line-height: 1.4;
+  }
+  .hero-pulse .copy b {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .hero-pulse .num {
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    color: var(--ember);
+    font-weight: 500;
+    letter-spacing: -.01em;
+  }
+  .hero-pulse small {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: .68rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    margin-top: .15rem;
+  }
+ 
+  /* Scroll indicator */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem; left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: .7rem;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    display: flex; flex-direction: column; align-items: center; gap: .6rem;
+    opacity: 0;
+    animation: rise 1s var(--ease) 1.8s forwards;
+  }
+  .scroll-hint .line {
+    width: 1px; height: 32px;
+    background: linear-gradient(to bottom, var(--ember), transparent);
+    animation: scrollLine 2.2s var(--ease) infinite;
+  }
+  @keyframes scrollLine {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    50.01% { transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+ 
+  /* ============ SECTION COMMON ============ */
+  section {
+    padding: 6rem 1.5rem;
+    max-width: var(--maxw); margin: 0 auto;
+    position: relative;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: .8rem;
+  }
+  .eyebrow::before {
+    content: ""; width: 24px; height: 1px; background: currentColor;
+  }
+  h2.display {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 144;
+    font-weight: 350;
+    font-size: clamp(2rem, 4.5vw, 3.6rem);
+    line-height: 1.05;
+    letter-spacing: -.025em;
+    max-width: 22ch;
+    margin-bottom: 1.5rem;
+  }
+  h2.display em {
+    font-style: italic;
+    color: var(--ember);
+    font-weight: 300;
+  }
+  .lede {
+    font-size: 1.1rem;
+    color: var(--ink-mute);
+    max-width: 60ch;
+    line-height: 1.55;
+  }
+ 
+  /* ============ PULSE STRIP ============ */
+  .pulse-section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    border-top: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+    max-width: 100%;
+    background: var(--bg-soft);
+  }
+  .pulse-grid {
+    max-width: var(--maxw); margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .stat {
+    padding: 1rem 1.5rem;
+    border-left: 1px solid var(--line-soft);
+    position: relative;
+  }
+  .stat:first-child { border-left: 0; }
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: .68rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    margin-bottom: .6rem;
+    display: flex; align-items: center; gap: .5rem;
+  }
+  .stat-label .dot-live {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--grid);
+    animation: pulse 2s var(--ease) infinite;
+  }
+  .stat-value {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 144;
+    font-weight: 400;
+    font-size: clamp(1.6rem, 3vw, 2.3rem);
+    line-height: 1;
+    letter-spacing: -.02em;
+  }
+  .stat-value .unit {
+    font-family: var(--font-mono);
+    font-size: .85rem;
+    color: var(--ink-mute);
+    margin-left: .3rem;
+    letter-spacing: .05em;
+  }
+  .stat-note {
+    font-size: .78rem;
+    color: var(--ink-mute);
+    margin-top: .5rem;
+    line-height: 1.35;
+  }
+  @media (max-width: 800px){
+    .pulse-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(3) { border-left: 0; border-top: 1px solid var(--line-soft); }
+    .stat:nth-child(4) { border-top: 1px solid var(--line-soft); }
+  }
+ 
+  /* ============ THE PROVOCATION ============ */
+  .provocation {
+    padding-top: 8rem; padding-bottom: 8rem;
+  }
+  .provocation-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .provoke-quote {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 144;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    line-height: 1.2;
+    letter-spacing: -.015em;
+  }
+  .provoke-quote .accent {
+    color: var(--ember);
+    font-style: normal;
+    font-weight: 400;
+  }
+  .provoke-body p {
+    color: var(--ink-mute);
+    font-size: 1.02rem;
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+  }
+  .provoke-body p strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .provoke-body .signature {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: .78rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+  @media (max-width: 900px){
+    .provocation-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+ 
+  /* ============ TOPICS GRID ============ */
+  .topics-head {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 3rem;
+    gap: 2rem; flex-wrap: wrap;
+  }
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line-soft);
+    border: 1px solid var(--line-soft);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .topic {
+    padding: 2.2rem 1.8rem;
+    background: var(--bg);
+    position: relative;
+    transition: background .35s var(--ease), transform .35s var(--ease);
+    display: flex; flex-direction: column;
+    min-height: 240px;
+    overflow: hidden;
+  }
+  .topic::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 100% 0%, color-mix(in oklab, var(--ember) 18%, transparent), transparent 60%);
+    opacity: 0;
+    transition: opacity .45s var(--ease);
+    pointer-events: none;
+  }
+  .topic:hover { background: var(--bg-soft); }
+  .topic:hover::before { opacity: 1; }
+  .topic-num {
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    letter-spacing: .15em;
+    color: var(--ink-dim);
+    margin-bottom: 1.4rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .topic-num .ic {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    display: grid; place-items: center;
+    color: var(--ink-mute);
+    font-size: .88rem;
+    transition: all .35s var(--ease);
+  }
+  .topic:hover .ic {
+    color: var(--ember);
+    border-color: var(--ember);
+    transform: rotate(12deg) scale(1.08);
+  }
+  .topic-title {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 144;
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 1.1;
+    letter-spacing: -.015em;
+    margin-bottom: .7rem;
+  }
+  .topic-title em {
+    font-style: italic;
+    color: var(--ember);
+    font-weight: 350;
+  }
+  .topic-desc {
+    color: var(--ink-mute);
+    font-size: .93rem;
+    line-height: 1.5;
+    margin-bottom: 1.4rem;
+    flex: 1;
+  }
+  .topic-link {
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--ink);
+    display: inline-flex; align-items: center; gap: .5rem;
+    transition: gap .25s var(--ease);
+  }
+  .topic:hover .topic-link { gap: .9rem; color: var(--ember); }
+  .topic.lab {
+    background: color-mix(in oklab, var(--surface) 50%, var(--bg));
+  }
+  .topic.lab .topic-num .ic {
+    background: color-mix(in oklab, var(--electric) 12%, transparent);
+    border-color: color-mix(in oklab, var(--electric) 35%, transparent);
+    color: var(--electric);
+  }
+  .topic.lab .topic-title em { color: var(--electric); }
+  .topic.lab:hover .ic { color: var(--electric); border-color: var(--electric); }
+  .topic.lab:hover .topic-link { color: var(--electric); }
+  .lab-tag {
+    position: absolute;
+    top: 1.4rem; right: 1.4rem;
+    font-family: var(--font-mono);
+    font-size: .62rem;
+    letter-spacing: .15em;
+    color: var(--electric);
+    border: 1px solid color-mix(in oklab, var(--electric) 40%, transparent);
+    padding: .2rem .5rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+  @media (max-width: 900px){
+    .topics-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px){
+    .topics-grid { grid-template-columns: 1fr; }
+  }
+ 
+  /* ============ WAVE / GRID BREATHING ============ */
+  .wave-section {
+    padding: 4rem 1.5rem;
+    border-top: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+    background: var(--bg-soft);
+    max-width: 100%;
+    overflow: hidden;
+  }
+  .wave-inner {
+    max-width: var(--maxw); margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .wave-text .eyebrow { color: var(--electric); }
+  .wave-text h3 {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 144;
+    font-weight: 350;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    line-height: 1.15;
+    letter-spacing: -.02em;
+    margin-bottom: 1rem;
+  }
+  .wave-text h3 em { font-style: italic; color: var(--electric); }
+  .wave-text p {
+    color: var(--ink-mute);
+    line-height: 1.6;
+    font-size: .98rem;
+  }
+  .wave-vis {
+    height: 200px;
+    position: relative;
+    border: 1px solid var(--line-soft);
+    border-radius: 12px;
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .wave-vis svg {
+    width: 100%; height: 100%;
+  }
+  .wave-vis::before {
+    content: "50.00 Hz";
+    position: absolute; top: 12px; left: 14px;
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    color: var(--grid);
+    letter-spacing: .1em;
+    z-index: 2;
+  }
+  .wave-vis::after {
+    content: "NOMINAL";
+    position: absolute; top: 12px; right: 14px;
+    font-family: var(--font-mono);
+    font-size: .68rem;
+    color: var(--ink-dim);
+    letter-spacing: .15em;
+    z-index: 2;
+  }
+  @media (max-width: 800px){
+    .wave-inner { grid-template-columns: 1fr; }
+  }
+ 
+  /* ============ ABOUT ============ */
+  .about {
+    text-align: center;
+    padding-top: 8rem; padding-bottom: 6rem;
+  }
+  .about .eyebrow { justify-content: center; }
+  .about .eyebrow::after {
+    content: ""; width: 24px; height: 1px; background: currentColor;
+  }
+  .about h2.display {
+    margin-left: auto; margin-right: auto;
+  }
+  .about .lede {
+    margin-left: auto; margin-right: auto;
+    margin-bottom: 2.5rem;
+  }
+  .about-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: var(--font-mono);
+    font-size: .78rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    padding-top: 2rem;
+    border-top: 1px solid var(--line-soft);
+  }
+  .about-meta .sep { color: var(--ink-dim); opacity: .4; }
+ 
+  /* ============ FOOTER ============ */
+  footer {
+    padding: 3rem 1.5rem 2rem;
+    border-top: 1px solid var(--line-soft);
+    background: var(--bg-soft);
+  }
+  .footer-inner {
+    max-width: var(--maxw); margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 1.5rem; flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: .74rem;
+    letter-spacing: .1em;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+  }
+  .footer-inner .brand { text-transform: none; letter-spacing: normal; font-family: var(--font-display); font-size: 1.1rem; color: var(--ink); }
+  .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .footer-links a:hover { color: var(--ember); }
+ 
+  /* ============ MOBILE ============ */
+  @media (max-width: 600px){
+    .hero { padding-top: 7rem; padding-bottom: 3rem; min-height: auto; }
+    .hero h1 { font-size: 2.6rem; }
+    section { padding: 4rem 1.2rem; }
+    .provocation { padding-top: 5rem; padding-bottom: 5rem; }
+    .scroll-hint { display: none; }
+    .hero-pulse { margin-top: 3rem; padding: 1rem; }
+  }
+</style>
 </head>
 <body>
-  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-    <i class="fas fa-circle-half-stroke"></i>
-  </button>
-  <button id="backToTop" class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">
-    <i class="fas fa-arrow-up"></i>
-  </button>
-  <header data-aos="fade-down">
-    <div class="sun-logo">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M12 4a1 1 0 011 1v1.05a7.002 7.002 0 015.95 5.95H20a1 1 0 110 2h-1.05a7.002 7.002 0 01-5.95 5.95V20a1 1 0 11-2 0v-1.05a7.002 7.002 0 01-5.95-5.95H4a1 1 0 110-2h1.05a7.002 7.002 0 015.95-5.95V5a1 1 0 011-1z"/>
+ 
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="brand">
+      <span class="brand-mark"></span>
+      <span>WiseWatt<em>&nbsp;/&nbsp;est. 2025</em></span>
+    </a>
+    <div class="nav-meta">
+      <span><span class="dot"></span><span class="label-hide">Grid&nbsp;</span>50.00 Hz</span>
+      <span id="dateStamp">—</span>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+      <i class="fas fa-circle-half-stroke"></i>
+    </button>
+  </div>
+</nav>
+ 
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-grid-bg"></div>
+ 
+  <div class="hero-label">An Independent Energy Journal · New Delhi</div>
+ 
+  <h1 id="heroH1">
+    <span class="word">Between</span> <span class="word">ambition</span> <span class="word">and</span> <span class="word">reality,</span><br>
+    <span class="word">the</span> <span class="word">grid</span> <span class="word">is</span> <span class="word"><em>being rewritten.</em></span>
+  </h1>
+ 
+  <p class="hero-sub">
+    Where clean energy meets ground reality — <strong>decoding the technologies, decisions, and global experiences</strong> shaping India's reliable energy future. Reading the transition one megawatt, one tariff, one trade-off at a time.
+  </p>
+ 
+  <div class="hero-cta">
+    <a href="#topics" class="btn btn-primary">
+      Start exploring <span class="arrow">→</span>
+    </a>
+    <a href="#provocation" class="btn">
+      Why this exists
+    </a>
+  </div>
+ 
+  <!-- Live counter -->
+  <div class="hero-pulse">
+    <div class="icon"><i class="fas fa-bolt"></i></div>
+    <div class="copy">
+      Since you opened this page, India's grid has dispatched approximately
+      <b><span class="num" id="liveCounter">0</span> MWh</b> of electricity.
+      <small>Live estimate · based on average load ≈ 200 GW</small>
+    </div>
+  </div>
+ 
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <span class="line"></span>
+  </div>
+</header>
+ 
+<!-- ============ LIVE PULSE STRIP ============ -->
+<section class="pulse-section">
+  <div class="pulse-grid">
+    <div class="stat">
+      <div class="stat-label"><span class="dot-live"></span>Installed RE capacity</div>
+      <div class="stat-value">~220<span class="unit">GW</span></div>
+      <div class="stat-note">Solar + wind + hydro + bio · India, 2025</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label"><span class="dot-live"></span>2030 target</div>
+      <div class="stat-value">500<span class="unit">GW</span></div>
+      <div class="stat-note">Non-fossil installed capacity commitment</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label"><span class="dot-live"></span>Peak demand</div>
+      <div class="stat-value">~250<span class="unit">GW</span></div>
+      <div class="stat-note">Summer 2024 record, expected to climb</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label"><span class="dot-live"></span>Coal in generation</div>
+      <div class="stat-value">~70<span class="unit">%</span></div>
+      <div class="stat-note">Of electricity actually produced. Capacity ≠ output.</div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ============ THE PROVOCATION ============ -->
+<section class="provocation" id="provocation">
+  <div class="eyebrow">The question we keep returning to</div>
+  <div class="provocation-grid">
+    <div class="provoke-quote">
+      India will <span class="accent">triple</span> its power system by 2030. The question isn't whether it can. It's <em>what shape that growth takes</em> — who builds it, who pays, who's left out.
+    </div>
+    <div class="provoke-body">
+      <p>
+        <strong>Capacity targets are the easy part.</strong> The hard parts are the things nobody puts on a slide:
+        balancing a grid with 500 GW of variable resources, financing distribution companies that still bleed money,
+        sourcing critical minerals from supply chains we don't control, and keeping the lights on for a billion people
+        whose demand will look nothing like 2024's.
+      </p>
+      <p>
+        WiseWatt sits in that gap. We read the policy notifications, follow the market signals, watch what's working
+        in California and Karnataka, and try to write about it without the acronyms — or at least with the acronyms
+        explained.
+      </p>
+      <p>
+        Some of it is data. Some of it is opinion. Some of it is just thinking out loud about an industry that touches
+        every part of life and gets discussed nowhere near enough.
+      </p>
+      <div class="signature">— The editorial position</div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ============ TOPICS GRID ============ -->
+<section id="topics">
+  <div class="topics-head">
+    <div>
+      <div class="eyebrow">Sections</div>
+      <h2 class="display">From policy moves<br>to <em>global lessons</em>.</h2>
+    </div>
+    <div class="lede">
+      Six lenses on the transition, plus two playable simulations of what grid operators actually deal with.
+    </div>
+  </div>
+ 
+  <div class="topics-grid">
+ 
+    <a href="policy.html" class="topic">
+      <div class="topic-num"><span>01 / Policy</span><span class="ic"><i class="fas fa-balance-scale"></i></span></div>
+      <div class="topic-title">Policy <em>Watch</em></div>
+      <div class="topic-desc">What's moving in Delhi, Lucknow and Chennai — and why it matters in Bhuj. Tracking notifications, tariffs and the political economy of electrons.</div>
+      <div class="topic-link">Read the desk <span>→</span></div>
+    </a>
+ 
+    <a href="tech.html" class="topic">
+      <div class="topic-num"><span>02 / Tech</span><span class="ic"><i class="fas fa-microchip"></i></span></div>
+      <div class="topic-title">Making Tech <em>Simple</em></div>
+      <div class="topic-desc">From inverter-based resources to virtual inertia. The engineering of the new grid, explained without losing the engineering.</div>
+      <div class="topic-link">Learn the language <span>→</span></div>
+    </a>
+ 
+    <a href="trends.html" class="topic">
+      <div class="topic-num"><span>03 / Ideas</span><span class="ic"><i class="fas fa-lightbulb"></i></span></div>
+      <div class="topic-title">Fresh <em>Ideas</em></div>
+      <div class="topic-desc">Half-formed thoughts on what the grid could become. Speculative, occasionally contrarian, sometimes correct.</div>
+      <div class="topic-link">Think out loud <span>→</span></div>
+    </a>
+ 
+    <a href="global.html" class="topic">
+      <div class="topic-num"><span>04 / Global</span><span class="ic"><i class="fas fa-globe-asia"></i></span></div>
+      <div class="topic-title">Global <em>Lessons</em></div>
+      <div class="topic-desc">What Germany got wrong. What Texas got right. What Vietnam did fast. What India might do differently.</div>
+      <div class="topic-link">Look abroad <span>→</span></div>
+    </a>
+ 
+    <a href="critical.html" class="topic">
+      <div class="topic-num"><span>05 / Materials</span><span class="ic"><i class="fas fa-gem"></i></span></div>
+      <div class="topic-title">Critical <em>Minerals</em></div>
+      <div class="topic-desc">Lithium, cobalt, copper, rare earths. The supply chains nobody talks about until they break.</div>
+      <div class="topic-link">Follow the metals <span>→</span></div>
+    </a>
+ 
+    <a href="AI.html" class="topic">
+      <div class="topic-num"><span>06 / AI</span><span class="ic"><i class="fas fa-robot"></i></span></div>
+      <div class="topic-title">AI Meets <em>Energy</em></div>
+      <div class="topic-desc">Forecasting, dispatch, demand response, grid intelligence. Beyond the hype, what models actually do for operators.</div>
+      <div class="topic-link">See the use cases <span>→</span></div>
+    </a>
+ 
+    <a href="frequency.html" class="topic lab">
+      <div class="lab-tag">Playable</div>
+      <div class="topic-num"><span>07 / Lab</span><span class="ic"><i class="fas fa-wave-square"></i></span></div>
+      <div class="topic-title">Frequency <em>Game</em></div>
+      <div class="topic-desc">Feel what grid operators feel. Keep the system at 50 Hz as load swings against generation. It's harder than it sounds.</div>
+      <div class="topic-link">Try the game <span>→</span></div>
+    </a>
+ 
+    <a href="voltage.html" class="topic lab">
+      <div class="lab-tag">Playable</div>
+      <div class="topic-num"><span>08 / Lab</span><span class="ic"><i class="fas fa-bolt"></i></span></div>
+      <div class="topic-title">Voltage <em>Game</em></div>
+      <div class="topic-desc">Voltage is local. Frequency is global. Manage reactive power across a small network and find out why VAR support matters.</div>
+      <div class="topic-link">Play the network <span>→</span></div>
+    </a>
+ 
+  </div>
+</section>
+ 
+<!-- ============ WAVE / 50 HZ SECTION ============ -->
+<section class="wave-section">
+  <div class="wave-inner">
+    <div class="wave-text">
+      <div class="eyebrow">The heartbeat</div>
+      <h3>Every appliance in India is <em>secretly synchronised</em> to one number.</h3>
+      <p>
+        50 Hz. The frequency at which the entire Indian grid breathes. Move too far from it — even for a few seconds —
+        and machines trip, factories halt, hospitals scramble. The energy transition is, partly, the story of keeping
+        that number steady while the things connected to it change beyond recognition.
+      </p>
+    </div>
+    <div class="wave-vis">
+      <svg viewBox="0 0 600 200" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="waveG" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#5DAE7B" stop-opacity=".2"/>
+            <stop offset="50%" stop-color="#5DAE7B" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#5DAE7B" stop-opacity=".2"/>
+          </linearGradient>
+        </defs>
+        <!-- gridlines -->
+        <g stroke="#262C36" stroke-width="1">
+          <line x1="0" y1="50" x2="600" y2="50"/>
+          <line x1="0" y1="100" x2="600" y2="100" stroke-dasharray="2,4"/>
+          <line x1="0" y1="150" x2="600" y2="150"/>
+        </g>
+        <!-- sine wave path, animated stroke -->
+        <path id="sineWave" d="" fill="none" stroke="url(#waveG)" stroke-width="2"/>
       </svg>
     </div>
-    <h1>
-      WiseWatt: Mapping India's Energy Transition
-    </h1>
-    <p>Where clean energy meets ground reality — decoding the technologies, decisions, and global experiences shaping India's reliable energy future.</p>
-    <div class="explore-gap"></div>
-  </header>
-  <section>
-    <h2 data-aos="fade-up">Start Exploring: From Policy Moves to Global Learnings</h2>
-    <div class="button-container" data-aos="fade-up" data-aos-delay="100">
-      <a href="policy.html" class="button"><span class="btn-icon btn-icon-policy"><i class="fas fa-balance-scale"></i></span>Policy Watch</a>
-      <a href="tech.html" class="button"><span class="btn-icon btn-icon-tech"><i class="fas fa-microchip"></i></span>Making Tech Simple</a>
-      <a href="trends.html" class="button"><span class="btn-icon btn-icon-fresh"><i class="fas fa-lightbulb"></i></span>Fresh Ideas</a>
-      <a href="global.html" class="button"><span class="btn-icon btn-icon-global"><i class="fas fa-globe-asia"></i></span>Global Lessons</a>
-      <a href="critical.html" class="button"><span class="btn-icon btn-icon-minerals"><i class="fas fa-gem"></i></span>Critical Minerals</a>
-      <a href="AI.html" class="button"><span class="btn-icon btn-icon-ai"><i class="fas fa-robot"></i></span>AI Meets Energy</a>
-      <a href="frequency.html" class="button"><span class="btn-icon btn-icon-frequency"><i class="fas fa-wave-square"></i></span>Frequency Game</a>
-      <a href="voltage.html" class="button"><span class="btn-icon btn-icon-voltage"><i class="fas fa-bolt"></i></span>Voltage Game</a>
+  </div>
+</section>
+ 
+<!-- ============ ABOUT ============ -->
+<section class="about">
+  <div class="eyebrow">Colophon</div>
+  <h2 class="display">A small journal<br>for a <em>large transition</em>.</h2>
+  <p class="lede">
+    WiseWatt is an independent reading of India's energy shift — written by researchers, engineers and observers
+    who think the most interesting story of this decade is happening on a power line near you.
+    Notes, essays, primers, the occasional simulation. No paywall. No filler.
+  </p>
+  <div class="about-meta">
+    <span>Independent</span>
+    <span class="sep">·</span>
+    <span>Non-partisan</span>
+    <span class="sep">·</span>
+    <span>Updated weekly</span>
+  </div>
+</section>
+ 
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-inner">
+    <div class="brand">WiseWatt</div>
+    <div class="footer-links">
+      <a href="policy.html">Policy</a>
+      <a href="tech.html">Tech</a>
+      <a href="global.html">Global</a>
+      <a href="AI.html">AI</a>
+      <a href="frequency.html">Lab</a>
     </div>
-  </section>
-  <footer>© 2025 WiseWatt. All rights reserved.</footer>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({ once: true, duration: 800 });
-    function toggleTheme() {
-      document.body.classList.toggle('light-theme');
+    <div>© 2025 · All rights reserved</div>
+  </div>
+</footer>
+ 
+<script>
+  /* ============ THEME TOGGLE ============ */
+  function toggleTheme(){
+    document.body.classList.toggle('light');
+    localStorage.setItem('ww-theme', document.body.classList.contains('light') ? 'light' : 'dark');
+  }
+  if (localStorage.getItem('ww-theme') === 'light') document.body.classList.add('light');
+ 
+  /* ============ NAV SCROLL STATE ============ */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  });
+ 
+  /* ============ DATE STAMP ============ */
+  const d = new Date();
+  const opts = { month: 'short', day: 'numeric', year: 'numeric' };
+  document.getElementById('dateStamp').textContent = d.toLocaleDateString('en-IN', opts).toUpperCase();
+ 
+  /* ============ HERO WORD STAGGER ============ */
+  document.querySelectorAll('#heroH1 .word').forEach((w, i) => {
+    w.style.animationDelay = (0.25 + i * 0.07) + 's';
+  });
+ 
+  /* ============ LIVE COUNTER ============
+     India avg dispatch ~ 200 GW = 200,000 MW.
+     Per second = 200,000 / 3600 MWh ≈ 55.55 MWh/s.
+     We start at 0 when the page loads. */
+  const counter = document.getElementById('liveCounter');
+  const MWH_PER_SEC = 55.55;
+  const start = performance.now();
+  function tickCounter(){
+    const elapsed = (performance.now() - start) / 1000;
+    const mwh = Math.floor(elapsed * MWH_PER_SEC);
+    counter.textContent = mwh.toLocaleString('en-IN');
+    requestAnimationFrame(tickCounter);
+  }
+  requestAnimationFrame(tickCounter);
+ 
+  /* ============ ANIMATED 50 HZ SINE WAVE ============ */
+  const sineEl = document.getElementById('sineWave');
+  let phase = 0;
+  function drawSine(){
+    const w = 600, h = 200, amp = 35, mid = 100;
+    let path = '';
+    for (let x = 0; x <= w; x += 4){
+      const y = mid + Math.sin((x / 50) + phase) * amp;
+      path += (x === 0 ? 'M' : 'L') + x + ',' + y.toFixed(2) + ' ';
     }
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    window.addEventListener('scroll', () => {
-      document.getElementById('backToTop').classList.toggle('show', window.scrollY > 300);
-    });
-  </script>
+    sineEl.setAttribute('d', path);
+    phase += 0.06;
+    requestAnimationFrame(drawSine);
+  }
+  drawSine();
+</script>
+ 
 </body>
 </html>
